@@ -1,2 +1,2 @@
 # practica-1-grupo2-equipo-7
-practica-1-grupo2-equipo-7 created by GitHub Classroom
+Poopina es un software gertor para la organizacion y apoyoo a restaurantes
