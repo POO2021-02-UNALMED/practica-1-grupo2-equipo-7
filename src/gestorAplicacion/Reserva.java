@@ -5,7 +5,7 @@ private int numreserva;
 private String fechareserva;
 private Cliente ccCliente;
 private boolean aplicable;
-//si la reserva aun es vigente o por el contrario ya venció
+//si la reserva aun es vigente o por el contrario ya venciÃ³
 
 
 public Reserva(int numreserva, String fechareserva,Cliente ccCliente, boolean aplicable) {

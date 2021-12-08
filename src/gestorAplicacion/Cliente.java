@@ -2,7 +2,7 @@ package gestorAplicacion;
 
 public class Cliente extends Persona {
     int puntos = 0;
-    Boolean reserva;
+    Reserva reserva;
     public Cliente(int cedula, String nombre, int telefono, String direccion){
         super(cedula, nombre, telefono, direccion);
     }
