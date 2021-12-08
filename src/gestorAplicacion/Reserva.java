@@ -1,20 +1,34 @@
 package gestorAplicacion;
 
 public class Reserva {
+public static Object getcliente;
 private int numreserva;
 private String fechareserva;
-private Cliente ccCliente;
+private Cliente cliente;
 private boolean aplicable;
-//si la reserva aun es vigente o por el contrario ya venció
+
+//si la reserva aun es vigente o por el contrario ya vencio
 
 
-public Reserva(int numreserva, String fechareserva,Cliente ccCliente, boolean aplicable) {
+
+public Reserva(int numreserva, String fechareserva,Cliente cliente, boolean aplicable) {
 	super();
 	this.numreserva = numreserva;
 	this.fechareserva = fechareserva;
-	this.ccCliente = ccCliente;
 	this.aplicable = aplicable;
+	this.cliente = cliente;
 	}
+
+
+public Cliente getCliente() {
+	return cliente;
+}
+
+
+public void setCliente(Cliente cliente) {
+	this.cliente = cliente;
+}
+
 
 public int getNumreserva() {
 	return numreserva;
@@ -46,15 +60,5 @@ public void setAplicable(boolean aplicable) {
 	this.aplicable = aplicable;
 }
 
-public Cliente getCcCliente() {
-	return ccCliente;
-}
-
-public void setCcCliente(Cliente ccCliente) {
-	this.ccCliente = ccCliente;
-}
-
-
 
 }
-
