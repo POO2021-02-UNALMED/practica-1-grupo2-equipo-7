@@ -21,7 +21,7 @@ public class Interfaz {
             System.out.println("Bienvenido al sistema POOpina");
             System.out.println("Escoja una opcion:");
             System.out.println("1. resevas.");
-            System.out.println("2. metodo 2.");
+            System.out.println("2. Consulta de puntaje.");
             System.out.println("3. metodo 3.");
             System.out.println("4. Catalogo");
             System.out.println("5. Insumos");
@@ -31,7 +31,7 @@ public class Interfaz {
             option = in.next();
             
             if (option.equals("1")) {
-            	 System.out.println("reservas");
+            	 System.out.println("Bienvenido al sistema de reservas");
             	Scanner numcc=new Scanner(System.in);
             	System.out.println("Ingrese un numero de cedula");
             	if ((boolean) (cliente.getCedula() == reserva.getCliente().getCedula())) {
@@ -43,8 +43,11 @@ public class Interfaz {
             	
             
                
-            }else if (option.equals("2")) {
-            	System.out.println("metodo 2");
+            }else if (option.equals("clientes frecuentes")) {
+            	System.out.println("en esta base de datos se almacena la información de todos nuestros clientes frecuentes");
+            	
+            	System.out.println(cliente.getcrearCliente);
+            	//falta hacer un array alguna estructura de datos donde almacenar a los clientes
             }else if (option.equals("3")) {
             	System.out.println("metodo 3");
             }else if(option.equals("4")){
