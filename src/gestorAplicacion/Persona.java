@@ -1,14 +1,16 @@
 package gestorAplicacion;
 
-public class Persona {
+public abstract class Persona {
 	private int cedula; 
 	private String nombre; 
-	private int telefono; 
+	private int telefono;
+	private String direccion;
 	
-	public Persona(int cedula, String nombre, int telefono) {
+	public Persona(int cedula, String nombre, int telefono, String direccion) {
 		this.setCedula(cedula);
 		this.setNombre(nombre);
 		this.setTelefono(telefono);
+		this.direccion = direccion;
 	}
 
 	public Persona() {
@@ -38,4 +40,7 @@ public class Persona {
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
+
+	public String getDireccion(){return this.direccion;}
+	public void setDireccion(String direccion){this.direccion = direccion;}
 }
