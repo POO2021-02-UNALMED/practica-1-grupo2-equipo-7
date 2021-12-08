@@ -2,6 +2,7 @@ package uiMain;
 
 import baseDatos.BaseDeDatos;
 import gestorAplicacion.Catalogo;
+import gestorAplicacion.materiaPrima;
 
 import java.util.Scanner;
 
@@ -23,6 +24,7 @@ public class Interfaz {
             System.out.println("2. metodo 2.");
             System.out.println("3. metodo 3.");
             System.out.println("4. Catalogo");
+            System.out.println("5. Insumos");
             System.out.println("0. Salir.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -35,6 +37,8 @@ public class Interfaz {
             	System.out.println("metodo 3");
             }else if(option.equals("4")){
                 Catalogo.menuCatalogo();
+            }else if(option.equals("5")){
+                materiaPrima.menuInsumos();
             }else if(option.equals("0")){
                 break;
             }

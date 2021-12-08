@@ -86,7 +86,7 @@ public class Catalogo {
     public String toString() {
         return "[" +
                 "Plato='" + nombrePlato + '\'' +
-                ", Precio=" + precio +
+                ", Precio= $" + precio +
                 ']';
     }
 }
