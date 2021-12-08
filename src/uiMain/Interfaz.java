@@ -1,14 +1,7 @@
 package uiMain;
 
 import baseDatos.BaseDeDatos;
-import gestorAplicacion.Catalogo;
-import gestorAplicacion.Cliente;
-import gestorAplicacion.materiaPrima;
-import gestorAplicacion.Persona;
-import gestorAplicacion.Proveedor;
-import gestorAplicacion.Reserva;
-import gestorAplicacion.Sede;
-import gestorAplicacion.Cliente;
+import gestorAplicacion.*;
 import java.util.Scanner;
 
 public class Interfaz {
@@ -19,6 +12,8 @@ public class Interfaz {
 	    base.baseDeDatos();
 		@SuppressWarnings("resource")
 		Scanner in=new Scanner(System.in);
+        Cliente cliente = null;
+        Reserva reserva = null;
 		String option;
         while(true) {
             System.out.println();
@@ -39,7 +34,7 @@ public class Interfaz {
             	 System.out.println("reservas");
             	Scanner numcc=new Scanner(System.in);
             	System.out.println("Ingrese un numero de cedula");
-            	if ((boolean) (Cliente.getcedula = Reserva.getcliente)) {
+            	if ((boolean) (cliente.getCedula() == reserva.getCliente().getCedula())) {
             		System.out.println("usted ya cuenta con una reserva");
             	}
             		else {

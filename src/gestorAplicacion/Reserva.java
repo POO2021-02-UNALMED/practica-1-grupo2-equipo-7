@@ -11,7 +11,7 @@ private boolean aplicable;
 
 
 
-public Reserva(int numreserva, String fechareserva,Cliente cliente, boolean aplicable) {
+public Reserva(int numreserva, String fechareserva, Cliente cliente, boolean aplicable) {
 	super();
 	this.numreserva = numreserva;
 	this.fechareserva = fechareserva;
