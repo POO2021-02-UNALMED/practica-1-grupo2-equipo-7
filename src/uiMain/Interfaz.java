@@ -4,6 +4,8 @@ import baseDatos.BaseDeDatos;
 import gestorAplicacion.*;
 import java.util.Scanner;
 
+import static gestorAplicacion.Catalogo.platos;
+
 public class Interfaz {
 
 
@@ -46,18 +48,93 @@ public class Interfaz {
             }else if (option.equals("clientes frecuentes")) {
             	System.out.println("en esta base de datos se almacena la información de todos nuestros clientes frecuentes");
             	
-            	System.out.println(cliente.getcrearCliente);
+            	//System.out.println(cliente.getcrearCliente);
             	//falta hacer un array alguna estructura de datos donde almacenar a los clientes
             }else if (option.equals("3")) {
             	System.out.println("metodo 3");
             }else if(option.equals("4")){
-                Catalogo.menuCatalogo();
+                menuCatalogo();
             }else if(option.equals("5")){
-                materiaPrima.menuInsumos();
+                menuInsumos();
             }else if(option.equals("0")){
                 break;
             }
         }
 	}
+
+    //menu donde se podra ver todo lo relacionado con el catalogo del restaurante
+    public static void menuCatalogo() {
+        Scanner in=new Scanner(System.in);
+        String option;
+        while(true) {
+            System.out.println();
+            System.out.println("-----------------------------");
+            System.out.println("Escoja una opcion:");
+            System.out.println("1. ver catalogo.");
+            System.out.println("2. metodo 2.");
+            System.out.println("3. metodo 3.");
+            System.out.println("0. Salir.");
+            System.out.println("-----------------------------");
+            System.out.println();
+            option = in.next();
+            if (option.equals("1")) {
+                //Esta opcion permite ver el catalogo de platos disponibles para que se pueda tomar el pedido
+                Catalogo.verCatalogo();//Muestra el catalogo
+                System.out.println(" Digite el numero de plato que desee");
+                Integer num= in.nextInt();
+                //despues de que haya escogido le pide al cajero que digite el numero del plato escogido
+                //si el cajero digita un numero erroneo lo vuelve a pedir
+                if (platos.containsKey(num)) {
+                    //como el plato existe con esa llave numerica
+                    //procede a crear un plato que sera el pedido por el user
+                    //este plato contiene los valores(values) de la llave que se pidio anteriormente
+                    Catalogo plato=platos.get(num);
+                    System.out.println(" Nombre= "+plato.getNombrePlato());
+                    System.out.println(" precio= " +plato.getPrecio());
+                    System.out.println(" Agregado al pedido");
+                    //en esta linea debe ir un metodo de Pedido donde se le ingrese el plato con
+                    //el cual se generaria el pedido final lo cual tambien permitira crear el recibo
+                }else{
+                    System.out.println(" Digite un numero valido");
+                }
+            }else if (option.equals("2")) {
+                System.out.println("none");
+            }else if (option.equals("3")) {
+                System.out.println("none");
+            }else if(option.equals("0")){
+                return;
+            }
+        }
+    }
+
+    //menu donde se podra ver todo lo relacionado con insumos de la clase materiaPrima
+    public static void menuInsumos() {
+        Scanner in=new Scanner(System.in);
+        String option;
+        while(true) {
+            System.out.println();
+            System.out.println("-----------------------------");
+            System.out.println("Escoja una opcion:");
+            System.out.println("1. ver insumos.");
+            System.out.println("2. metodo 2.");
+            System.out.println("3. metodo 3.");
+            System.out.println("0. Salir.");
+            System.out.println("-----------------------------");
+            System.out.println();
+            option = in.next();
+            if (option.equals("1")) {
+                materiaPrima.verInsumos();//muestra los insumos disponibles
+            }else if (option.equals("2")) {
+                System.out.println("none");
+            }else if (option.equals("3")) {
+                System.out.println("none");
+            }else if(option.equals("0")){
+                return;
+            }
+        }
+    }
+
+
+
 }
 

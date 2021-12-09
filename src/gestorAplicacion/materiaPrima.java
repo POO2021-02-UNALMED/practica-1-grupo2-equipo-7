@@ -6,10 +6,11 @@ import java.util.Scanner;
 public class materiaPrima {
 
     //Proveedor proveedor;
-    protected String nombreInsumo;
+    protected String nombreInsumo;//atributos
     protected int cantInsumo;
-    public static Hashtable<String,Integer> insumos=new Hashtable<>();
+    public static Hashtable<String,Integer> insumos=new Hashtable<>();//hash para almacenar el nombre y la cantidad del insumo
 
+    //constructor
     public materiaPrima(String nombreInsumo, int cantInsumo) {
         this.nombreInsumo = nombreInsumo;
         this.cantInsumo = cantInsumo;
@@ -40,34 +41,9 @@ public class materiaPrima {
         materiaPrima.insumos = insumos;
     }
 
+    //metodo para crear un nuevo insumo
     public static void crearInsumo(String nombre,int cantidad) {
-        materiaPrima newM=new materiaPrima(nombre,cantidad);
-    }
-
-    public static void menuInsumos() {
-        Scanner in=new Scanner(System.in);
-        String option;
-        while(true) {
-            System.out.println();
-            System.out.println("-----------------------------");
-            System.out.println("Escoja una opcion:");
-            System.out.println("1. ver insumos.");
-            System.out.println("2. metodo 2.");
-            System.out.println("3. metodo 3.");
-            System.out.println("0. Salir.");
-            System.out.println("-----------------------------");
-            System.out.println();
-            option = in.next();
-            if (option.equals("1")) {
-                verInsumos();
-            }else if (option.equals("2")) {
-                System.out.println("none");
-            }else if (option.equals("3")) {
-                System.out.println("none");
-            }else if(option.equals("0")){
-                return;
-            }
-        }
+        materiaPrima newM = new materiaPrima(nombre, cantidad);
     }
 
 
