@@ -41,7 +41,29 @@ public class Interfaz {
                     if ((boolean) (cliente.getCedula() == reserva.getCliente().getCedula())) {
                         System.out.println("usted ya cuenta con una reserva");
                     } else {
-                        System.out.println("usted acaba de crear una reserva con la cedula" + Persona.getcedula);
+                        System.out.println("Usted no cuenta con resevas porfavor seleccione una opcion");
+                        System.out.println("1 Crear reserva");
+                        System.out.println("0 volver al menu anterior");
+                        
+                       switch (option) {
+                       case "1":
+                    	   System.out.println("Usted esta creando una reserva porfavor proporcione los datos requeridos");
+                    	   Scanner id = new Scanner(System.in);
+                    	   System.out.println("ingrese su documento de identidad");
+                    	   Scanner fechares = new Scanner(System.in);
+                    	   System.out.println("ingrese una fecha para su reserva");
+                    	   Scanner horares = new Scanner(System.in);
+                    	   System.out.println("igrese una hora para su reserva");
+                    	   Scanner sederes = new Scanner(System.in);
+                    	   System.out.println("ingrese un numero de sede para su reserva");
+                    	   System.out.println("su reserva se ha guardado exitosamente con el #cc"+id+"para la fecha"+fechares+"a las"+
+                    		horares+"en la sede"+sederes);
+                    	  
+                    	  
+                    	   
+                       
+                       }
+                       
                     }
 
 
