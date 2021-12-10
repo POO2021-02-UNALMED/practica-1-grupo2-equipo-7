@@ -25,7 +25,7 @@ public class Interfaz {
             System.out.println("Escoja una opcion:");
             System.out.println("1. resevas.");
             System.out.println("2. Consulta de puntaje.");
-            System.out.println("3. metodo 3.");
+            System.out.println("3. Registro clientes.");
             System.out.println("4. Catalogo");
             System.out.println("5. Insumos");
             System.out.println("0. Salir.");
@@ -59,23 +59,28 @@ public class Interfaz {
                     	   System.out.println("su reserva se ha guardado exitosamente con el #cc"+id+"para la fecha"+fechares+"a las"+
                     		horares+"en la sede"+sederes);
                     	  
-                    	  
-                    	   
-                       
                        }
+                       break;
                        
                     }
 
 
                     break;
-                case "clientes frecuentes":
+                case "2":
                     System.out.println("en esta base de datos se almacena la información de todos nuestros clientes frecuentes");
 
                     //System.out.println(cliente.getcrearCliente);
                     //falta hacer un array alguna estructura de datos donde almacenar a los clientes
                     break;
                 case "3":
-                    System.out.println("metodo 3");
+                    System.out.println("Bienvenido al sistema para registrar clientes");
+                    System.out.println("Ingrese un numero de documento");
+                    Integer num = in.nextInt();
+                    Scanner nombre = new Scanner (System.in);
+                    String cadena;
+                    System.out.println("ingrese un nombre a fin con el numero de documento");
+                    cadena = nombre.next();
+                    System.out.println("Se ha registrado a"+ nombre +"con el documento#"+num+"de forma exitosa");
                     break;
                 case "4":
                     menuCatalogo();
