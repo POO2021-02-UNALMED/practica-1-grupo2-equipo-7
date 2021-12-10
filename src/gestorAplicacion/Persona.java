@@ -8,9 +8,9 @@ public abstract class Persona {
 	private String direccion;
 	
 	public Persona(int cedula, String nombre, int telefono, String direccion) {
-		this.setCedula(cedula);
-		this.setNombre(nombre);
-		this.setTelefono(telefono);
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.telefono = telefono;
 		this.direccion = direccion;
 	}
 
