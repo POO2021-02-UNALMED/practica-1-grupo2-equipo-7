@@ -2,9 +2,12 @@ package uiMain;
 
 import baseDatos.BaseDeDatos;
 import gestorAplicacion.*;
+
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import static gestorAplicacion.Catalogo.platos;
+import static gestorAplicacion.Mesa.mesas;
 
 public class Interfaz {
 
@@ -56,6 +59,7 @@ public class Interfaz {
                     System.out.println("metodo 3");
                     break;
                 case "4":
+
                     menuCatalogo();
                     break;
                 case "5":
@@ -115,6 +119,24 @@ public class Interfaz {
                     return;
             }
         }
+    }
+
+    public static void pedido_facturacion(){
+        int option;
+        System.out.println();
+        System.out.println("-----------------------------");
+        Mesa.getMesas();
+        System.out.println("-----------------------------");
+        Scanner in=new Scanner(System.in);
+        option = in.nextInt();
+        while(true){
+            if(mesas.contains(option)){
+                if (mesas.get(option).isDisponibilidad()){
+                    Catalogo.verCatalogo();
+                }
+            }
+        }
+
     }
 
     //menu donde se podra ver todo lo relacionado con insumos de la clase materiaPrima
