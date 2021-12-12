@@ -7,15 +7,27 @@ public class Mesa {
     private int idunico;
     private String zona;
     private int numero;
+<<<<<<< HEAD
     private boolean disponibilidad;
     public static LinkedList<Mesa> mesas = new LinkedList<>();
     private Pedido pedido;
+=======
+    public static LinkedList<Mesa> mesas= new LinkedList<>(); //Array que contiene todas las mesas creadas
+>>>>>>> crud
 
     public Mesa(int idunico, String zona, int numero) {
         this.idunico = idunico;
         this.zona = zona;
         this.numero = numero;
         mesas.add(this);
+    }
+
+    public Mesa() {
+    }
+
+    public static void crearMesa(int id, String zona, int numMesa) {
+        Mesa newMesa=new Mesa(id,zona,numMesa);
+        mesas.add(newMesa);
     }
 
     public int getIdunico() {
@@ -42,6 +54,7 @@ public class Mesa {
         this.numero = numero;
     }
 
+<<<<<<< HEAD
     public boolean isDisponibilidad() {
         return disponibilidad;
     }
@@ -67,4 +80,19 @@ public class Mesa {
             return "Mesa "+numero+" (Ocupada)";
         }
         }
+=======
+    public static void verMesas(){
+        for (Mesa mesa:mesas){
+            System.out.println(mesa);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ID (" + idunico +")" + "\n" +
+                "[ Mesa numero: " + numero + "\n" +
+                "  Zona: " + zona  + " ]";
+    }
+
+>>>>>>> crud
 }

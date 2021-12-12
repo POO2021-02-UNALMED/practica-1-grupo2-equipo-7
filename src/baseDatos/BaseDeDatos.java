@@ -22,7 +22,11 @@ public class BaseDeDatos {
         materiaPrima.crearInsumo("chicken", 40);
         materiaPrima.crearInsumo("potato", 20);
         
-        Cliente.crearCliente(1009825,"ricardo",31245678,"av colombia #63-10",1000);  
+        Cliente.crearCliente(1009825,"ricardo",31245678,"av colombia #63-10");
+        Cliente.crearCliente(123,"r",321,"av");
+
+        Mesa.crearMesa(1,"none",18);
+        Mesa.crearMesa(2,"center",7);
     }
     
    

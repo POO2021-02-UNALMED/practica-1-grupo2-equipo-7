@@ -1,20 +1,21 @@
 package gestorAplicacion;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class Proveedor {
     private int nit;
     private String nombre;
     private String telefono;
-    private Map<String, materiaPrima> productos_ofrecidos;
-    private static Map<String, Proveedor> proveedores;
+    //private Map<String, materiaPrima> productos_ofrecidos;
+    public static LinkedList<Proveedor> proveedores=new LinkedList<>();
 
-    public Proveedor(int nit, String nombre, String telefono, Map productos_ofrecidos, Map proveedores){
+    public Proveedor(int nit, String nombre, String telefono){
         this.nit = nit;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.productos_ofrecidos = productos_ofrecidos;
-        proveedores.put(this.nombre, this);
+        //this.productos_ofrecidos = productos_ofrecidos;
     }
+
     //Getters y Setters
     public int getNit() {
         return nit;
@@ -40,25 +41,21 @@ public class Proveedor {
         this.telefono = telefono;
     }
 
-    public Map<String, materiaPrima> getProductos_ofrecidos() {
-        return productos_ofrecidos;
+    public static void crearProveedor(int nit, String nombre, String telefono) {
+        Proveedor newProveedor=new Proveedor(nit,nombre,telefono);
+        proveedores.add(newProveedor);
     }
 
-    public void setProductos_ofrecidos(Map<String, materiaPrima> productos_ofrecidos) {
-        this.productos_ofrecidos = productos_ofrecidos;
-    }
-
-    public Map<String, Proveedor> getProveedores() {
-        return proveedores;
+    public static void verProveedores() {
+        for(Proveedor proveedor:proveedores){
+            System.out.println(proveedor);
+        }
     }
 
     @Override
     public String toString() {
-        return "Proveedor{" +
-                "nit=" + nit +
-                ", nombre='" + nombre + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", productos_ofrecidos=" + productos_ofrecidos +
-                '}';
+        return "NIT Proveedor " + nit + "\n" +
+                "[ Nombre: " + nombre + "\n" +
+                "  Telefono: " + telefono + " ]";
     }
 }

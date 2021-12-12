@@ -48,12 +48,8 @@ public class materiaPrima {
 
 
     public static void verInsumos() {
-        if(insumos.isEmpty()){
-            System.out.println("no hay insumos para ver");
-        }else{
-            for(Integer insumo:insumos.values()){
-                System.out.println(insumo);
-            }
+        for(Integer insumo:insumos.values()){
+            System.out.println(insumo);
         }
     }
 

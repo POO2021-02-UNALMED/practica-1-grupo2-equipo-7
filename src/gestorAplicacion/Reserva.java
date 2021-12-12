@@ -1,64 +1,75 @@
 package gestorAplicacion;
 
+import java.util.LinkedList;
+
 public class Reserva {
-public static Object getcliente;
-private int numreserva;
-private String fechareserva;
-private Cliente cliente;
-private boolean aplicable;
+	public static Object getcliente;
+    private int numreserva;
+    private String fechareserva;
+    private Cliente cliente;
+    private boolean aplicable;
+	public static LinkedList<Reserva> reservas= new LinkedList<>();
+     //si la reserva aun es vigente o por el contrario ya vencio
 
-//si la reserva aun es vigente o por el contrario ya vencio
-
-
-
-public Reserva(int numreserva, String fechareserva, Cliente cliente, boolean aplicable) {
-	super();
-	this.numreserva = numreserva;
-	this.fechareserva = fechareserva;
-	this.aplicable = aplicable;
-	this.cliente = cliente;
+	public Reserva(int numreserva, String fechareserva, Cliente cliente, boolean aplicable) {
+       	super();
+	    this.numreserva = numreserva;
+	    this.fechareserva = fechareserva;
+     	this.aplicable = aplicable;
+    	this.cliente = cliente;
 	}
 
 
-public Cliente getCliente() {
+    public Cliente getCliente() {
 	return cliente;
 }
 
 
-public void setCliente(Cliente cliente) {
+    public void setCliente(Cliente cliente) {
 	this.cliente = cliente;
 }
 
+	public static void crearReserva(int numreserva, String fechareserva,Cliente cliente, boolean aplicable) {
+		Reserva newReserva=new Reserva(numreserva,fechareserva,cliente,aplicable);
+		reservas.add(newReserva);
+	}
 
-public int getNumreserva() {
+    public int getNumreserva() {
 	return numreserva;
 }
 
-
-public void setNumreserva(int numreserva) {
+    public void setNumreserva(int numreserva) {
 	this.numreserva = numreserva;
 }
 
-
-public String getFechareserva() {
+    public String getFechareserva() {
 	return fechareserva;
 }
 
-
-public void setFechareserva(String fechareserva) {
+    public void setFechareserva(String fechareserva) {
 	this.fechareserva = fechareserva;
 }
 
-
-
-public boolean isAplicable() {
+    public boolean isAplicable() {
 	return aplicable;
 }
 
-
-public void setAplicable(boolean aplicable) {
+    public void setAplicable(boolean aplicable) {
 	this.aplicable = aplicable;
 }
 
+	public static void verReserva(){
+		for (Reserva reserva:reservas){
+			System.out.println(reserva);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Nro de Reserva " + numreserva + "\n" +
+				"[ Fecha de reserva: " + fechareserva + "\n" +
+				"  Cliente: " + cliente + "\n" +
+				"  Aplicable: " + aplicable +" ]";
+	}
 
 }
