@@ -1,13 +1,15 @@
 package gestorAplicacion;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Pedido {
 
+    private static ArrayList<Catalogo> platos;
     private Cliente cliente;
     private Mesa mesa;
     private int idpedido;
-    ArrayList<Catalogo> platos = new ArrayList<Catalogo>(); //Array que contiene los platos del pedido
+    public static LinkedList<Pedido> pedidos= new LinkedList<>();; //Array que contiene los pedidos
 
     //private int cantidadplatos; #variable para uso con array statico
 
@@ -21,15 +23,15 @@ public class Pedido {
         this.cliente = cliente;
         this.mesa = mesa;
         this.idpedido = idpedido;
-        this.platos = platos;
+        Pedido.platos =platos;
     }
 
-    public ArrayList<Catalogo> getPlatos() {
-        return platos;
+    public LinkedList<Pedido> getPlatos() {
+        return pedidos;
     }
 
     public void setPlatos(ArrayList<Catalogo> platos) {
-        this.platos = platos;
+
     }
 
     public Cliente getCliente() {
@@ -54,6 +56,26 @@ public class Pedido {
 
     public void setIdpedido(int idpedido) {
         this.idpedido = idpedido;
+    }
+
+    public static void crearPedido(Cliente cliente, Mesa mesa, int idpedido, ArrayList<Catalogo> pedidosPlato) {
+        Pedido newPedido=new Pedido(cliente,mesa,idpedido,pedidosPlato);
+        pedidos.add(newPedido);
+    }
+
+    public static void verPedidos(){
+        for (Pedido pedido:pedidos){
+            System.out.println(pedido);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido Numero (" + idpedido +")" +"\n" +
+                "[ Cliente: " + cliente + "\n" +
+                "  Mesa: " + mesa + "\n" +
+                "  Pedidos: " + platos + " ]";
+
     }
 
 }

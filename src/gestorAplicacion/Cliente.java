@@ -11,6 +11,10 @@ public class Cliente extends Persona {
         super(cedula, nombre, telefono, direccion);
     }
 
+    public Cliente(){
+        super();
+    }
+
     public void actualizar_puntos(int puntos){
         this.puntos += puntos;
     }
@@ -22,6 +26,12 @@ public class Cliente extends Persona {
         Cliente newCliente=new Cliente(cedula,nombre,telefono,direccion);
         clientes.add(newCliente);
 	}
+
+    public static void verCliente(){
+        for (Cliente cliente:clientes){
+            System.out.println(cliente);
+        }
+    }
 
     @Override
     public String toString() {
