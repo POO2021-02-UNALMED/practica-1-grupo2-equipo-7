@@ -3,13 +3,13 @@ package uiMain;
 import baseDatos.BaseDeDatos;
 import gestorAplicacion.*;
 
-<<<<<<< HEAD
+
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import static gestorAplicacion.Catalogo.platos;
 import static gestorAplicacion.Mesa.mesas;
-=======
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,7 +22,8 @@ import static gestorAplicacion.Pedido.pedidos;
 import static gestorAplicacion.Persona.getcedula;
 import static gestorAplicacion.Proveedor.proveedores;
 import static gestorAplicacion.Reserva.reservas;
->>>>>>> crud
+import static gestorAplicacion.Mesa.*;
+
 
 public class Interfaz {
 
@@ -44,7 +45,7 @@ public class Interfaz {
             System.out.println("1. resevas.");
             System.out.println("2. Consulta de puntaje.");
             System.out.println("3. metodo 3.");
-            System.out.println("4. ");
+            System.out.println("4. Pedido y facturación.");
             System.out.println("5. Gestion del restaurante");
             System.out.println("6. ");
             System.out.println("0. Salir.");
@@ -76,7 +77,7 @@ public class Interfaz {
                     break;
                 case "4":
 
-                    menuCatalogo();
+                    pedido_facturacion();
                     break;
                 case "5":
                     gestionRestaurante();
@@ -675,7 +676,7 @@ public class Interfaz {
             }
         }
     }
-
+//=====================================================================================================================
     private static void menuPedido() {
         //Menu con todo lo relacionado con los pedidos
         Scanner in=new Scanner(System.in);
@@ -723,7 +724,7 @@ public class Interfaz {
                     System.out.println(" Digite el id de la mesa que desea escoger");
                     int ID=in.nextInt();//se pide el id de la mesa que se escogio
                     Mesa mesa=new Mesa();
-                    for (Mesa mesa1:mesas) {
+                    for (Mesa mesa1:mesas.values()) {
                         if (mesa1.getIdunico() == ID) {//encuentra la mesa
                             mesa=mesa1;
                         }
@@ -810,7 +811,7 @@ public class Interfaz {
                                 System.out.println();
                                 System.out.println(" Digite el id de la nueva mesa");
                                 int idMesa=in.nextInt();//se pide el id de la mesa que se escogio
-                                for (Mesa mesa1:mesas){
+                                for (Mesa mesa1:mesas.values()){
                                     if (mesa1.getIdunico()==idMesa){//encuentra la mesa
                                         pedido1.setMesa(mesa1);
                                         System.out.println(" ¡Mesa editada con exito!");
@@ -880,6 +881,7 @@ public class Interfaz {
             }
         }
     }
+    //====================================================================================================================
 
     private static void menuMesa() {
         //Menu con todo lo relacionado con las mesas
@@ -905,7 +907,7 @@ public class Interfaz {
                 case "1"://en esta opcion se podra crear una mesa
                     System.out.println(" Digite el id de la mesa ");
                     int id=in.nextInt();//se pide el id de la nueva mesa
-                    for (Mesa mesa:mesas){
+                    for (Mesa mesa:mesas.values()){
                         if (mesa.getIdunico()==id){//encuentra una mesa ya registrada con dicho id
                             System.out.println(" Ya existe una mesa con dicho ID");//advierte que no pueden haber dos mesas con el mismo id y se sale
                             return;
@@ -913,10 +915,10 @@ public class Interfaz {
                     }
                     //se pide la informacion restante para crear la mesa
                     System.out.println(" Digite la zona");
-                    String zona=in.next();
+                    short zona=in.nextShort();
                     System.out.println(" Digite el numero de la mesa");
                     int numMesa= in.nextInt();
-                    Mesa.crearMesa(id,zona,numMesa);//aca se crea la mesa
+                    new Mesa(id,zona,numMesa);//aca se crea la mesa
                     System.out.println(" ¡Mesa creada con exito!");
                     break;
                 case "2"://opcion para editar una mesa
@@ -927,7 +929,7 @@ public class Interfaz {
                     System.out.println();
                     System.out.println(" Digite el id de la mesa que desea editar");
                     int ID=in.nextInt();//se pide el id de la mesa que se escogio para editar
-                    for (Mesa mesa1:mesas) {
+                    for (Mesa mesa1:mesas.values()) {
                         if (mesa1.getIdunico()==ID) {//encuentra la mesa
                             System.out.println("-----------------------------");
                             System.out.println(" Mesa a editar");
@@ -942,7 +944,7 @@ public class Interfaz {
                             if (option.equals("1")) {//opcion para editar el id de la mesa
                                 System.out.println( "Digite el nuevo ID");
                                 int newID= in.nextInt();
-                                for (Mesa mesa:mesas){
+                                for (Mesa mesa:mesas.values()){
                                     if (mesa.getIdunico()==newID){//encuentra una mesa ya registrada con dicho id
                                         System.out.println(" Ya existe una mesa con dicho ID");//advierte que no pueden haber dos mesas con el mismo id y se sale
                                         return;
@@ -954,7 +956,11 @@ public class Interfaz {
                                 System.out.println(" Zona de la mesa actual");
                                 System.out.println(mesa1.getZona());//se muestra la zona actual
                                 System.out.println(" Digite la nueva zona");
-                                String zone= in.next();
+                                System.out.println("1. VIP." +
+                                        "2. SALON PRINCIPAL." +
+                                        "3. TERRAZA.");
+                                short zone= in.nextShort();
+                                if(zone > 0 && zone <4)
                                 mesa1.setZona(zone);//aca se edita la zona
                                 System.out.println(" ¡Zona editada con exito!");
                             }else if (option.equals("3")) {//opcion para la editar el numero de la mesa
@@ -986,7 +992,7 @@ public class Interfaz {
                         System.out.println();
                         System.out.println(" Digite el id de la mesa que desea eliminar");
                         int nume=in.nextInt();//se pide el id de la mesa a eliminar
-                        for (Mesa mesa: mesas ){
+                        for (Mesa mesa: mesas.values()){
                             if (mesa.getIdunico()==nume){//encuentra la mesa
                                 mesas.remove(mesa);//elimina la mesa
                                 System.out.println(" ¡Mesa eliminada con exito! ");
@@ -1023,7 +1029,7 @@ public class Interfaz {
     }
 
     private static void menuProveedor() {
-        //Menu con todo lo relacionado con las mesas
+        //Menu con todo lo relacionado con los proveedores
         Scanner in=new Scanner(System.in);
         String option;
         while(true) {
@@ -1218,12 +1224,12 @@ public class Interfaz {
         int option;
         System.out.println();
         System.out.println("-----------------------------");
-        Mesa.getMesas();
+        Mesa.verMesas();
         System.out.println("-----------------------------");
         Scanner in=new Scanner(System.in);
         option = in.nextInt();
         while(true){
-            if(mesas.contains(option)){
+            if(mesas.get(option).equals(true)){
                 if (mesas.get(option).isDisponibilidad()){
                     Catalogo.verCatalogo();
                 }

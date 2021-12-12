@@ -1,34 +1,35 @@
 package gestorAplicacion;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Mesa {
 
     private int idunico;
-    private String zona;
     private int numero;
-<<<<<<< HEAD
-    private boolean disponibilidad;
-    public static LinkedList<Mesa> mesas = new LinkedList<>();
+    private short zona;
+    private boolean disponibilidad = true;
     private Pedido pedido;
-=======
-    public static LinkedList<Mesa> mesas= new LinkedList<>(); //Array que contiene todas las mesas creadas
->>>>>>> crud
+    public static HashMap<Integer,Mesa> mesas= new HashMap<>(); //Array que contiene todas las mesas creadas
 
-    public Mesa(int idunico, String zona, int numero) {
+
+    public Mesa(int idunico, short zona, int numero) {
         this.idunico = idunico;
         this.zona = zona;
         this.numero = numero;
-        mesas.add(this);
+        mesas.put(numero,this);
     }
 
     public Mesa() {
+
     }
 
-    public static void crearMesa(int id, String zona, int numMesa) {
+
+
+    /*public static void crearMesa(int id, short zona, int numMesa) {
         Mesa newMesa=new Mesa(id,zona,numMesa);
         mesas.add(newMesa);
-    }
+    }*/
 
     public int getIdunico() {
         return idunico;
@@ -39,10 +40,19 @@ public class Mesa {
     }
 
     public String getZona() {
-        return zona;
+        switch (this.zona){
+            case 1:
+                return "VIP";
+            case 2:
+                return "Salón principal";
+            case 3:
+                return "Terraza";
+            default:
+                return "Código de zona inválido.";
+        }
     }
 
-    public void setZona(String zona) {
+    public void setZona(short zona) {
         this.zona = zona;
     }
 
@@ -54,7 +64,7 @@ public class Mesa {
         this.numero = numero;
     }
 
-<<<<<<< HEAD
+
     public boolean isDisponibilidad() {
         return disponibilidad;
     }
@@ -63,11 +73,11 @@ public class Mesa {
         this.disponibilidad = disponibilidad;
     }
 
-    public static void getMesas() {
+   /* public static void getMesas() {
         for (Object str : mesas){
             System.out.println(str.toString());
         }
-    }
+    }*/
     public void entorno_Mesa(){
 
     }
@@ -75,24 +85,25 @@ public class Mesa {
     @Override
     public String toString() {
         if (disponibilidad) {
-            return "Mesa "+numero+" (Disponible)";
+            return "Mesa "+this.numero+" (Disponible)";
         } else {
-            return "Mesa "+numero+" (Ocupada)";
+            return "Mesa "+this.numero+" (Ocupada)";
         }
         }
-=======
+
     public static void verMesas(){
-        for (Mesa mesa:mesas){
+        for (Mesa mesa:mesas.values()){
             System.out.println(mesa);
         }
     }
 
-    @Override
+    /*@Override
     public String toString() {
-        return "ID (" + idunico +")" + "\n" +
-                "[ Mesa numero: " + numero + "\n" +
-                "  Zona: " + zona  + " ]";
-    }
+        return "ID (" + this.idunico +")" + "\n" +
+                "[ Mesa numero: " + this.numero + "\n" +
+                "  Zona: " + this.zona  + " ]\n" +
+                "Disponibilidad "+ this.disponibilidad;
+    }*/
 
->>>>>>> crud
+
 }

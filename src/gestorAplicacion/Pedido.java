@@ -12,16 +12,10 @@ public class Pedido {
     public static LinkedList<Pedido> pedidos= new LinkedList<>();; //Array que contiene los pedidos
 
     //private int cantidadplatos; #variable para uso con array statico
-
-<<<<<<< HEAD
     public void Recibo() {
 
     }
-=======
-//    public void Recibo {
-//
-//    }
->>>>>>> crud
+
 
 
 

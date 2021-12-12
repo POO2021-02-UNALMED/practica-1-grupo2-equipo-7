@@ -25,8 +25,11 @@ public class BaseDeDatos {
         Cliente.crearCliente(1009825,"ricardo",31245678,"av colombia #63-10");
         Cliente.crearCliente(123,"r",321,"av");
 
-        Mesa.crearMesa(1,"none",18);
-        Mesa.crearMesa(2,"center",7);
+        new Mesa(1, (short) 1,18);
+        new Mesa(2, (short) 2,6);
+        new Mesa(3, (short) 3,7);
+        new Mesa(4, (short) 2,8);
+        new Mesa(5, (short) 2,9);
     }
     
    
