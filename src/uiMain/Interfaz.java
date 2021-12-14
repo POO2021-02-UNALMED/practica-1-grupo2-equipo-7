@@ -1222,16 +1222,19 @@ public class Interfaz {
 
     public static void pedido_facturacion(){
         int option;
+        Scanner in=new Scanner(System.in);
         System.out.println();
         System.out.println("-----------------------------");
         Mesa.verMesas();
         System.out.println("-----------------------------");
-        Scanner in=new Scanner(System.in);
         option = in.nextInt();
         while(true){
             if(mesas.get(option).equals(true)){
                 if (mesas.get(option).isDisponibilidad()){
-                    Catalogo.verCatalogo();
+                    if(mesas.get(option).entornoMesa() == null){
+                        System.out.println("Aún no tiene pedido para ésta mesa.");
+                    }else{
+                    mesas.get(option).entornoMesa();}
                 }
             }
         }

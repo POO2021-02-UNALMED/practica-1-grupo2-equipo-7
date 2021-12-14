@@ -1,7 +1,6 @@
 package gestorAplicacion;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 public class Mesa {
 
@@ -10,7 +9,7 @@ public class Mesa {
     private short zona;
     private boolean disponibilidad = true;
     private Pedido pedido;
-    public static HashMap<Integer,Mesa> mesas= new HashMap<>(); //Array que contiene todas las mesas creadas
+    public static HashMap<Integer,Mesa> mesas= new HashMap<>(); //HashMap que contiene todas las mesas creadas
 
 
     public Mesa(int idunico, short zona, int numero) {
@@ -78,9 +77,16 @@ public class Mesa {
             System.out.println(str.toString());
         }
     }*/
-    public void entorno_Mesa(){
-
-    }
+   public Catalogo entornoMesa() {
+       if (this.pedido.getPlatos() == null) {
+           return null;
+       } else {
+           for (Catalogo plato : this.pedido.getPlatos()) {
+               return plato;
+           }
+           return null;
+       }
+   }
 
     @Override
     public String toString() {
@@ -96,6 +102,8 @@ public class Mesa {
             System.out.println(mesa);
         }
     }
+
+
 
     /*@Override
     public String toString() {

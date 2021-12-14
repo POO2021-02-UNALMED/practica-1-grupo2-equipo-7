@@ -26,8 +26,11 @@ public class Pedido {
         Pedido.platos =platos;
     }
 
-    public LinkedList<Pedido> getPlatos() {
-        return pedidos;
+    public ArrayList<Catalogo> getPlatos() {
+        if(platos.isEmpty()){
+            return null;
+        } else {
+        return platos;}
     }
 
     public void setPlatos(ArrayList<Catalogo> platos) {
