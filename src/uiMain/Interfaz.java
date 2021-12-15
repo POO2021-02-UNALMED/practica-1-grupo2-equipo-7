@@ -8,11 +8,13 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import static gestorAplicacion.Catalogo.platos;
+import static gestorAplicacion.Cliente.crearCliente;
 import static gestorAplicacion.Mesa.mesas;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
 
 import static gestorAplicacion.Catalogo.platos;
 import static gestorAplicacion.Cliente.clientes;
@@ -164,7 +166,7 @@ public class Interfaz {
                     int cedula=in.nextInt();//primero se pide la cedula
                     //despues se comprueba de que no exista ningun cliente con esta cedula
                     //ya que la cedula es unica y no deben haber dos con la misma
-                    for (Cliente cliente: clientes ){ //recorre la lista de clientes
+                    for (Cliente cliente: clientes.values()){ //recorre la lista de clientes
                         if (cliente.getCedula()==cedula){ //encuentra un cliente que ya tiene esta cedula
                             System.out.println(" Esta cedula ya existe ");
                             return;
@@ -185,14 +187,14 @@ public class Interfaz {
                 case "2"://en esta opcion se editara la informacion del cliente
                     System.out.println("-----------------------------");
                     System.out.println(" Lista de clientes");//Primero se muestran los clientes para que el usuario escoja el que quiere editar
-                    for (Cliente cliente: clientes ){
+                    for (Cliente cliente: clientes.values()){
                         System.out.println(cliente);
                     }
                     System.out.println("-----------------------------");
                     System.out.println();
                     System.out.println(" Digite la cedula del cliente que desea editar");
                     int cedu=in.nextInt();//se pide la cedula del cliente que se escogio para editar
-                    for (Cliente cliente1: clientes ){
+                    for (Cliente cliente1: clientes.values()){
                         if (cliente1.getCedula()==cedu){//se encuentra el cliente
                             System.out.println("-----------------------------");
                             System.out.println(" Cliente a editar");
@@ -211,7 +213,7 @@ public class Interfaz {
                                 System.out.println(" Digite la nueva cedula");
                                 int cedul=in.nextInt();//se pide la nueva cedula
                                 //y se comprueba de que no exista ningun cliente registrado con esta cedula
-                                for (Cliente cliente2: clientes ){
+                                for (Cliente cliente2: clientes.values()){
                                     if (cliente2.getCedula()==cedul){
                                         System.out.println(" Esta cedula ya existe ");
                                         return;
@@ -257,14 +259,14 @@ public class Interfaz {
                         //para que el usuario identifique la cedula del cliente a eliminar
                         System.out.println("-----------------------------");
                         System.out.println(" Lista de clientes");
-                        for (Cliente cliente: clientes ){
+                        for (Cliente cliente: clientes.values()){
                             System.out.println(cliente);
                         }
                         System.out.println("-----------------------------");
                         System.out.println();
                         System.out.println(" Digite la cedula del cliente que desea eliminar");
                         int ced=in.nextInt();//se pide la cedula del cliente a eliminar
-                        for (Cliente cliente1: clientes ){
+                        for (Cliente cliente1: clientes.values()){
                             if (cliente1.getCedula()==ced){//encuentra el cliente
                                 clientes.remove(cliente1);//elimina el cliente
                                 System.out.println(" ¡Cliente eliminado con exito! ");
@@ -281,7 +283,7 @@ public class Interfaz {
                         //de lo contrario
                         //recorre el arreglo mostrando todos los clientes registrados hasta el momento
                         System.out.println("-----------------------------");
-                        for (Cliente cliente: clientes ){
+                        for (Cliente cliente: clientes.values()){
                             System.out.println(cliente);
                             System.out.println();
                         }
@@ -530,7 +532,7 @@ public class Interfaz {
                     System.out.println(" Digite la cedula del cliente que desea agregar");
                     int cedul=in.nextInt();//se pide la cedula del cliente que se escogio
                     Cliente cliente=new Cliente();
-                    for (Cliente cliente1: clientes ) {
+                    for (Cliente cliente1: clientes.values()) {
                         if (cliente1.getCedula()==cedul) {//aca encuentra al cliente que sera el dueño de la reserva
                             cliente=cliente1;
                         }
@@ -581,7 +583,7 @@ public class Interfaz {
                                 System.out.println();
                                 System.out.println(" Digite la cedula del nuevo dueño de la reserva");
                                 int cedu=in.nextInt();//se pide la cedula del cliente que se escogio
-                                for (Cliente cliente1:clientes){
+                                for (Cliente cliente1:clientes.values()){
                                     if (cliente1.getCedula()==cedu){
                                         reserva1.setCliente(cliente1);//aca se edita el dueño de la reserva
                                         System.out.println(" ¡Cliente editado con exito!");
@@ -710,7 +712,7 @@ public class Interfaz {
                     System.out.println(" Digite la cedula del cliente que desea agregar");
                     int cedul=in.nextInt();//se pide la cedula del cliente que se escogio
                     Cliente cliente=new Cliente();
-                    for (Cliente cliente1: clientes ) {
+                    for (Cliente cliente1: clientes.values()) {
                         if (cliente1.getCedula()==cedul) {//aca encuentra al cliente que sera el dueño del pedido
                             cliente=cliente1;
                         }
@@ -794,7 +796,7 @@ public class Interfaz {
                                 System.out.println();
                                 System.out.println(" Digite la cedula del nuevo dueño del pedido");
                                 int cedu=in.nextInt();//se pide la cedula del cliente que se escogio
-                                for (Cliente cliente1:clientes){
+                                for (Cliente cliente1:clientes.values()){
                                     if (cliente1.getCedula()==cedu){
                                         pedido1.setCliente(cliente1);//aca se edita el dueño del pedido
                                         System.out.println(" ¡Cliente editado con exito!");
@@ -1221,24 +1223,29 @@ public class Interfaz {
     }
 
     public static void pedido_facturacion(){
-        int option;
+        int option, op;
+        int cc;
         Scanner in=new Scanner(System.in);
         System.out.println();
         System.out.println("-----------------------------");
         Mesa.verMesas();
         System.out.println("-----------------------------");
         option = in.nextInt();
-        while(true){
-            if(mesas.get(option).equals(true)){
+        if(mesas.containsKey(option)){
                 if (mesas.get(option).isDisponibilidad()){
+                    System.out.println("Ingrese documento del cliente: ");
+                    cc = in.nextInt();
+                    verificacion(cc);
                     if(mesas.get(option).entornoMesa() == null){
-                        System.out.println("Aún no tiene pedido para ésta mesa.");
-                    }else{
-                    mesas.get(option).entornoMesa();}
-                }
-            }
-        }
+                         mesas.get(option).entornoMesa();}
+                    }else {
+                        mesas.get(option).entornoMesa();
+                    }
 
+            } else{
+            System.out.println("Elija una mesa entre las siguientes disponibles:");
+            pedido_facturacion();
+        }
     }
 
     //menu donde se podra ver todo lo relacionado con insumos de la clase materiaPrima
@@ -1265,6 +1272,28 @@ public class Interfaz {
             }else if(option.equals("0")){
                 return;
             }
+        }
+    }
+    public static void verificacion(int cedula) {
+        Scanner in=new Scanner(System.in);
+        String nombre;
+        String direccion;
+        int cc, tel;
+
+        if (!clientes.containsKey(cedula)) {
+            System.out.println("No existe el cliente en el sistema, vamos a crearlo: ");
+            System.out.println("Ingrese nombre: ");
+            nombre = in.next();
+            System.out.println("Ingrese número de cc: ");
+            cc = in.nextInt();
+            System.out.println("Ingrese número de teléfono: ");
+            tel = in.nextInt();
+            System.out.println("Ingrese dirección: ");
+            direccion = in.next();
+            Cliente cliente = new Cliente(cc, nombre, tel, direccion);
+            System.out.println("Cliente creado de manera exitosa." +
+                    "Ahora sí, creemos su pedido.");
+
         }
     }
 }

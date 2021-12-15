@@ -5,11 +5,11 @@ import java.util.TreeMap;
 
 public class Catalogo {
 
-    protected static int idPlato=1; //contador que sirva como llave unica para identificar un plato del catalogo
+    protected int idplato=1; //contador que sirva como llave unica para identificar un plato del catalogo
     protected String nombrePlato;//atributos del nombre y precio del plato que ira en el catalogo
     protected int precio;
     public static TreeMap<Integer,Catalogo> platos=new TreeMap<>();//Treemap que sirve como catalogo donde se encuentran los platos que ofrece el restaurante,los identificamos con una llave numerica
-
+    protected static int idPlato = idplato;
     //constructor
     public Catalogo(String nombrePlato,int precio) {
         this.nombrePlato = nombrePlato;
@@ -50,9 +50,9 @@ public class Catalogo {
         }else{
             //pero si no esta vacio,recorre el treemap mostrando la llave y su valor
             for (Map.Entry<Integer,Catalogo> plato: platos.entrySet()) {
-                Integer key=plato.getKey();
+                Integer key=plato.getValue().idPlato;
                 Catalogo value=plato.getValue();
-                System.out.println(" "+key+" "+value);
+                System.out.println(" "+key+". "+value);
             }
         }
     }
@@ -60,9 +60,6 @@ public class Catalogo {
     //metodo toString para visualizar los datos del treemap
     @Override
     public String toString() {
-        return "[" +
-                "Plato='" + nombrePlato + '\'' +
-                ", Precio= $" + precio +
-                ']';
+        return nombrePlato+"($"+precio+")";
     }
 }

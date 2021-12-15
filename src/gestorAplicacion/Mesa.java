@@ -1,6 +1,7 @@
 package gestorAplicacion;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Mesa {
 
@@ -78,15 +79,28 @@ public class Mesa {
         }
     }*/
    public Catalogo entornoMesa() {
-       if (this.pedido.getPlatos() == null) {
-           return null;
-       } else {
-           for (Catalogo plato : this.pedido.getPlatos()) {
-               return plato;
+       Scanner in=new Scanner(System.in);
+       int op = in.nextInt();
+       try {
+           if (this.pedido.getPlatos() == null) {
+                Catalogo.verCatalogo();
+                while(op != 0) {
+
+
+                }
+
+           } else {
+               for (Catalogo plato : this.pedido.getPlatos()) {
+                   System.out.println(plato);
+               }
+
            }
-           return null;
+       } catch (NullPointerException e) {
        }
+       return null;
    }
+
+    public void tomadePedido(){}
 
     @Override
     public String toString() {
