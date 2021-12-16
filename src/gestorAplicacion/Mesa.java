@@ -1,6 +1,7 @@
 package gestorAplicacion;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Mesa {
@@ -10,6 +11,7 @@ public class Mesa {
     private short zona;
     private boolean disponibilidad = true;
     private Pedido pedido;
+    private LinkedList<Catalogo> pedidoM = new LinkedList<>();
     public static HashMap<Integer,Mesa> mesas= new HashMap<>(); //HashMap que contiene todas las mesas creadas
 
 
@@ -84,8 +86,10 @@ public class Mesa {
        try {
            if (this.pedido.getPlatos() == null) {
                 Catalogo.verCatalogo();
+                op = in.nextInt();
+                pedidoM.add(Catalogo.platos.get(op));
                 while(op != 0) {
-
+                op = 0;
 
                 }
 
