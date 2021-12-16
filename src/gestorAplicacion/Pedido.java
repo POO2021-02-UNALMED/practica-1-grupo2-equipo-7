@@ -1,8 +1,9 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Pedido {
+public class Pedido implements Serializable {
 
     private HashMap<Catalogo, Integer> platos; //Hash que guarda el contenido de cada pedido con la cantidad de cada plato
     private Cliente cliente;

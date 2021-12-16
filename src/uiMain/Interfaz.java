@@ -1434,7 +1434,7 @@ public class Interfaz {
             }else if(option.equals("0")){
                 return;
             }
-            System.out.println("sistema actualizado");
+            System.out.println("sistema de puntos actualizado");
         }
     }
 

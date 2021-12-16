@@ -1,11 +1,12 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class materiaPrima {
+public class materiaPrima implements Serializable {
 
     //Proveedor proveedor;
     protected String nombreInsumo;//atributos

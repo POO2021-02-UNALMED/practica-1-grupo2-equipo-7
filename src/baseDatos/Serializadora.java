@@ -39,6 +39,7 @@ public class Serializadora implements Serializable {
         FileOutputStream Escritorpedidos;
         FileOutputStream Escritorreservas;
         FileOutputStream Escritormesas;
+        FileOutputStream Escritoinsumos;
 
         try {
             //Serializa la lista de clientes
@@ -90,6 +91,13 @@ public class Serializadora implements Serializable {
             out7.close();
             Escritorclientes.close();
 
+            //Serializa la lista de insumos
+            Escritoinsumos = new FileOutputStream(System.getProperty("user.dir") + "\\tmp\\Listainsumos.txt");
+            ObjectOutputStream out8 = new ObjectOutputStream(Escritoinsumos);
+            out.writeObject(materiaPrima.insumos);
+            out8.close();
+            Escritoinsumos.close();
+
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -111,6 +119,7 @@ public class Serializadora implements Serializable {
         FileInputStream Lectorpedidos;
         FileInputStream Lectorreservas;
         FileInputStream Lectormesas;
+        FileInputStream Lectorinsumos;
         try {
             Lectorclientes = new FileInputStream(System.getProperty("user.dir") + "/tmp/Listaclientes.txt");
             ObjectInputStream in = new ObjectInputStream(Lectorclientes);
@@ -196,6 +205,19 @@ public class Serializadora implements Serializable {
             Mesa.mesas = cargamesas;
             in7.close();
             Lectormesas.close();
+
+            //Metodo para probar que esta leyendo
+           /* for (Cliente test : cargaclientes) {
+                System.out.println(test.getNombre());
+                System.out.println(test.getCedula());
+            }*/
+
+            Lectorinsumos = new FileInputStream(System.getProperty("user.dir") + "/tmp/Listainsumos.txt");
+            ObjectInputStream in8 = new ObjectInputStream(Lectorinsumos);
+            TreeMap cargainsumos=new TreeMap<>();
+            materiaPrima.insumos = cargainsumos;
+            in8.close();
+            Lectorinsumos.close();
 
             //Metodo para probar que esta leyendo
            /* for (Cliente test : cargaclientes) {

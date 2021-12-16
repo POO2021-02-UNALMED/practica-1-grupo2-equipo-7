@@ -1,12 +1,13 @@
 package gestorAplicacion;
 
 import java.awt.font.LineMetrics;
+import java.io.Serializable;
 import java.util.*;
 
 import static gestorAplicacion.Cliente.clientes;
 import static gestorAplicacion.materiaPrima.insumos;
 
-public class Catalogo {
+public class Catalogo implements Serializable {
 
     private static Integer idPlato = 1;
     protected String nombrePlato;//atributos del nombre y precio del plato que ira en el catalogo

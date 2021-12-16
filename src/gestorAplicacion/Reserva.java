@@ -1,10 +1,11 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
-public class Reserva {
+public class Reserva implements Serializable {
     private int numreserva;
     private String fechareserva;
     private int cliente;

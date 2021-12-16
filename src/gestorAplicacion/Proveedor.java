@@ -1,8 +1,9 @@
 package gestorAplicacion;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class Proveedor {
+public class Proveedor implements Serializable {
     private int nit;
     private String nombre;
     private String telefono;

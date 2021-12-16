@@ -1,6 +1,8 @@
 package gestorAplicacion;
 
-public class Sede {
+import java.io.Serializable;
+
+public class Sede implements Serializable {
 private int numsede;
 private boolean open;
 //para saber si la sede esta abierta en el momento

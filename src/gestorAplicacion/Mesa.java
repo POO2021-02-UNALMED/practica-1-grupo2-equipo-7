@@ -2,10 +2,11 @@ package gestorAplicacion;
 
 import uiMain.Interfaz;
 
+import java.io.Serializable;
 import java.sql.SQLOutput;
 import java.util.*;
 
-public class Mesa {
+public class Mesa implements Serializable {
 
     private int idunico;
     private int numero;
