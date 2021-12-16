@@ -1,40 +1,51 @@
 package gestorAplicacion;
 
 import java.util.LinkedList;
+import java.util.TreeMap;
 
 public class Reserva {
-	public static Object getcliente;
     private int numreserva;
     private String fechareserva;
-    private Cliente cliente;
-    private boolean aplicable;
-	public static LinkedList<Reserva> reservas= new LinkedList<>();
-     //si la reserva aun es vigente o por el contrario ya vencio
+    private int cliente;
+	private String horareserva;
+    private int cantidadpersonas;
 
-	public Reserva(int numreserva, String fechareserva, Cliente cliente, boolean aplicable) {
-       	super();
-	    this.numreserva = numreserva;
+	public Reserva(int cliente,int numreserva, String fechareserva,String horareserva, int cantidadpersonas) {
+	    
+		this.cliente = cliente;
+		this.numreserva = numreserva;
 	    this.fechareserva = fechareserva;
-     	this.aplicable = aplicable;
-    	this.cliente = cliente;
+	    this.horareserva = horareserva;
+		this.cantidadpersonas = cantidadpersonas;
+    	
 	}
 
 
-    public Cliente getCliente() {
-	return cliente;
-}
+ 
+    
+
+    
 
 
-    public void setCliente(Cliente cliente) {
-	this.cliente = cliente;
-}
 
-	public static void crearReserva(int numreserva, String fechareserva,Cliente cliente, boolean aplicable) {
-		Reserva newReserva=new Reserva(numreserva,fechareserva,cliente,aplicable);
-		reservas.add(newReserva);
+
+	public int getCliente() {
+		return cliente;
 	}
 
-    public int getNumreserva() {
+
+
+
+
+	public void setCliente(int cliente) {
+		this.cliente = cliente;
+	}
+
+
+
+
+
+	public int getNumreserva() {
 	return numreserva;
 }
 
@@ -50,26 +61,39 @@ public class Reserva {
 	this.fechareserva = fechareserva;
 }
 
-    public boolean isAplicable() {
-	return aplicable;
-}
-
-    public void setAplicable(boolean aplicable) {
-	this.aplicable = aplicable;
-}
-
-	public static void verReserva(){
-		for (Reserva reserva:reservas){
-			System.out.println(reserva);
+   
+		
+		public String getHorareserva() {
+			return horareserva;
 		}
-	}
+
+
+		public void setHorareserva(String horareserva) {
+			this.horareserva = horareserva;
+		}
+
+
+		public int getCantidadpersonas() {
+			return cantidadpersonas;
+		}
+
+
+		public void setCantidadpersonas(int cantidadpersonas) {
+			this.cantidadpersonas = cantidadpersonas;
+		}
+
+
+	
+	
+	
 
 	@Override
-	public String toString() {
-		return "Nro de Reserva " + numreserva + "\n" +
-				"[ Fecha de reserva: " + fechareserva + "\n" +
-				"  Cliente: " + cliente + "\n" +
-				"  Aplicable: " + aplicable +" ]";
-	}
-
+	 public String toString() {
+        return "numero de reserva: "+getNumreserva() + "\n" +
+                "[ fecha de la reserva: "+ getFechareserva() + "\n" +
+                "  cliente: "+ getCliente() + "\n" +
+                " hora de la reserva: "+ getHorareserva() + "\n" +
+                "  cantidad personsas: "+ getCantidadpersonas()+" ]";
+    }
 }
+
