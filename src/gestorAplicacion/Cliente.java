@@ -11,8 +11,9 @@ public class Cliente extends Persona {
     Reserva reserva;
     public static HashMap<Integer,Cliente> clientes= new HashMap<>();
 
-    public Cliente(int cedula, String nombre, int telefono, String direccion){
+    public Cliente(int cedula, String nombre, int telefono, String direccion,Reserva reserva){
         super(cedula, nombre, telefono, direccion);
+        this.reserva = reserva;
     }
 
     public Cliente(){
@@ -26,8 +27,8 @@ public class Cliente extends Persona {
     public int getPuntos(){return this.puntos;}
 
     // Pendiente creacion de la clase reserva para crear métodos relacionados
-	public static void crearCliente(int cedula, String nombre, int telefono, String direccion) {
-        Cliente newCliente=new Cliente(cedula,nombre,telefono,direccion);
+	public static void crearCliente(int cedula, String nombre, int telefono, String direccion, Reserva reserva) {
+        Cliente newCliente=new Cliente(cedula,nombre,telefono,direccion, reserva);
         clientes.put(cedula , newCliente);
 	}
 

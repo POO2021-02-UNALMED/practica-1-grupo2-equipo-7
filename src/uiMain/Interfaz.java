@@ -194,7 +194,8 @@ public class Interfaz {
                     int telefono = in.nextInt();
                     System.out.println(" Por favor ingrese la direccion");
                     String direccion = in.next();
-                    Cliente.crearCliente(cedula, nombre, telefono, direccion);//aca se crea el cliente
+                    Reserva reserva = null;
+                    Cliente.crearCliente(cedula, nombre, telefono, direccion,reserva);//aca se crea el cliente
                     System.out.println(" �Cliente creado con exito!");
                     break;
                 case "2"://en esta opcion se editara la informacion del cliente
@@ -710,19 +711,13 @@ public class Interfaz {
                  for (Reserva reserva1 : reservas) {
                      if (reserva1.getNumreserva() == numero) {//se encuentra la reserva
                          System.out.println("-----------------------------");
-                         System.out.println(" Reserva a editar");
                          System.out.println(reserva1);//se muestra la reserva que se va a editar solo para comprobar
                          System.out.println("-----------------------------");
                      }
 
                  }
 
-                /* System.out.println(" Digite el numero de lq reserbq");
-                 //de lo contrario
-                 //recorre el arreglo mostrando todas las reserva registradas hasta el momento
-                 System.out.println("-----------------------------");
-                 Reserva.verReserva();
-                 System.out.println("-----------------------------");*/
+               
              }
         }else if (opcion.equals("2")) {
             Scanner oli = new Scanner(System.in);
@@ -740,6 +735,7 @@ public class Interfaz {
             System.out.println("Cuantas personas son?");
             cantidadpersonas = oli.nextInt();
             Reserva.crearReserva(cc,numreserva,fecha,hora,cantidadpersonas);
+            if (Cliente.clientes.containsKey(cc))()
             System.out.println("Su reserva ha sido creada con exito ");
         }
         
@@ -1405,9 +1401,9 @@ public class Interfaz {
                 Scanner cedulascan=new Scanner(System.in);
 
                 int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
+                Cliente cliente2 = clientes.get(cedula);
                 //Busca la cedula ingresada en el array de cliente
                     if (clientes.containsKey(cedula)) {//se encuentra el cliente
-                        Cliente cliente2 = clientes.get(cedula);
 
                         System.out.println("Nombre" + cliente2.getNombre());
                         //Verificacion del estuatus segun atributo, 0 normal, 1 frecuente, 2 VIP
@@ -1420,8 +1416,6 @@ public class Interfaz {
                         }
                         System.out.println("Sus puntos son:" + cliente2.getPuntos());
 
-                    }else {
-                        System.out.println("no se encontro la cedula");
                     }
 
                 break;
@@ -1484,8 +1478,8 @@ public class Interfaz {
             option = in.next();
             if (option.equals("1")) {
                 //Busca la cedula ingresada en el array de clientes
+                Cliente cliente2 = clientes.get(cedula);
                     if (clientes.containsKey(cedula)){
-                        Cliente cliente2 = clientes.get(cedula);
                         //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
                         if (cliente2.getPuntos()>5000) {
                             cliente2.actualizar_puntos(cliente2.getPuntos() - 5000);
@@ -1493,16 +1487,14 @@ public class Interfaz {
                         }else {
                             System.out.println("no dispone de suficientes puntos");
                         }
-                    }else {
-                        System.out.println("no se encontro la cedula");
                     }
 
                 break;
             }else if (option.equals("2")) {
                 //Busca la cedula ingresada en el array de clientes
                 //Busca la cedula ingresada en el array de clientes
+                    Cliente cliente2 = clientes.get(cedula);
                     if (clientes.containsKey(cedula)){
-                        Cliente cliente2 = clientes.get(cedula);
                         //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
                         if (cliente2.getPuntos()>20000) {
                             cliente2.actualizar_puntos(cliente2.getPuntos() - 20000);
@@ -1510,8 +1502,6 @@ public class Interfaz {
                         }else {
                             System.out.println("no dispone de suficientes puntos");
                         }
-                    }else {
-                        System.out.println("no se encontro la cedula");
                     }
 
                 break;
