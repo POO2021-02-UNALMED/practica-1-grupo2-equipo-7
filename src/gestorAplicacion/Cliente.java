@@ -20,6 +20,14 @@ public class Cliente extends Persona {
         super();
     }
 
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+
     public void actualizar_puntos(int puntos){
         this.puntos += puntos;
     }

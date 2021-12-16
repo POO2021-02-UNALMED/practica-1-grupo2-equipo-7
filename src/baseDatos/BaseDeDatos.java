@@ -85,8 +85,8 @@ public class BaseDeDatos {
         materiaPrima.crearInsumo("meat", 20);
 
         
-        Cliente.crearCliente(1009825,"ricardo",31245678,"av colombia #63-10");
-        Cliente.crearCliente(123,"r",321,"av");
+        Cliente.crearCliente(1009825,"ricardo",31245678,"av colombia #63-10",null);
+        Cliente.crearCliente(123,"r",321,"av",null);
         materiaPrima.crearInsumo("potato", 20);
     
     HashMap<Integer, String > mapaClientes =new HashMap<Integer,String>();
@@ -96,9 +96,9 @@ public class BaseDeDatos {
         new Mesa(3, (short) 3,7);
         new Mesa(4, (short) 2,8);
         new Mesa(5, (short) 2,9);
- Reserva.crearReserva(1009825, 23,  "24/12/21", "14:00", 2);
- Reserva.crearReserva(1009845, 03,  "26/12/21", "16:00", 7);
- Reserva.crearReserva(1049825, 25,  "12/12/21", "18:00", 4);
+        Reserva.crearReserva(1009825, 23,  "24/12/21", "14:00", 2);
+        Reserva.crearReserva(1009845, 44,  "26/12/21", "16:00", 7);
+        Reserva.crearReserva(1049825, 25,  "12/12/21", "18:00", 4);
     }
     
    

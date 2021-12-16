@@ -194,8 +194,7 @@ public class Interfaz {
                     int telefono = in.nextInt();
                     System.out.println(" Por favor ingrese la direccion");
                     String direccion = in.next();
-                    Reserva reserva = null;
-                    Cliente.crearCliente(cedula, nombre, telefono, direccion,reserva);//aca se crea el cliente
+                    Cliente.crearCliente(cedula, nombre, telefono, direccion, null);//aca se crea el cliente
                     System.out.println(" �Cliente creado con exito!");
                     break;
                 case "2"://en esta opcion se editara la informacion del cliente
@@ -734,9 +733,13 @@ public class Interfaz {
             hora = oli.next();
             System.out.println("Cuantas personas son?");
             cantidadpersonas = oli.nextInt();
-            Reserva.crearReserva(cc,numreserva,fecha,hora,cantidadpersonas);
-            if (Cliente.clientes.containsKey(cc))()
-            System.out.println("Su reserva ha sido creada con exito ");
+            Reserva reserva= new Reserva(cc,numreserva,fecha,hora,cantidadpersonas);
+            for (Map.Entry<Integer,Cliente> cliente: clientes.entrySet()) {
+                if (cliente.getKey()==cc){
+                    cliente.getValue().setReserva(reserva);
+                    System.out.println("Su reserva ha sido creada con exito ");
+                }
+            }
         }
         
     }
@@ -1543,7 +1546,7 @@ public class Interfaz {
                         tel = in.nextInt();
                         System.out.println("Ingrese direcci�n: ");
                         direccion = in.next();
-                        Cliente cliente = new Cliente(cc, nombre, tel, direccion);
+                        Cliente cliente = new Cliente(cc, nombre, tel, direccion,null);
                         System.out.println("Cliente creado de manera exitosa." +
                                 "Ahora s�, realizemos su reserva.");
 
