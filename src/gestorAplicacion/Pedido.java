@@ -27,14 +27,14 @@ public class Pedido {
         this.platos =platos;
     }
 
-    public LinkedList<Catalogo> getPlatos() {
+    public HashMap<Catalogo, Integer> getPlatos() {
         if(platos.isEmpty()){
             return null;
         } else {
         return platos;}
     }
 
-    public void setPlatos(LinkedList<Catalogo> platos) {
+    public void setPlatos(HashMap<Catalogo, Integer> platos) {
         this.platos = platos;
     }
 
@@ -62,7 +62,7 @@ public class Pedido {
         this.idpedido = idpedido;
     }
 
-    public static void crearPedido(Cliente cliente, Mesa mesa, int idpedido, LinkedList<Catalogo> pedidosPlato) {
+    public static void crearPedido(Cliente cliente, Mesa mesa, int idpedido, HashMap<Catalogo, Integer> pedidosPlato) {
         Pedido newPedido=new Pedido(cliente,mesa,idpedido,pedidosPlato);
         pedidos.add(newPedido);
     }

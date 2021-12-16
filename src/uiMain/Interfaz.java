@@ -781,7 +781,7 @@ public class Interfaz {
                     System.out.println(" �Cuantos platos desea comprar el cliente?");//se pregunta cuantos platos comprara el cliente
                     //ya que el cliente puede comprar mas de un plato en cada pedido,por ende se le pedira un plato la cantidad de veces que va a comprar
                     int cantidad = in.nextInt();
-                    LinkedList<Catalogo> pedidosPlato = null;
+                    HashMap<Catalogo, Integer> pedidosPlato = null;
                     for (int i = 1; i <= cantidad; i++) {
                         //se muestra el catalogo de platos disponibles para que se pueda tomar el pedido
                         System.out.println();
@@ -801,7 +801,7 @@ public class Interfaz {
                             Catalogo plato = platos.get(num);
                             System.out.println(" Nombre= " + plato.getNombrePlato());//aca se muestra el plato que se agrego al pedido
                             System.out.println(" precio= " + plato.getPrecio());//con su respectivo precio
-                            pedidosPlato.add(plato);//aca se agrega el pedido
+                            pedidosPlato.put(plato, plato.getPrecio());//aca se agrega el pedido
                             System.out.println(" Agregado al pedido");
                         } else {
                             System.out.println(" Digite un numero valido");
