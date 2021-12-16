@@ -1,6 +1,7 @@
 package uiMain;
 
 import baseDatos.BaseDeDatos;
+import baseDatos.Serializadora;
 import gestorAplicacion.*;
 
 
@@ -32,6 +33,8 @@ public class Interfaz {
     private static int CedulaCLiente;
 
 	public static void main(String[] args) {
+
+        Serializadora.Lectura();
 	    BaseDeDatos base=new BaseDeDatos();
 	    base.baseDeDatos();
 		@SuppressWarnings("resource")
@@ -40,6 +43,7 @@ public class Interfaz {
         Reserva reserva = null;
 		String option;
         label:
+
         while(true) {
             System.out.println();
             System.out.println("-----------------------------");
@@ -90,6 +94,8 @@ public class Interfaz {
                     menuInsumos();
                     break;
                 case "0":
+                    Serializadora.Escritura();
+                    System.out.println("Se guardo con exito");
                     break label;
             }
         }
