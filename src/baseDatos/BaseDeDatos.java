@@ -96,6 +96,9 @@ public class BaseDeDatos {
         new Mesa(3, (short) 3,7);
         new Mesa(4, (short) 2,8);
         new Mesa(5, (short) 2,9);
+ Reserva.crearReserva(1009825, 23,  "24/12/21", "14:00", 2);
+ Reserva.crearReserva(1009845, 03,  "26/12/21", "16:00", 7);
+ Reserva.crearReserva(1049825, 25,  "12/12/21", "18:00", 4);
     }
     
    
