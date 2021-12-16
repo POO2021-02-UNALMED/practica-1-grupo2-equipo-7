@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Cliente extends Persona {
 
     protected int puntos = 0;
-    int estatus; //2 cliente VIP, 1 cliente frecuente, 0 cliente normal.
+    protected int estatus; //2 cliente VIP, 1 cliente frecuente, 0 cliente normal.
 
     Reserva reserva;
     public static LinkedList<Cliente> clientes= new LinkedList<>();

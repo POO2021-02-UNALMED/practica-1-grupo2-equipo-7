@@ -3,7 +3,6 @@ package gestorAplicacion;
 import java.util.LinkedList;
 
 public class Reserva {
-	public static Object getcliente;
     private int numreserva;
     private String fechareserva;
     private Cliente cliente;
@@ -12,7 +11,6 @@ public class Reserva {
      //si la reserva aun es vigente o por el contrario ya vencio
 
 	public Reserva(int numreserva, String fechareserva, Cliente cliente, boolean aplicable) {
-       	super();
 	    this.numreserva = numreserva;
 	    this.fechareserva = fechareserva;
      	this.aplicable = aplicable;

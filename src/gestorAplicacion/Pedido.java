@@ -16,9 +16,6 @@ public class Pedido {
 
     }
 
-
-
-
     public Pedido(Cliente cliente, Mesa mesa, int idpedido, ArrayList<Catalogo> platos) {
         this.cliente = cliente;
         this.mesa = mesa;

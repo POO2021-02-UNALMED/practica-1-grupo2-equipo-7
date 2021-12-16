@@ -22,7 +22,6 @@ import static gestorAplicacion.Cliente.clientes;
 import static gestorAplicacion.Empleado.empleados;
 import static gestorAplicacion.Mesa.mesas;
 import static gestorAplicacion.Pedido.pedidos;
-import static gestorAplicacion.Persona.getcedula;
 import static gestorAplicacion.Proveedor.proveedores;
 import static gestorAplicacion.Reserva.reservas;
 import static gestorAplicacion.Mesa.*;
@@ -68,7 +67,7 @@ public class Interfaz {
                     if ((boolean) (cliente.getCedula() == reserva.getCliente().getCedula())) {
                         System.out.println("usted ya cuenta con una reserva");
                     } else {
-                        System.out.println("usted acaba de crear una reserva con la cedula" + Persona.getcedula);
+                        //System.out.println("usted acaba de crear una reserva con la cedula" + cliente.getCedula);
                     }
 
 

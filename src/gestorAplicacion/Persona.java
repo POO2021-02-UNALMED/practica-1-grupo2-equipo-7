@@ -1,7 +1,6 @@
 package gestorAplicacion;
 
 public abstract class Persona {
-	public static Object getcedula;
 	private int cedula; 
 	private String nombre; 
 	private int telefono;
