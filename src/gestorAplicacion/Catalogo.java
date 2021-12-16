@@ -86,7 +86,7 @@ public class Catalogo implements Serializable {
                     for (Map.Entry<String,Double> plato: plato1.insumosPlato.entrySet()){
                         for (Map.Entry<String,Double> insumo: insumos.entrySet()) {
                             if (plato.getKey().equals(insumo.getKey())){
-                                double cantidad=insumo.getValue()-plato.getValue();
+                                double cantidad=insumo.getValue()-(plato.getValue())*cant;
                                 insumo.setValue(cantidad);
                                 System.out.println(" cantidad removida con exito");
                             }

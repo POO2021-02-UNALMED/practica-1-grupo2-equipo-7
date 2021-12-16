@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Cliente extends Persona {
 
-    protected int puntos = 0;
+    protected float puntos = 0;
     protected int estatus; //2 cliente VIP, 1 cliente frecuente, 0 cliente normal.
 
     Reserva reserva;
@@ -28,11 +28,11 @@ public class Cliente extends Persona {
         this.reserva = reserva;
     }
 
-    public void actualizar_puntos(int puntos){
+    public void actualizar_puntos(float puntos){
         this.puntos += puntos;
     }
 
-    public int getPuntos(){return this.puntos;}
+    public float getPuntos(){return this.puntos;}
 
     // Pendiente creacion de la clase reserva para crear métodos relacionados
 	public static void crearCliente(int cedula, String nombre, int telefono, String direccion, Reserva reserva) {

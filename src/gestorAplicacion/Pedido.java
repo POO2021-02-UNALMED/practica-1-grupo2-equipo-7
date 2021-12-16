@@ -17,6 +17,9 @@ public class Pedido implements Serializable {
         System.out.println("Sub-total: " + val);
         System.out.println("Propina: "+ val*0.1);
         System.out.println("Total: "+ (val + (val*0.1)));
+        this.getCliente().actualizar_puntos((float) (val*0.1));
+        System.out.println("Has ganado: "+ (val*0.1) + " Puntos.");
+        System.out.println("Llevas acumulados: "+ this.getCliente().getPuntos() + " Puntos.");
         in.next();
     }
 

@@ -144,9 +144,6 @@ public class Interfaz {
             System.out.println("2. Editar cliente.");
             System.out.println("3. Eliminar cliente.");
             System.out.println("4. Ver clientes.");
-            System.out.println("5. .");
-            System.out.println("6. .");
-            System.out.println("7. .");
             System.out.println("0. Volver.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -300,9 +297,6 @@ public class Interfaz {
             System.out.println("2. Editar empleado.");
             System.out.println("3. Eliminar empleado.");
             System.out.println("4. Ver empleados.");
-            System.out.println("5. .");
-            System.out.println("6. .");
-            System.out.println("7. .");
             System.out.println("0. Volver.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -460,15 +454,6 @@ public class Interfaz {
                         Empleado.verEmpleados();
                         System.out.println("-----------------------------");
                     }
-                    break;
-                case "5":
-
-                    break;
-                case "6":
-
-                    break;
-                case "7":
-
                     break;
                 case "0":
                     return;
@@ -736,9 +721,6 @@ public class Interfaz {
             System.out.println("2. Editar pedidos.");
             System.out.println("3. Eliminar pedidos.");
             System.out.println("4. Ver pedidos.");
-            System.out.println("5. .");
-            System.out.println("6. .");
-            System.out.println("7. .");
             System.out.println("0. Volver.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -913,15 +895,6 @@ public class Interfaz {
                         System.out.println("-----------------------------");
                     }
                     break;
-                case "5":
-                    //verPlinsum();
-                    break;
-                case "6":
-
-                    break;
-                case "7":
-
-                    break;
                 case "0":
                     return;
             }
@@ -942,9 +915,6 @@ public class Interfaz {
             System.out.println("2. Editar mesa.");
             System.out.println("3. Eliminar mesas.");
             System.out.println("4. Ver mesas.");
-            System.out.println("5. .");
-            System.out.println("6. .");
-            System.out.println("7. .");
             System.out.println("0. Volver.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -1059,15 +1029,6 @@ public class Interfaz {
                         System.out.println("-----------------------------");
                     }
                     break;
-                case "5":
-
-                    break;
-                case "6":
-
-                    break;
-                case "7":
-
-                    break;
                 case "0":
                     return;
             }
@@ -1087,9 +1048,6 @@ public class Interfaz {
             System.out.println("2. Editar proveedor.");
             System.out.println("3. Eliminar proveedor.");
             System.out.println("4. Ver proveedores.");
-            System.out.println("5. .");
-            System.out.println("6. .");
-            System.out.println("7. .");
             System.out.println("0. Volver.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -1198,15 +1156,7 @@ public class Interfaz {
                         System.out.println("-----------------------------");
                     }
                     break;
-                case "5":
 
-                    break;
-                case "6":
-
-                    break;
-                case "7":
-
-                    break;
                 case "0":
                     return;
             }
@@ -1406,7 +1356,7 @@ public class Interfaz {
                 //asignador de estatus segun cantidad de puntos
                 for (Cliente cliente2: clientes.values()) {
 
-                    int leerpuntos = cliente2.getPuntos();
+                    float leerpuntos = cliente2.getPuntos();
                     int status = cliente2.getestatus();
 
                     //verifica los clientes que anteriormente no eran frecuentes o VIP.
