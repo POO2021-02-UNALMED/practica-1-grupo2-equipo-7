@@ -8,7 +8,7 @@ import static gestorAplicacion.materiaPrima.insumos;
 
 public class Catalogo {
 
-    protected int idplato; //contador que sirva como llave unica para identificar un plato del catalogo
+    private static Integer idPlato = 1;
     protected String nombrePlato;//atributos del nombre y precio del plato que ira en el catalogo
     protected int precio;
     public static TreeMap<Integer,Catalogo> platos=new TreeMap<>();//Treemap que sirve como catalogo donde se encuentran los platos que ofrece el restaurante,los identificamos con una llave numerica
