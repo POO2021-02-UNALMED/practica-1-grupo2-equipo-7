@@ -1,7 +1,9 @@
 package uiMain;
 
 import baseDatos.BaseDeDatos;
+import baseDatos.Serializadora;
 import gestorAplicacion.*;
+
 
 
 import java.sql.SQLOutput;
@@ -12,6 +14,8 @@ import static gestorAplicacion.Cliente.crearCliente;
 import static gestorAplicacion.Mesa.mesas;
 
 import java.awt.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static gestorAplicacion.Catalogo.platos;
@@ -19,7 +23,6 @@ import static gestorAplicacion.Cliente.clientes;
 import static gestorAplicacion.Empleado.empleados;
 import static gestorAplicacion.Mesa.mesas;
 import static gestorAplicacion.Pedido.pedidos;
-import static gestorAplicacion.Persona.getcedula;
 import static gestorAplicacion.Proveedor.proveedores;
 import static gestorAplicacion.Reserva.reservas;
 import static gestorAplicacion.Mesa.*;
@@ -27,23 +30,27 @@ import static gestorAplicacion.Mesa.*;
 
 public class Interfaz {
 
+    private static int CedulaCLiente;
 
-    public static void main(String[] args) {
-        BaseDeDatos base = new BaseDeDatos();
-        base.baseDeDatos();
-        @SuppressWarnings("resource")
-        Scanner in = new Scanner(System.in);
+	public static void main(String[] args) {
+
+        Serializadora.Lectura();
+	    BaseDeDatos base=new BaseDeDatos();
+	    base.baseDeDatos();
+		@SuppressWarnings("resource")
+		Scanner in=new Scanner(System.in);
         Cliente cliente = null;
         Reserva reserva = null;
         String option;
         label:
-        while (true) {
+
+        while(true) {
             System.out.println();
             System.out.println("-----------------------------");
             System.out.println("Bienvenido al sistema POOpina");
             System.out.println("Escoja una opcion:");
             System.out.println("1. resevas.");
-            System.out.println("2. Consulta de puntaje.");
+            System.out.println("2. Consulta y canjeo de puntaje.");
             System.out.println("3. metodo 3.");
             System.out.println("4. Pedido y facturaci�n.");
             System.out.println("5. Gestion del restaurante");
@@ -61,33 +68,14 @@ public class Interfaz {
                     if ((boolean) (cliente.getCedula() == reserva.getCliente().getCedula())) {
                         System.out.println("usted ya cuenta con una reserva");
                     } else {
-                        System.out.println("Usted no cuenta con resevas porfavor seleccione una opcion");
-                        System.out.println("1 Crear reserva");
-                        System.out.println("0 volver al menu anterior");
-                        
-                       switch (option) {
-                       case "1":
-                    	   System.out.println("Usted esta creando una reserva porfavor proporcione los datos requeridos");
-                    	   Scanner id = new Scanner(System.in);
-                    	   System.out.println("ingrese su documento de identidad");
-                    	   Scanner fechares = new Scanner(System.in);
-                    	   System.out.println("ingrese una fecha para su reserva");
-                    	   Scanner horares = new Scanner(System.in);
-                    	   System.out.println("igrese una hora para su reserva");
-                    	   Scanner sederes = new Scanner(System.in);
-                    	   System.out.println("ingrese un numero de sede para su reserva");
-                    	   System.out.println("su reserva se ha guardado exitosamente con el #cc"+id+"para la fecha"+fechares+"a las"+
-                    		horares+"en la sede"+sederes);
-                    	  
-                       }
-                       break;
-                       
+                        //System.out.println("usted acaba de crear una reserva con la cedula" + cliente.getCedula);
                     }
 
 
                     break;
                 case "2":
-                    System.out.println("en esta base de datos se almacena la informaci�n de todos nuestros clientes frecuentes");
+                    menuPuntos();
+                    //System.out.println("en esta base de datos se almacena la informaci�n de todos nuestros clientes frecuentes");
 
                     //System.out.println(cliente.getcrearCliente);
                     //falta hacer un array alguna estructura de datos donde almacenar a los clientes
@@ -113,6 +101,8 @@ public class Interfaz {
                     menuInsumos();
                     break;
                 case "0":
+                    Serializadora.Escritura();
+                    System.out.println("Se guardo con exito");
                     break label;
             }
         }
@@ -1324,6 +1314,161 @@ public class Interfaz {
             return;
         }
     }
+
+    //menu donde se podra ver todo lo relacionado con los puntos de los clientes
+    public static void menuPuntos() {
+        Scanner in=new Scanner(System.in);
+        String option;
+        while(true) {
+            System.out.println();
+            System.out.println("-----------------------------");
+            System.out.println("Escoja una opcion:");
+            System.out.println("1. Verificar.");
+            System.out.println("2. Actualizar estatus segun puntos.");
+            System.out.println("3. Canjear puntos.");
+            System.out.println("0. Salir.");
+            System.out.println("-----------------------------");
+            System.out.println();
+            option = in.next();
+            if (option.equals("1")) {
+
+
+                /*String cedula;
+                cedula = cedulascan.next();
+                CedulaCLiente = Integer.parseInt(cedula);
+                for (Cliente cliente1: clientes ){
+                    if (cliente1.getCedula()==cedu){//se encuentra el cliente*/
+
+                System.out.println("Ingrese el numero de cedula que desea verificar");
+                Scanner cedulascan=new Scanner(System.in);
+                int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
+
+                //Busca la cedula ingresada en el array de clientes
+                for (Cliente cliente2: clientes) {
+                    if (cliente2.getCedula()==cedula){//se encuentra el cliente
+
+                        System.out.println("Nombre" + cliente2.getNombre());
+                        //Verificacion del estuatus segun atributo, 0 normal, 1 frecuente, 2 VIP
+                        if (cliente2.getestatus() == 0) {
+                            System.out.println("Su estatus es" + "Cliente normal");
+                        }else if(cliente2.getestatus() == 1){
+                            System.out.println("Su estatus es" + "Cliente frecuente");
+                        }else if(cliente2.getestatus() == 2){
+                            System.out.println("Su estatus es" + "Cliente VIP");
+                        }
+                        System.out.println("Sus puntos son:" + cliente2.getPuntos());
+                    }
+
+                }
+                break;
+
+            }else if (option.equals("2")) {
+                //asignador de estatus segun cantidad de puntos
+                for (Cliente cliente2: clientes) {
+
+                    int leerpuntos = cliente2.getPuntos();
+                    int status = cliente2.getestatus();
+
+                    //verifica los clientes que anteriormente no eran frecuentes o VIP.
+                    if (status == 0) {
+                        if (leerpuntos < 10000) {
+                            cliente2.setestatus(0);
+                        } else if (leerpuntos > 10000 && leerpuntos < 100000) {
+                            cliente2.setestatus(1);
+                        } else if (leerpuntos > 100000) {
+                            cliente2.setestatus(2);
+                        }
+                        //verifica para los clientes subir a VIP, no los degrada a cliente normal despues de ser frecuente.
+                    } else if (status == 1) {
+                        if (leerpuntos > 100000) {
+                            cliente2.setestatus(2);
+                        }
+                    }
+                }
+                //Para los clientes VIP no se hace chequeo, una ves VIP no se degradan.
+                System.out.println("Estatus de clientes actualizado");
+                break;
+
+            }else if (option.equals("3")) {
+                menucanjeoPuntos();;
+            }else if(option.equals("0")){
+                return;
+            }
+        System.out.println("sistema actualizado");
+        }
+    }
+
+    //menu donde se podra ver todo lo relacionado con el canjeo de puntos de los clientes
+    public static void menucanjeoPuntos() {
+
+        System.out.println("Ingrese el numero de cedula que desea verificar");
+        Scanner cedulascan=new Scanner(System.in);
+        int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
+
+        Scanner in=new Scanner(System.in);
+        String option;
+                while(true) {
+            System.out.println();
+            System.out.println("-----------------------------");
+            System.out.println("Escoja una opcion para canjeo de puntos:");
+            System.out.println("1. (5.000 puntos) Postre tradicional de la casa.");
+            System.out.println("2. (20.000 puntos) Vino Colecci�n Reserva.");
+            System.out.println("3. Pago Con puntos. (50.000 puntos en adelante)");
+            System.out.println("0. Salir.");
+            System.out.println("-----------------------------");
+            System.out.println();
+            option = in.next();
+            if (option.equals("1")) {
+                //Busca la cedula ingresada en el array de clientes
+                for (Cliente cliente2: clientes) {
+                    if (cliente2.getCedula()==cedula){
+                        //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
+                        if (cliente2.getPuntos()>5000) {
+                            cliente2.actualizar_puntos(cliente2.getPuntos() - 5000);
+                            System.out.println("retiro de puntos realizado");
+                        }else {
+                            System.out.println("no dispone de suficientes puntos");
+                        }
+                    }
+                }
+                break;
+            }else if (option.equals("2")) {
+                //Busca la cedula ingresada en el array de clientes
+                //Busca la cedula ingresada en el array de clientes
+                for (Cliente cliente2: clientes) {
+                    if (cliente2.getCedula()==cedula){
+                        //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
+                        if (cliente2.getPuntos()>20000) {
+                            cliente2.actualizar_puntos(cliente2.getPuntos() - 20000);
+                            System.out.println("retiro de puntos realizado");
+                        }else {
+                            System.out.println("no dispone de suficientes puntos");
+                        }
+                    }
+                }
+                break;
+            }else if (option.equals("3")) {
+                //implementar opcion de pago de factura con puntos
+               /* //Busca la cedula ingresada en el array de clientes
+                for (int i = 0; i < prueba.size(); i++) {
+
+                    Cliente clienteprueba = prueba.get(i);
+                    if (clienteprueba.getCedula() == CedulaCLiente) {
+                        //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
+                        if (clienteprueba.getPuntos()>20000) {
+                            clienteprueba.actualizar_puntos(clienteprueba.getPuntos() - 20000);
+                            System.out.println("retiro de puntos realizado");
+                        }else {
+                            System.out.println("no dispone de suficientes puntos");
+                        }
+                    }
+                }*/
+            }else if(option.equals("0")){
+                return;
+            }
+        }
+    }
+
 }
 
 
