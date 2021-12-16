@@ -13,9 +13,7 @@ public class Pedido {
 
     //private int cantidadplatos; #variable para uso con array statico
 
-//    public void Recibo {
-//
-//    }
+    public void Recibo() {
 
 
 
