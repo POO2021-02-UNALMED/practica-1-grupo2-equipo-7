@@ -1350,6 +1350,88 @@ public class Interfaz {
         System.out.println("sistema actualizado");
         }
     }
+    //menu donde se podra ver todo lo relacionado con los puntos de los clientes
+    public static void menuPuntos() {
+        Scanner in=new Scanner(System.in);
+        String option;
+        while(true) {
+            System.out.println();
+            System.out.println("-----------------------------");
+            System.out.println("Escoja una opcion:");
+            System.out.println("1. Verificar.");
+            System.out.println("2. Actualizar estatus segun puntos.");
+            System.out.println("3. Canjear puntos.");
+            System.out.println("0. Salir.");
+            System.out.println("-----------------------------");
+            System.out.println();
+            option = in.next();
+            if (option.equals("1")) {
+
+
+                /*String cedula;
+                cedula = cedulascan.next();
+                CedulaCLiente = Integer.parseInt(cedula);
+                for (Cliente cliente1: clientes ){
+                    if (cliente1.getCedula()==cedu){//se encuentra el cliente*/
+
+                System.out.println("Ingrese el numero de cedula que desea verificar");
+                Scanner cedulascan=new Scanner(System.in);
+                int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
+
+                //Busca la cedula ingresada en el array de clientes
+                for (Cliente cliente2: clientes) {
+                    if (cliente2.getCedula()==cedula){//se encuentra el cliente
+
+                        System.out.println("Nombre" + cliente2.getNombre());
+                        //Verificacion del estuatus segun atributo, 0 normal, 1 frecuente, 2 VIP
+                        if (cliente2.getestatus() == 0) {
+                            System.out.println("Su estatus es" + "Cliente normal");
+                        }else if(cliente2.getestatus() == 1){
+                            System.out.println("Su estatus es" + "Cliente frecuente");
+                        }else if(cliente2.getestatus() == 2){
+                            System.out.println("Su estatus es" + "Cliente VIP");
+                        }
+                        System.out.println("Sus puntos son:" + cliente2.getPuntos());
+                    }
+
+                }
+                break;
+
+            }else if (option.equals("2")) {
+                //asignador de estatus segun cantidad de puntos
+                for (Cliente cliente2: clientes) {
+
+                    int leerpuntos = cliente2.getPuntos();
+                    int status = cliente2.getestatus();
+
+                    //verifica los clientes que anteriormente no eran frecuentes o VIP.
+                    if (status == 0) {
+                        if (leerpuntos < 10000) {
+                            cliente2.setestatus(0);
+                        } else if (leerpuntos > 10000 && leerpuntos < 100000) {
+                            cliente2.setestatus(1);
+                        } else if (leerpuntos > 100000) {
+                            cliente2.setestatus(2);
+                        }
+                        //verifica para los clientes subir a VIP, no los degrada a cliente normal despues de ser frecuente.
+                    } else if (status == 1) {
+                        if (leerpuntos > 100000) {
+                            cliente2.setestatus(2);
+                        }
+                    }
+                }
+                //Para los clientes VIP no se hace chequeo, una ves VIP no se degradan.
+                System.out.println("Estatus de clientes actualizado");
+                break;
+
+            }else if (option.equals("3")) {
+                menucanjeoPuntos();;
+            }else if(option.equals("0")){
+                return;
+            }
+            System.out.println("sistema actualizado");
+        }
+    }
 
     //menu donde se podra ver todo lo relacionado con el canjeo de puntos de los clientes
     public static void menucanjeoPuntos() {
