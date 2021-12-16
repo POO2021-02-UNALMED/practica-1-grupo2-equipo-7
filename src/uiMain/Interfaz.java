@@ -46,7 +46,7 @@ public class Interfaz {
             System.out.println("Bienvenido al sistema POOpina");
             System.out.println("Escoja una opcion:");
             System.out.println("1. resevas.");
-            System.out.println("2. Consulta de puntaje.");
+            System.out.println("2. Consulta y canjeo de puntaje.");
             System.out.println("3. metodo 3.");
             System.out.println("4. Pedido y facturación.");
             System.out.println("5. Gestion del restaurante");
@@ -1289,61 +1289,62 @@ public class Interfaz {
             option = in.next();
             if (option.equals("1")) {
 
-                Scanner cedulascan=new Scanner(System.in);
-                String cedula;
+
+                /*String cedula;
                 cedula = cedulascan.next();
                 CedulaCLiente = Integer.parseInt(cedula);
-                ArrayList<Cliente> pruebacedula = new ArrayList();
+                for (Cliente cliente1: clientes ){
+                    if (cliente1.getCedula()==cedu){//se encuentra el cliente*/
+
+                System.out.println("Ingrese el numero de cedula que desea verificar");
+                Scanner cedulascan=new Scanner(System.in);
+                int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
 
                 //Busca la cedula ingresada en el array de clientes
-                for (int i = 0; i < pruebacedula.size(); i++) {
+                for (Cliente cliente2: clientes) {
+                    if (cliente2.getCedula()==cedula){//se encuentra el cliente
 
-                    Cliente clienteprueba = pruebacedula.get(i);
-                    if (clienteprueba.getCedula() == CedulaCLiente){
-
-                        System.out.println("Nombre" + clienteprueba.getNombre());
+                        System.out.println("Nombre" + cliente2.getNombre());
                         //Verificacion del estuatus segun atributo, 0 normal, 1 frecuente, 2 VIP
-                        if (clienteprueba.getestatus() == 0) {
+                        if (cliente2.getestatus() == 0) {
                             System.out.println("Su estatus es" + "Cliente normal");
-                        }else if(clienteprueba.getestatus() == 1){
+                        }else if(cliente2.getestatus() == 1){
                             System.out.println("Su estatus es" + "Cliente frecuente");
-                        }else if(clienteprueba.getestatus() == 2){
+                        }else if(cliente2.getestatus() == 2){
                             System.out.println("Su estatus es" + "Cliente VIP");
                         }
-                        System.out.println("Sus puntos son:" + clienteprueba.getPuntos());
+                        System.out.println("Sus puntos son:" + cliente2.getPuntos());
                     }
 
                 }
-                return;
+                break;
 
             }else if (option.equals("2")) {
                 //asignador de estatus segun cantidad de puntos
-                ArrayList<Cliente> prueba = new ArrayList();
-                for (int i = 0; i < prueba.size(); i++) {
+                for (Cliente cliente2: clientes) {
 
-                    Cliente clientepuntos = prueba.get(i);
-                    int leerpuntos = clientepuntos.getPuntos();
-                    int status = clientepuntos.getestatus();
+                    int leerpuntos = cliente2.getPuntos();
+                    int status = cliente2.getestatus();
 
                     //verifica los clientes que anteriormente no eran frecuentes o VIP.
                     if (status == 0) {
                         if (leerpuntos < 10000) {
-                            clientepuntos.setestatus(0);
+                            cliente2.setestatus(0);
                         } else if (leerpuntos > 10000 && leerpuntos < 100000) {
-                            clientepuntos.setestatus(1);
+                            cliente2.setestatus(1);
                         } else if (leerpuntos > 100000) {
-                            clientepuntos.setestatus(2);
+                            cliente2.setestatus(2);
                         }
                         //verifica para los clientes subir a VIP, no los degrada a cliente normal despues de ser frecuente.
                     } else if (status == 1) {
                         if (leerpuntos > 100000) {
-                            clientepuntos.setestatus(2);
+                            cliente2.setestatus(2);
                         }
                     }
                 }
                 //Para los clientes VIP no se hace chequeo, una ves VIP no se degradan.
                 System.out.println("Estatus de clientes actualizado");
-                return;
+                break;
 
             }else if (option.equals("3")) {
                 menucanjeoPuntos();;
@@ -1356,9 +1357,13 @@ public class Interfaz {
 
     //menu donde se podra ver todo lo relacionado con el canjeo de puntos de los clientes
     public static void menucanjeoPuntos() {
+
+        System.out.println("Ingrese el numero de cedula que desea verificar");
+        Scanner cedulascan=new Scanner(System.in);
+        int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
+
         Scanner in=new Scanner(System.in);
         String option;
-        ArrayList<Cliente> prueba = new ArrayList();
                 while(true) {
             System.out.println();
             System.out.println("-----------------------------");
@@ -1372,36 +1377,33 @@ public class Interfaz {
             option = in.next();
             if (option.equals("1")) {
                 //Busca la cedula ingresada en el array de clientes
-                for (int i = 0; i < prueba.size(); i++) {
-
-                    Cliente clienteprueba = prueba.get(i);
-                    if (clienteprueba.getCedula() == CedulaCLiente) {
+                for (Cliente cliente2: clientes) {
+                    if (cliente2.getCedula()==cedula){
                         //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
-                        if (clienteprueba.getPuntos()>5000) {
-                            clienteprueba.actualizar_puntos(clienteprueba.getPuntos() - 5000);
+                        if (cliente2.getPuntos()>5000) {
+                            cliente2.actualizar_puntos(cliente2.getPuntos() - 5000);
                             System.out.println("retiro de puntos realizado");
                         }else {
                             System.out.println("no dispone de suficientes puntos");
                         }
                     }
                 }
-                return;
+                break;
             }else if (option.equals("2")) {
                 //Busca la cedula ingresada en el array de clientes
-                for (int i = 0; i < prueba.size(); i++) {
-
-                    Cliente clienteprueba = prueba.get(i);
-                    if (clienteprueba.getCedula() == CedulaCLiente) {
+                //Busca la cedula ingresada en el array de clientes
+                for (Cliente cliente2: clientes) {
+                    if (cliente2.getCedula()==cedula){
                         //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
-                        if (clienteprueba.getPuntos()>20000) {
-                            clienteprueba.actualizar_puntos(clienteprueba.getPuntos() - 20000);
+                        if (cliente2.getPuntos()>20000) {
+                            cliente2.actualizar_puntos(cliente2.getPuntos() - 20000);
                             System.out.println("retiro de puntos realizado");
                         }else {
                             System.out.println("no dispone de suficientes puntos");
                         }
                     }
                 }
-                return;
+                break;
             }else if (option.equals("3")) {
                 //implementar opcion de pago de factura con puntos
                /* //Busca la cedula ingresada en el array de clientes
