@@ -4,10 +4,10 @@ import baseDatos.BaseDeDatos;
 import gestorAplicacion.*;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 import static gestorAplicacion.Catalogo.platos;
+
 import static gestorAplicacion.Cliente.clientes;
 import static gestorAplicacion.Empleado.empleados;
 import static gestorAplicacion.Mesa.mesas;
@@ -15,6 +15,7 @@ import static gestorAplicacion.Pedido.pedidos;
 import static gestorAplicacion.Persona.getcedula;
 import static gestorAplicacion.Proveedor.proveedores;
 import static gestorAplicacion.Reserva.reservas;
+import static gestorAplicacion.materiaPrima.insumos;
 
 public class Interfaz {
 
@@ -43,7 +44,6 @@ public class Interfaz {
             System.out.println("-----------------------------");
             System.out.println();
             option = in.next();
-
             switch (option) {
                 case "1":
                     System.out.println("Bienvenido al sistema de reservas");
@@ -95,7 +95,8 @@ public class Interfaz {
             System.out.println("4. Pedido.");
             System.out.println("5. Mesa.");
             System.out.println("6. Proveedor.");
-            System.out.println("7. Sede.");
+            System.out.println("7. Catalogo.");
+            System.out.println("8. Insumos.");
             System.out.println("0. Volver.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -120,7 +121,10 @@ public class Interfaz {
                     menuProveedor();//menu donde se podra ver y editar toda la informacion relacionada con los proveedores
                     break;
                 case "7":
-                    menuSede();//menu donde se podra ver y editar toda la informacion relacionada con las sedes
+                    menuCatalogo();//menu donde se podra ver y editar toda la informacion relacionada con el catalogo
+                    break;
+                case "8":
+                    menuInsumos();//menu donde se podra ver y editar toda la informacion relacionada los insumos
                     break;
                 case "0":
                     return;
@@ -858,7 +862,7 @@ public class Interfaz {
                     }
                     break;
                 case "5":
-
+                    //verPlinsum();
                     break;
                 case "6":
 
@@ -1119,7 +1123,7 @@ public class Interfaz {
                         int NIT=in.nextInt();//se pide el nit del proveedor a eliminar
                         for (Proveedor proveedor: proveedores ){
                             if (proveedor.getNit()==NIT){//encuentra el proveedor
-                                proveedores.remove(proveedor);//elimina el proveedores
+                                proveedores.remove(proveedor);//elimina el proveedor
                                 System.out.println(" ¡Proveedor eliminado con exito! ");
                             }
                         }
@@ -1152,9 +1156,6 @@ public class Interfaz {
         }
     }
 
-    private static void menuSede() {
-    }
-
     //menu donde se podra ver todo lo relacionado con el catalogo del restaurante
     public static void menuCatalogo() {
         Scanner in=new Scanner(System.in);
@@ -1163,9 +1164,10 @@ public class Interfaz {
             System.out.println();
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
-            System.out.println("1. ver catalogo.");
-            System.out.println("2. metodo 2.");
-            System.out.println("3. metodo 3.");
+            System.out.println("1. Ver catalogo.");
+            System.out.println("2. Agregar plato al catalogo.");
+            System.out.println("3. Eliminar plato del catalogo.");
+            System.out.println("4. Metodo pruebq.");
             System.out.println("0. Salir.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -1173,31 +1175,63 @@ public class Interfaz {
             switch (option) {
                 case "1":
                     //Esta opcion permite ver el catalogo de platos disponibles para que se pueda tomar el pedido
+                    System.out.println("-----------------------------");
                     Catalogo.verCatalogo();//Muestra el catalogo
+                    System.out.println("-----------------------------");
+                    System.out.println();
+                    break;
+                case "2":
+                    System.out.println(" Digite el nombre del plato ");
+                    String nombre=in.next();
+                    System.out.println(" Digite el precio del plato ");
+                    int precio=in.nextInt();
+                    System.out.println(" Digite la cantidad de ingredientes que posee el plato ");
+                    int num=in.nextInt();
+                    HashMap<String, Double> insumosPlato = new HashMap<>();
+                    for (int i=1;i<=num; i++) {
+                        System.out.println("-----------------------------");
+                        for (Map.Entry<String,Double> insumo: insumos.entrySet()) {
+                            String key=insumo.getKey();
+                            Double value=insumo.getValue();
+                            System.out.println("- "+key+ " " +value);
 
-                    System.out.println(" Digite el numero de plato que desee");
-                    Integer num = in.nextInt();
-                    //despues de que haya escogido le pide al cajero que digite el numero del plato escogido
+                        }
+                        System.out.println("-----------------------------");
+                        System.out.println(" Digite el nombre del insumo ");
+                        String nameInsumo=in.next();
+                        if (materiaPrima.insumos.containsKey(nameInsumo)){
+                            System.out.println(" Digite la cantidad que requiere ");
+                            double cant=in.nextDouble();
+                            insumosPlato.put(nameInsumo,cant);
+                        }else {
+                            System.out.println(" Digite un nombre valido");
+                        }
+
+                    }
+                    Catalogo.crearCatalogo(nombre,precio,insumosPlato);//aqui se agrega el plato al catalogo
+                    System.out.println(" ¡Plato agregado con exito! ");
+                    break;
+                case "3"://opcion eliminar un plato del catalogo
+                    //Esta opcion permite ver el catalogo de platos disponibles
+                    System.out.println("-----------------------------");
+                    Catalogo.verCatalogo();//Muestra el catalogo
+                    System.out.println("-----------------------------");
+                    System.out.println();
+                    System.out.println(" Digite el numero de plato que desea eliminar");
+                    Integer nume = in.nextInt();
+                    //despues de que haya escogido pide que digite el numero del plato elegido
                     //si el cajero digita un numero erroneo lo vuelve a pedir
-                    if (platos.containsKey(num)) {
+                    if (platos.containsKey(nume)) {
                         //como el plato existe con esa llave numerica
-                        //procede a crear un plato que sera el pedido por el user
-                        //este plato contiene los valores(values) de la llave que se pidio anteriormente
-                        Catalogo plato = platos.get(num);
-                        System.out.println(" Nombre= " + plato.getNombrePlato());
-                        System.out.println(" precio= " + plato.getPrecio());
-                        System.out.println(" Agregado al pedido");
-                        //en esta linea debe ir un metodo de Pedido donde se le ingrese el plato con
-                        //el cual se generaria el pedido final lo cual tambien permitira crear el recibo
+                        platos.remove(nume);//lo elimina
+
+                        System.out.println(" ¡Plato eliminado con exito! ");
                     } else {
                         System.out.println(" Digite un numero valido");
                     }
                     break;
-                case "2":
-                    System.out.println("none");
-                    break;
-                case "3":
-                    System.out.println("none aún");
+                case "4":
+                    Catalogo.verPlinsum();
                     break;
                 case "0":
                     return;
@@ -1213,21 +1247,30 @@ public class Interfaz {
             System.out.println();
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
-            System.out.println("1. ver insumos.");
-            System.out.println("2. metodo 2.");
-            System.out.println("3. metodo 3.");
+            System.out.println("1. Ver insumos.");
+            System.out.println("2. Agregar insumos.");
             System.out.println("0. Salir.");
             System.out.println("-----------------------------");
             System.out.println();
             option = in.next();
-            if (option.equals("1")) {
-                materiaPrima.verInsumos();//muestra los insumos disponibles
-            }else if (option.equals("2")) {
-                System.out.println("none");
-            }else if (option.equals("3")) {
-                System.out.println("none");
-            }else if(option.equals("0")){
-                return;
+            switch (option) {
+                case "1":
+                    //Esta opcion permite ver los insumos disponibles
+                    System.out.println("-----------------------------");
+                    materiaPrima.verInsumos();//Muestra los insumos
+                    System.out.println("-----------------------------");
+                    System.out.println();
+                    break;
+                case "2":
+                    System.out.println(" Digite el nombre del insumo ");
+                    String nombre=in.next();
+                    System.out.println(" Digite la cantidad del insumo ");
+                    int cantidad=in.nextInt();
+                    materiaPrima.crearInsumo(nombre,cantidad);//aqui se agrega el insumo
+                    System.out.println(" ¡Insumo agregado con exito! ");
+                    break;
+                case "0":
+                    return;
             }
         }
     }
