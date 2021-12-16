@@ -1,27 +1,28 @@
 package gestorAplicacion;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Pedido {
 
-    private TreeMap<Catalogo, Integer> platos; //Hash que guarda el contenido de cada pedido con la cantidad de cada plato
+    private HashMap<Catalogo, Integer> platos; //Hash que guarda el contenido de cada pedido con la cantidad de cada plato
     private Cliente cliente;
     private Mesa mesa;
     private int idpedido;
     public static LinkedList<Pedido> pedidos= new LinkedList<>();; //Array que contiene los pedidos
 
     //private int cantidadplatos; #variable para uso con array statico
-    public void Recibo() {
-
+    public void Recibo(int val) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Sub-total: " + val);
+        System.out.println("Propina: "+ val*0.1);
+        System.out.println("Total: "+ (val + (val*0.1)));
+        in.next();
     }
 
 
 
 
-    public Pedido(Cliente cliente, Mesa mesa, int idpedido, TreeMap<Catalogo, Integer> platos) {
+    public Pedido(Cliente cliente, Mesa mesa, int idpedido, HashMap<Catalogo, Integer> platos) {
         this.cliente = cliente;
         this.mesa = mesa;
         this.idpedido = idpedido;

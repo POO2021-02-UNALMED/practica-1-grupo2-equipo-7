@@ -1288,7 +1288,7 @@ public class Interfaz {
                     }
                     break;
                 case "4":
-                    Catalogo.verPlinsum();
+                    //Catalogo.verPlinsum();
                     break;
                 case "0":
                     return;

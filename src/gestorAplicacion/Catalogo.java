@@ -67,6 +67,7 @@ public class Catalogo {
         }else{
             //pero si no esta vacio,recorre el treemap mostrando la llave y su valor
             System.out.println("-----------------------------");
+            System.out.println("Catálogo: ");
             for (Map.Entry<Integer,Catalogo> plato: platos.entrySet()) {
                 Integer key=plato.getKey();
                 Catalogo value=plato.getValue();
@@ -76,23 +77,12 @@ public class Catalogo {
         }
     }
 
-    public static void verPlinsum() {
+    public static void descontarInsumos(Catalogo plato1, Integer cant) {
         Scanner in=new Scanner(System.in);
         if(platos.isEmpty()){
             System.out.println("no hay platos para ver");
         }else{
-            //pero si no esta vacio,recorre el treemap mostrando la llave y su valor
-            verCatalogo();
-            System.out.println(" Digite la key del plato");
-            int numero=in.nextInt();
-            for (Map.Entry<Integer,Catalogo> platoE: platos.entrySet()) {
-                Integer key=platoE.getKey();
-                Catalogo value=platoE.getValue();
-                if (numero == key){
-                    System.out.println(" Plato escogido");
-                    System.out.println(value);
-                    //String name=;
-                    for (Map.Entry<String,Double> plato: value.insumosPlato.entrySet()){
+                    for (Map.Entry<String,Double> plato: plato1.insumosPlato.entrySet()){
                         for (Map.Entry<String,Double> insumo: insumos.entrySet()) {
                             if (plato.getKey().equals(insumo.getKey())){
                                 double cantidad=insumo.getValue()-plato.getValue();
@@ -101,8 +91,8 @@ public class Catalogo {
                             }
                         }
                     }
-                }
-            }
+
+
         }
     }
 
