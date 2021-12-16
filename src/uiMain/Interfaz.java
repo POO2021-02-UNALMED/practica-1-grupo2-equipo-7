@@ -5,16 +5,14 @@ import gestorAplicacion.*;
 
 
 import java.sql.SQLOutput;
-import java.util.Scanner;
+import java.util.*;
 
 import static gestorAplicacion.Catalogo.platos;
 import static gestorAplicacion.Cliente.crearCliente;
 import static gestorAplicacion.Mesa.mesas;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.HashMap;
 
 import static gestorAplicacion.Catalogo.platos;
 import static gestorAplicacion.Cliente.clientes;
@@ -740,7 +738,7 @@ public class Interfaz {
                     System.out.println(" ¿Cuantos platos desea comprar el cliente?");//se pregunta cuantos platos comprara el cliente
                     //ya que el cliente puede comprar mas de un plato en cada pedido,por ende se le pedira un plato la cantidad de veces que va a comprar
                     int cantidad = in.nextInt();
-                    ArrayList<Catalogo> pedidosPlato = new ArrayList<>();
+                    LinkedList<Catalogo> pedidosPlato = null;
                     for (int i = 1; i <= cantidad; i++) {
                         //se muestra el catalogo de platos disponibles para que se pueda tomar el pedido
                         System.out.println();
@@ -1233,69 +1231,72 @@ public class Interfaz {
         System.out.println("-----------------------------");
         option = in.nextInt();
         if (mesas.containsKey(option)) {
-            if (mesas.get(option).isDisponibilidad()) {
-                System.out.println("Ingrese documento del cliente: ");
-                cc = in.nextInt();
-                verification(cc);
-                mesas.get(option).entornoMesa();
+            if(mesas.get(option).isDisponibilidad()){
+            System.out.println("Ingrese documento del cliente: ");
+            cc = in.nextInt();
+            verification(cc);
+            mesas.get(option).entornoMesa(clientes.get(cc));}
+            else{
+            mesas.get(option).entornoMesa(mesas.get(option).getPedido().getCliente());}
+        } else {
+            System.out.println("Elija una mesa entre las siguientes disponibles:");
+            pedido_facturacion();
+        }
+    }
 
-            } else {
-                System.out.println("Elija una mesa entre las siguientes disponibles:");
-                pedido_facturacion();
+    //menu donde se podra ver todo lo relacionado con insumos de la clase materiaPrima
+    public static void menuInsumos() {
+        Scanner in = new Scanner(System.in);
+        String option;
+        while (true) {
+            System.out.println();
+            System.out.println("-----------------------------");
+            System.out.println("Escoja una opcion:");
+            System.out.println("1. ver insumos.");
+            System.out.println("2. metodo 2.");
+            System.out.println("3. metodo 3.");
+            System.out.println("0. Salir.");
+            System.out.println("-----------------------------");
+            System.out.println();
+            option = in.next();
+            if (option.equals("1")) {
+                materiaPrima.verInsumos();//muestra los insumos disponibles
+            } else if (option.equals("2")) {
+                System.out.println("none");
+            } else if (option.equals("3")) {
+                System.out.println("none");
+            } else if (option.equals("0")) {
+                return;
             }
         }
     }
-        //menu donde se podra ver todo lo relacionado con insumos de la clase materiaPrima
-        public static void menuInsumos() {
-            Scanner in = new Scanner(System.in);
-            String option;
-            while (true) {
-                System.out.println();
-                System.out.println("-----------------------------");
-                System.out.println("Escoja una opcion:");
-                System.out.println("1. ver insumos.");
-                System.out.println("2. metodo 2.");
-                System.out.println("3. metodo 3.");
-                System.out.println("0. Salir.");
-                System.out.println("-----------------------------");
-                System.out.println();
-                option = in.next();
-                if (option.equals("1")) {
-                    materiaPrima.verInsumos();//muestra los insumos disponibles
-                } else if (option.equals("2")) {
-                    System.out.println("none");
-                } else if (option.equals("3")) {
-                    System.out.println("none");
-                } else if (option.equals("0")) {
-                    return;
-                }
-            }
+
+    public static void verification(int cedula) {
+        Scanner in = new Scanner(System.in);
+        String nombre;
+        String direccion;
+        int cc, tel;
+
+        if (!clientes.containsKey(cedula)) {
+            System.out.println("No existe el cliente en el sistema, vamos a crearlo: ");
+            System.out.println("Ingrese nombre: ");
+            nombre = in.next();
+            System.out.println("Ingrese número de cc: ");
+            cc = in.nextInt();
+            System.out.println("Ingrese número de teléfono: ");
+            tel = in.nextInt();
+            System.out.println("Ingrese dirección: ");
+            direccion = in.next();
+            Cliente cliente = new Cliente(cc, nombre, tel, direccion);
+            System.out.println("Cliente creado de manera exitosa." +
+                    "Ahora sí, creemos su pedido.");
+            return;
+
+        } else {
+            System.out.println("Bienvenido(a) Sr(a). " + clientes.get(cedula).getNombre() + ".");
+            return;
         }
-
-        public static void verification(int cedula){
-            Scanner in = new Scanner(System.in);
-            String nombre;
-            String direccion;
-            int cc, tel;
-
-            if (!clientes.containsKey(cedula)) {
-                System.out.println("No existe el cliente en el sistema, vamos a crearlo: ");
-                System.out.println("Ingrese nombre: ");
-                nombre = in.next();
-                System.out.println("Ingrese número de cc: ");
-                cc = in.nextInt();
-                System.out.println("Ingrese número de teléfono: ");
-                tel = in.nextInt();
-                System.out.println("Ingrese dirección: ");
-                direccion = in.next();
-                Cliente cliente = new Cliente(cc, nombre, tel, direccion);
-                System.out.println("Cliente creado de manera exitosa." +
-                        "Ahora sí, creemos su pedido.");
-
-            }
-        }
-
-
+    }
 }
 
 

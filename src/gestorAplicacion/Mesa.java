@@ -3,6 +3,7 @@ package gestorAplicacion;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Mesa {
 
@@ -11,8 +12,8 @@ public class Mesa {
     private short zona;
     private boolean disponibilidad = true;
     private Pedido pedido;
-    private LinkedList<Catalogo> pedidoM = new LinkedList<>();
     public static HashMap<Integer,Mesa> mesas= new HashMap<>(); //HashMap que contiene todas las mesas creadas
+
 
 
     public Mesa(int idunico, short zona, int numero) {
@@ -66,6 +67,9 @@ public class Mesa {
         this.numero = numero;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
 
     public boolean isDisponibilidad() {
         return disponibilidad;
@@ -80,28 +84,29 @@ public class Mesa {
             System.out.println(str.toString());
         }
     }*/
-   public Catalogo entornoMesa() {
+   public void entornoMesa(Cliente cliente) {
        Scanner in=new Scanner(System.in);
-       int op = in.nextInt();
-       try {
-           if (this.pedido.getPlatos() == null) {
-                Catalogo.verCatalogo();
-                op = in.nextInt();
-                pedidoM.add(Catalogo.platos.get(op));
-                while(op != 0) {
-                op = 0;
-
-                }
-
-           } else {
+       int op;
+       Random idPedido = new Random();
+       LinkedList<Catalogo> pedidoM = new LinkedList<>();
+       Catalogo.verCatalogo();
+       if(this.pedido == null){ pedido = new Pedido(cliente, this, idPedido.nextInt(1000), pedidoM);
+       this.disponibilidad = false;} else {
+           System.out.println("-----------------------------------");
                for (Catalogo plato : this.pedido.getPlatos()) {
                    System.out.println(plato);
                }
-
+           System.out.println("-----------------------------------");
            }
-       } catch (NullPointerException e) {
+
+       System.out.println("Elija uno por uno los items que desea agregar a su pedido, con 0 finaliza el pedido. ");
+       op = in.nextInt();
+       pedidoM.add(Catalogo.platos.get(op));
+       while(op != 0) {
+           op = in.nextInt();
+           pedidoM.add(Catalogo.platos.get(op));
        }
-       return null;
+
    }
 
     public void tomadePedido(){}

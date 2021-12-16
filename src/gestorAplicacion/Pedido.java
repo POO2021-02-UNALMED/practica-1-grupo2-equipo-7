@@ -1,11 +1,12 @@
 package gestorAplicacion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Pedido {
 
-    private static ArrayList<Catalogo> platos;
+    private HashMap<Catalogo, Integer> platos; //Hash que guarda el contenido de cada pedido con la cantidad de cada plato
     private Cliente cliente;
     private Mesa mesa;
     private int idpedido;
@@ -19,22 +20,22 @@ public class Pedido {
 
 
 
-    public Pedido(Cliente cliente, Mesa mesa, int idpedido, ArrayList<Catalogo> platos) {
+    public Pedido(Cliente cliente, Mesa mesa, int idpedido, HashMap<Catalogo, Integer> platos) {
         this.cliente = cliente;
         this.mesa = mesa;
         this.idpedido = idpedido;
-        Pedido.platos =platos;
+        this.platos =platos;
     }
 
-    public ArrayList<Catalogo> getPlatos() {
+    public LinkedList<Catalogo> getPlatos() {
         if(platos.isEmpty()){
             return null;
         } else {
         return platos;}
     }
 
-    public void setPlatos(ArrayList<Catalogo> platos) {
-
+    public void setPlatos(LinkedList<Catalogo> platos) {
+        this.platos = platos;
     }
 
     public Cliente getCliente() {
@@ -61,7 +62,7 @@ public class Pedido {
         this.idpedido = idpedido;
     }
 
-    public static void crearPedido(Cliente cliente, Mesa mesa, int idpedido, ArrayList<Catalogo> pedidosPlato) {
+    public static void crearPedido(Cliente cliente, Mesa mesa, int idpedido, LinkedList<Catalogo> pedidosPlato) {
         Pedido newPedido=new Pedido(cliente,mesa,idpedido,pedidosPlato);
         pedidos.add(newPedido);
     }
