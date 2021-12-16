@@ -1,17 +1,20 @@
 package gestorAplicacion;
 
+import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class materiaPrima {
 
     //Proveedor proveedor;
     protected String nombreInsumo;//atributos
-    protected int cantInsumo;
-    public static Hashtable<String,Integer> insumos=new Hashtable<>();//hash para almacenar el nombre y la cantidad del insumo
+    protected double cantInsumo;
+    public static TreeMap<String,Double> insumos=new TreeMap<>();//hash para almacenar el nombre y la cantidad del insumo
+
 
     //constructor
-    public materiaPrima(String nombreInsumo, int cantInsumo) {
+    public materiaPrima(String nombreInsumo, double cantInsumo) {
         this.nombreInsumo = nombreInsumo;
         this.cantInsumo = cantInsumo;
         insumos.put(nombreInsumo,cantInsumo);
@@ -25,7 +28,7 @@ public class materiaPrima {
         this.nombreInsumo = nombreInsumo;
     }
 
-    public int getCantInsumo() {
+    public double getCantInsumo() {
         return cantInsumo;
     }
 
@@ -33,11 +36,11 @@ public class materiaPrima {
         this.cantInsumo = cantInsumo;
     }
 
-    public static Hashtable<String, Integer> getInsumos() {
+    public static TreeMap<String, Double> getInsumos() {
         return insumos;
     }
 
-    public static void setInsumos(Hashtable<String, Integer> insumos) {
+    public static void setInsumos(TreeMap<String, Double> insumos) {
         materiaPrima.insumos = insumos;
     }
 
@@ -48,8 +51,17 @@ public class materiaPrima {
 
 
     public static void verInsumos() {
-        for(Integer insumo:insumos.values()){
-            System.out.println(insumo);
+        if(insumos.isEmpty()){
+            System.out.println("no hay insumos para ver");
+        }else{
+            //pero si no esta vacio,recorre el treemap mostrando la llave y su valor
+            System.out.println("-----------------------------");
+            for (Map.Entry<String,Double> insumo: insumos.entrySet()) {
+                String key=insumo.getKey();
+                Double value=insumo.getValue();
+                System.out.println(" "+key+ " " +value);
+            }
+            System.out.println("-----------------------------");
         }
     }
 
@@ -57,7 +69,7 @@ public class materiaPrima {
     public String toString() {
         return "[" +
                 "nombre del insumo='" + nombreInsumo + '\'' +
-                ", peso=" + cantInsumo +"kg " + '\'' +
+                ", peso=" + cantInsumo +"lb " + '\'' +
                 ']';
     }
 }

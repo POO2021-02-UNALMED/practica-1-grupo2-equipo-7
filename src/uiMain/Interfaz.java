@@ -19,12 +19,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static gestorAplicacion.Catalogo.platos;
+
 import static gestorAplicacion.Cliente.clientes;
 import static gestorAplicacion.Empleado.empleados;
 import static gestorAplicacion.Mesa.mesas;
 import static gestorAplicacion.Pedido.pedidos;
 import static gestorAplicacion.Proveedor.proveedores;
 import static gestorAplicacion.Reserva.reservas;
+import static gestorAplicacion.materiaPrima.insumos;
 import static gestorAplicacion.Mesa.*;
 
 
@@ -59,7 +61,6 @@ public class Interfaz {
             System.out.println("-----------------------------");
             System.out.println();
             option = in.next();
-
             switch (option) {
                 case "1":
                     System.out.println("Bienvenido al sistema de reservas");
@@ -122,7 +123,8 @@ public class Interfaz {
             System.out.println("4. Pedido.");
             System.out.println("5. Mesa.");
             System.out.println("6. Proveedor.");
-            System.out.println("7. Sede.");
+            System.out.println("7. Catalogo.");
+            System.out.println("8. Insumos.");
             System.out.println("0. Volver.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -147,7 +149,10 @@ public class Interfaz {
                     menuProveedor();//menu donde se podra ver y editar toda la informacion relacionada con los proveedores
                     break;
                 case "7":
-                    menuSede();//menu donde se podra ver y editar toda la informacion relacionada con las sedes
+                    menuCatalogo();//menu donde se podra ver y editar toda la informacion relacionada con el catalogo
+                    break;
+                case "8":
+                    menuInsumos();//menu donde se podra ver y editar toda la informacion relacionada los insumos
                     break;
                 case "0":
                     return;
@@ -886,7 +891,7 @@ public class Interfaz {
                     }
                     break;
                 case "5":
-
+                    //verPlinsum();
                     break;
                 case "6":
 
@@ -1149,10 +1154,10 @@ public class Interfaz {
                         System.out.println("-----------------------------");
                         System.out.println();
                         System.out.println(" Digite el NIT del proveedor que desea eliminar");
-                        int NIT = in.nextInt();//se pide el nit del proveedor a eliminar
-                        for (Proveedor proveedor : proveedores) {
-                            if (proveedor.getNit() == NIT) {//encuentra el proveedor
-                                proveedores.remove(proveedor);//elimina el proveedores
+                        int NIT=in.nextInt();//se pide el nit del proveedor a eliminar
+                        for (Proveedor proveedor: proveedores ){
+                            if (proveedor.getNit()==NIT){//encuentra el proveedor
+                                proveedores.remove(proveedor);//elimina el proveedor
                                 System.out.println(" �Proveedor eliminado con exito! ");
                             }
                         }
@@ -1185,9 +1190,6 @@ public class Interfaz {
         }
     }
 
-    private static void menuSede() {
-    }
-
     //menu donde se podra ver todo lo relacionado con el catalogo del restaurante
     public static void menuCatalogo() {
         Scanner in = new Scanner(System.in);
@@ -1196,9 +1198,10 @@ public class Interfaz {
             System.out.println();
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
-            System.out.println("1. ver catalogo.");
-            System.out.println("2. metodo 2.");
-            System.out.println("3. metodo 3.");
+            System.out.println("1. Ver catalogo.");
+            System.out.println("2. Agregar plato al catalogo.");
+            System.out.println("3. Eliminar plato del catalogo.");
+            System.out.println("4. Metodo pruebq.");
             System.out.println("0. Salir.");
             System.out.println("-----------------------------");
             System.out.println();
@@ -1206,31 +1209,63 @@ public class Interfaz {
             switch (option) {
                 case "1":
                     //Esta opcion permite ver el catalogo de platos disponibles para que se pueda tomar el pedido
+                    System.out.println("-----------------------------");
                     Catalogo.verCatalogo();//Muestra el catalogo
+                    System.out.println("-----------------------------");
+                    System.out.println();
+                    break;
+                case "2":
+                    System.out.println(" Digite el nombre del plato ");
+                    String nombre=in.next();
+                    System.out.println(" Digite el precio del plato ");
+                    int precio=in.nextInt();
+                    System.out.println(" Digite la cantidad de ingredientes que posee el plato ");
+                    int num=in.nextInt();
+                    HashMap<String, Double> insumosPlato = new HashMap<>();
+                    for (int i=1;i<=num; i++) {
+                        System.out.println("-----------------------------");
+                        for (Map.Entry<String,Double> insumo: insumos.entrySet()) {
+                            String key=insumo.getKey();
+                            Double value=insumo.getValue();
+                            System.out.println("- "+key+ " " +value);
 
-                    System.out.println(" Digite el numero de plato que desee");
-                    Integer num = in.nextInt();
-                    //despues de que haya escogido le pide al cajero que digite el numero del plato escogido
+                        }
+                        System.out.println("-----------------------------");
+                        System.out.println(" Digite el nombre del insumo ");
+                        String nameInsumo=in.next();
+                        if (materiaPrima.insumos.containsKey(nameInsumo)){
+                            System.out.println(" Digite la cantidad que requiere ");
+                            double cant=in.nextDouble();
+                            insumosPlato.put(nameInsumo,cant);
+                        }else {
+                            System.out.println(" Digite un nombre valido");
+                        }
+
+                    }
+                    Catalogo.crearCatalogo(nombre,precio,insumosPlato);//aqui se agrega el plato al catalogo
+                    System.out.println(" �Plato agregado con exito! ");
+                    break;
+                case "3"://opcion eliminar un plato del catalogo
+                    //Esta opcion permite ver el catalogo de platos disponibles
+                    System.out.println("-----------------------------");
+                    Catalogo.verCatalogo();//Muestra el catalogo
+                    System.out.println("-----------------------------");
+                    System.out.println();
+                    System.out.println(" Digite el numero de plato que desea eliminar");
+                    Integer nume = in.nextInt();
+                    //despues de que haya escogido pide que digite el numero del plato elegido
                     //si el cajero digita un numero erroneo lo vuelve a pedir
-                    if (platos.containsKey(num)) {
+                    if (platos.containsKey(nume)) {
                         //como el plato existe con esa llave numerica
-                        //procede a crear un plato que sera el pedido por el user
-                        //este plato contiene los valores(values) de la llave que se pidio anteriormente
-                        Catalogo plato = platos.get(num);
-                        System.out.println(" Nombre= " + plato.getNombrePlato());
-                        System.out.println(" precio= " + plato.getPrecio());
-                        System.out.println(" Agregado al pedido");
-                        //en esta linea debe ir un metodo de Pedido donde se le ingrese el plato con
-                        //el cual se generaria el pedido final lo cual tambien permitira crear el recibo
+                        platos.remove(nume);//lo elimina
+
+                        System.out.println(" �Plato eliminado con exito! ");
                     } else {
                         System.out.println(" Digite un numero valido");
                     }
                     break;
-                case "2":
-                    System.out.println("none");
-                    break;
-                case "3":
-                    System.out.println("none a�n");
+                case "4":
+                    Catalogo.verPlinsum();
                     break;
                 case "0":
                     return;
@@ -1269,130 +1304,30 @@ public class Interfaz {
             System.out.println();
             System.out.println("-----------------------------");
             System.out.println("Escoja una opcion:");
-            System.out.println("1. ver insumos.");
-            System.out.println("2. metodo 2.");
-            System.out.println("3. metodo 3.");
+            System.out.println("1. Ver insumos.");
+            System.out.println("2. Agregar insumos.");
             System.out.println("0. Salir.");
             System.out.println("-----------------------------");
             System.out.println();
             option = in.next();
-            if (option.equals("1")) {
-                materiaPrima.verInsumos();//muestra los insumos disponibles
-            } else if (option.equals("2")) {
-                System.out.println("none");
-            } else if (option.equals("3")) {
-                System.out.println("none");
-            } else if (option.equals("0")) {
-                return;
-            }
-        }
-    }
-
-    public static void verification(int cedula) {
-        Scanner in = new Scanner(System.in);
-        String nombre;
-        String direccion;
-        int cc, tel;
-
-        if (!clientes.containsKey(cedula)) {
-            System.out.println("No existe el cliente en el sistema, vamos a crearlo: ");
-            System.out.println("Ingrese nombre: ");
-            nombre = in.next();
-            System.out.println("Ingrese n�mero de cc: ");
-            cc = in.nextInt();
-            System.out.println("Ingrese n�mero de tel�fono: ");
-            tel = in.nextInt();
-            System.out.println("Ingrese direcci�n: ");
-            direccion = in.next();
-            Cliente cliente = new Cliente(cc, nombre, tel, direccion);
-            System.out.println("Cliente creado de manera exitosa." +
-                    "Ahora s�, creemos su pedido.");
-            return;
-
-        } else {
-            System.out.println("Bienvenido(a) Sr(a). " + clientes.get(cedula).getNombre() + ".");
-            return;
-        }
-    }
-
-    //menu donde se podra ver todo lo relacionado con los puntos de los clientes
-    public static void menuPuntos() {
-        Scanner in=new Scanner(System.in);
-        String option;
-        while(true) {
-            System.out.println();
-            System.out.println("-----------------------------");
-            System.out.println("Escoja una opcion:");
-            System.out.println("1. Verificar.");
-            System.out.println("2. Actualizar estatus segun puntos.");
-            System.out.println("3. Canjear puntos.");
-            System.out.println("0. Salir.");
-            System.out.println("-----------------------------");
-            System.out.println();
-            option = in.next();
-            if (option.equals("1")) {
-
-
-                /*String cedula;
-                cedula = cedulascan.next();
-                CedulaCLiente = Integer.parseInt(cedula);
-                for (Cliente cliente1: clientes ){
-                    if (cliente1.getCedula()==cedu){//se encuentra el cliente*/
-
-                System.out.println("Ingrese el numero de cedula que desea verificar");
-                Scanner cedulascan=new Scanner(System.in);
-                int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
-
-                //Busca la cedula ingresada en el array de clientes
-                for (Cliente cliente2: clientes) {
-                    if (cliente2.getCedula()==cedula){//se encuentra el cliente
-
-                        System.out.println("Nombre" + cliente2.getNombre());
-                        //Verificacion del estuatus segun atributo, 0 normal, 1 frecuente, 2 VIP
-                        if (cliente2.getestatus() == 0) {
-                            System.out.println("Su estatus es" + "Cliente normal");
-                        }else if(cliente2.getestatus() == 1){
-                            System.out.println("Su estatus es" + "Cliente frecuente");
-                        }else if(cliente2.getestatus() == 2){
-                            System.out.println("Su estatus es" + "Cliente VIP");
-                        }
-                        System.out.println("Sus puntos son:" + cliente2.getPuntos());
-                    }
-
-                }
-                break;
-
-            }else if (option.equals("2")) {
-                //asignador de estatus segun cantidad de puntos
-                for (Cliente cliente2: clientes) {
-
-                    int leerpuntos = cliente2.getPuntos();
-                    int status = cliente2.getestatus();
-
-                    //verifica los clientes que anteriormente no eran frecuentes o VIP.
-                    if (status == 0) {
-                        if (leerpuntos < 10000) {
-                            cliente2.setestatus(0);
-                        } else if (leerpuntos > 10000 && leerpuntos < 100000) {
-                            cliente2.setestatus(1);
-                        } else if (leerpuntos > 100000) {
-                            cliente2.setestatus(2);
-                        }
-                        //verifica para los clientes subir a VIP, no los degrada a cliente normal despues de ser frecuente.
-                    } else if (status == 1) {
-                        if (leerpuntos > 100000) {
-                            cliente2.setestatus(2);
-                        }
-                    }
-                }
-                //Para los clientes VIP no se hace chequeo, una ves VIP no se degradan.
-                System.out.println("Estatus de clientes actualizado");
-                break;
-
-            }else if (option.equals("3")) {
-                menucanjeoPuntos();;
-            }else if(option.equals("0")){
-                return;
+            switch (option) {
+                case "1":
+                    //Esta opcion permite ver los insumos disponibles
+                    System.out.println("-----------------------------");
+                    materiaPrima.verInsumos();//Muestra los insumos
+                    System.out.println("-----------------------------");
+                    System.out.println();
+                    break;
+                case "2":
+                    System.out.println(" Digite el nombre del insumo ");
+                    String nombre=in.next();
+                    System.out.println(" Digite la cantidad del insumo ");
+                    int cantidad=in.nextInt();
+                    materiaPrima.crearInsumo(nombre,cantidad);//aqui se agrega el insumo
+                    System.out.println(" �Insumo agregado con exito! ");
+                    break;
+                case "0":
+                    return;
             }
         System.out.println("sistema actualizado");
         }
