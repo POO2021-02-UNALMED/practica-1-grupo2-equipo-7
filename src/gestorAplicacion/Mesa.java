@@ -88,7 +88,7 @@ public class Mesa {
        Scanner in=new Scanner(System.in);
        int op;
        Random idPedido = new Random();
-       LinkedList<Catalogo> pedidoM = new LinkedList<>();
+       HashMap<Catalogo, Integer> pedidoM = new HashMap<>();
        Catalogo.verCatalogo();
        if(this.pedido == null){ pedido = new Pedido(cliente, this, idPedido.nextInt(1000), pedidoM);
        this.disponibilidad = false;} else {
@@ -101,10 +101,14 @@ public class Mesa {
 
        System.out.println("Elija uno por uno los items que desea agregar a su pedido, con 0 finaliza el pedido. ");
        op = in.nextInt();
-       pedidoM.add(Catalogo.platos.get(op));
+       System.out.println("Elija la cantidad que desea del plato seleccionado: ");
+       int cant = in.nextInt();
+       pedidoM.put(Catalogo.platos.get(op), cant);
        while(op != 0) {
            op = in.nextInt();
-           pedidoM.add(Catalogo.platos.get(op));
+           System.out.println("Elija la cantidad que desea del plato seleccionado: ");
+           cant = in.nextInt();
+           pedidoM.put(Catalogo.platos.get(op), cant);
        }
 
    }

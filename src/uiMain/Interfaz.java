@@ -63,32 +63,7 @@ public class Interfaz {
             option = in.next();
             switch (option) {
                 case "1":
-                    System.out.println("Bienvenido al sistema de reservas porfavor seleccione una opcion acontinuaci�n");
-                    Scanner menu = new Scanner(System.in);
-                    String opcion;
-                    System.out.println("Presione 1 para consultar el estado de una reserva ");
-                    System.out.println("Presione 2 para crear una nueva reserva ");
-                	opcion = in.next();
-                      if (opcion.equals("2")) {
-                    	  Scanner oli = new Scanner(System.in);
-                    	  int cc;
-                    	  String fecha;
-                    	  String hora;
-                    	  int cantidadpersonas,numreserva;
-                          System.out.println("Ingrese su numero de cedula");
-                          cc = oli.nextInt();
-                          verification(cc);
-                          System.out.println("Ingrese un numero para su reserva nueva");
-                          numreserva = oli.nextInt();
-                          System.out.println("ingrese una fecha para su reserva");
-                          fecha = oli.next();
-                          System.out.println("ingrese una hora para su reserva");
-                          hora = oli.next();
-                          System.out.println("Cuantas personas son?");
-                          cantidadpersonas = oli.nextInt();
-                          Reserva reserva = new Reserva (cc,numreserva,fecha,hora,cantidadpersonas);
-                          System.out.println("Su reserva ha sido creada con exito ");
-                    	  }
+                    menuReservas();
             break;
                     
                    
@@ -155,7 +130,7 @@ public class Interfaz {
                     menuEmpleado();//menu donde se podra ver y editar toda la informacion relacionada con los empleados
                     break;
                 case "3":
-                    menuReserva();//menu donde se podra ver y editar toda la informacion relacionada con las reservas
+                    menuReservas();//menu donde se podra ver y editar toda la informacion relacionada con las reservas
                     break;
                 case "4":
                     menuPedido();//menu donde se podra ver y editar toda la informacion relacionada con los pedidos
@@ -523,7 +498,7 @@ public class Interfaz {
         }
     }
 
-    private static void menuReserva() {
+   /* private static void menuReserva() {
         //Menu con todo lo relacionado con las reservas
         Scanner in = new Scanner(System.in);
         String option;
@@ -715,8 +690,36 @@ public class Interfaz {
                     return;
             }
         }
-    }
+    }*/
 
+    public static void menuReservas(){
+        System.out.println("Bienvenido al sistema de reservas porfavor seleccione una opcion acontinuaci�n");
+        Scanner menu = new Scanner(System.in);
+        String opcion;
+        System.out.println("Presione 1 para consultar el estado de una reserva ");
+        System.out.println("Presione 2 para crear una nueva reserva ");
+        opcion = menu.next();
+        if (opcion.equals("2")) {
+            Scanner oli = new Scanner(System.in);
+            int cc;
+            String fecha;
+            String hora;
+            int cantidadpersonas,numreserva;
+            System.out.println("Ingrese su numero de cedula");
+            cc = oli.nextInt();
+            verification(cc);
+            System.out.println("Ingrese un numero para su reserva nueva");
+            numreserva = oli.nextInt();
+            System.out.println("ingrese una fecha para su reserva");
+            fecha = oli.next();
+            System.out.println("ingrese una hora para su reserva");
+            hora = oli.next();
+            System.out.println("Cuantas personas son?");
+            cantidadpersonas = oli.nextInt();
+            Reserva reserva = new Reserva (cc,numreserva,fecha,hora,cantidadpersonas);
+            System.out.println("Su reserva ha sido creada con exito ");
+        }
+    }
     //=====================================================================================================================
     private static void menuPedido() {
         //Menu con todo lo relacionado con los pedidos
@@ -1376,30 +1379,30 @@ public class Interfaz {
 
                 System.out.println("Ingrese el numero de cedula que desea verificar");
                 Scanner cedulascan=new Scanner(System.in);
-                int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
 
-                //Busca la cedula ingresada en el array de clientes
-                for (Cliente cliente2: clientes) {
-                    if (cliente2.getCedula()==cedula){//se encuentra el cliente
+                int cedula=cedulascan.nextInt();//se pide la cedula del cliente que se escogio para editar
+                Cliente cliente2 = clientes.get(cedula);
+                //Busca la cedula ingresada en el array de cliente
+                    if (clientes.containsKey(cedula)) {//se encuentra el cliente
 
                         System.out.println("Nombre" + cliente2.getNombre());
                         //Verificacion del estuatus segun atributo, 0 normal, 1 frecuente, 2 VIP
                         if (cliente2.getestatus() == 0) {
                             System.out.println("Su estatus es" + "Cliente normal");
-                        }else if(cliente2.getestatus() == 1){
+                        } else if (cliente2.getestatus() == 1) {
                             System.out.println("Su estatus es" + "Cliente frecuente");
-                        }else if(cliente2.getestatus() == 2){
+                        } else if (cliente2.getestatus() == 2) {
                             System.out.println("Su estatus es" + "Cliente VIP");
                         }
                         System.out.println("Sus puntos son:" + cliente2.getPuntos());
+
                     }
 
-                }
                 break;
 
             }else if (option.equals("2")) {
                 //asignador de estatus segun cantidad de puntos
-                for (Cliente cliente2: clientes) {
+                for (Cliente cliente2: clientes.values()) {
 
                     int leerpuntos = cliente2.getPuntos();
                     int status = cliente2.getestatus();
@@ -1455,8 +1458,8 @@ public class Interfaz {
             option = in.next();
             if (option.equals("1")) {
                 //Busca la cedula ingresada en el array de clientes
-                for (Cliente cliente2: clientes) {
-                    if (cliente2.getCedula()==cedula){
+                Cliente cliente2 = clientes.get(cedula);
+                    if (clientes.containsKey(cedula)){
                         //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
                         if (cliente2.getPuntos()>5000) {
                             cliente2.actualizar_puntos(cliente2.getPuntos() - 5000);
@@ -1465,13 +1468,13 @@ public class Interfaz {
                             System.out.println("no dispone de suficientes puntos");
                         }
                     }
-                }
+
                 break;
             }else if (option.equals("2")) {
                 //Busca la cedula ingresada en el array de clientes
                 //Busca la cedula ingresada en el array de clientes
-                for (Cliente cliente2: clientes) {
-                    if (cliente2.getCedula()==cedula){
+                    Cliente cliente2 = clientes.get(cedula);
+                    if (clientes.containsKey(cedula)){
                         //verifica la cantidad de puntos y procede a hacer el descuento en caso de ser posible
                         if (cliente2.getPuntos()>20000) {
                             cliente2.actualizar_puntos(cliente2.getPuntos() - 20000);
@@ -1480,7 +1483,7 @@ public class Interfaz {
                             System.out.println("no dispone de suficientes puntos");
                         }
                     }
-                }
+
                 break;
             }else if (option.equals("3")) {
                 //implementar opcion de pago de factura con puntos

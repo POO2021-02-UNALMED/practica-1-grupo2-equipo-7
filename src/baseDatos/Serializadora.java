@@ -114,7 +114,7 @@ public class Serializadora implements Serializable {
         try {
             Lectorclientes = new FileInputStream(System.getProperty("user.dir") + "/tmp/Listaclientes.txt");
             ObjectInputStream in = new ObjectInputStream(Lectorclientes);
-            LinkedList<Cliente> cargaclientes = new LinkedList<>();
+            HashMap<Integer, Cliente> cargaclientes = new HashMap<>();
             Cliente.clientes = cargaclientes;
             in.close();
             Lectorclientes.close();

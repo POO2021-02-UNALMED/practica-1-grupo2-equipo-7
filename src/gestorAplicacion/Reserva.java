@@ -9,6 +9,7 @@ public class Reserva {
     private int cliente;
 	private String horareserva;
     private int cantidadpersonas;
+	public static LinkedList<Reserva> reservas = new LinkedList<>();
 
 	public Reserva(int cliente,int numreserva, String fechareserva,String horareserva, int cantidadpersonas) {
 	    
