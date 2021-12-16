@@ -31,7 +31,7 @@ import static gestorAplicacion.Mesa.*;
 
 
 public class Interfaz {
-
+    static int numreserva=1;
     private static int CedulaCLiente;
 
 	public static void main(String[] args) {
@@ -699,26 +699,50 @@ public class Interfaz {
         System.out.println("Presione 1 para consultar el estado de una reserva ");
         System.out.println("Presione 2 para crear una nueva reserva ");
         opcion = menu.next();
-        if (opcion.equals("2")) {
+        if (opcion.equals("1")) {
+        	
+        	 if (reservas.isEmpty()) {
+                 //si no hay,muestra una advertencia
+                 System.out.println("no hay reservas para ver");
+             } else {
+                 System.out.println(" Digite el numero de la reserva que desea ver");
+                 int numero = menu.nextInt();//se pide el numero de la reserva que se escogio para editar
+                 for (Reserva reserva1 : reservas) {
+                     if (reserva1.getNumreserva() == numero) {//se encuentra la reserva
+                         System.out.println("-----------------------------");
+                         System.out.println(" Reserva a editar");
+                         System.out.println(reserva1);//se muestra la reserva que se va a editar solo para comprobar
+                         System.out.println("-----------------------------");
+                     }
+
+                 }
+
+                /* System.out.println(" Digite el numero de lq reserbq");
+                 //de lo contrario
+                 //recorre el arreglo mostrando todas las reserva registradas hasta el momento
+                 System.out.println("-----------------------------");
+                 Reserva.verReserva();
+                 System.out.println("-----------------------------");*/
+             }
+        }else if (opcion.equals("2")) {
             Scanner oli = new Scanner(System.in);
             int cc;
             String fecha;
             String hora;
-            int cantidadpersonas,numreserva;
+            int cantidadpersonas;
             System.out.println("Ingrese su numero de cedula");
             cc = oli.nextInt();
             verification(cc);
-            System.out.println("Ingrese un numero para su reserva nueva");
-            numreserva = oli.nextInt();
             System.out.println("ingrese una fecha para su reserva");
             fecha = oli.next();
             System.out.println("ingrese una hora para su reserva");
             hora = oli.next();
             System.out.println("Cuantas personas son?");
             cantidadpersonas = oli.nextInt();
-            Reserva reserva = new Reserva (cc,numreserva,fecha,hora,cantidadpersonas);
+            Reserva.crearReserva(cc,numreserva,fecha,hora,cantidadpersonas);
             System.out.println("Su reserva ha sido creada con exito ");
         }
+        
     }
     //=====================================================================================================================
     private static void menuPedido() {

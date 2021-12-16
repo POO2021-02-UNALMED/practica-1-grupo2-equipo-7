@@ -1,5 +1,6 @@
 package gestorAplicacion;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
@@ -11,24 +12,15 @@ public class Reserva {
     private int cantidadpersonas;
 	public static LinkedList<Reserva> reservas = new LinkedList<>();
 
-	public Reserva(int cliente,int numreserva, String fechareserva,String horareserva, int cantidadpersonas) {
+	public Reserva(int cliente, int numreserva,String fechareserva,String horareserva, int cantidadpersonas) {
 	    
 		this.cliente = cliente;
 		this.numreserva = numreserva;
 	    this.fechareserva = fechareserva;
 	    this.horareserva = horareserva;
 		this.cantidadpersonas = cantidadpersonas;
-    	
+		  	
 	}
-
-
- 
-    
-
-    
-
-
-
 
 	public int getCliente() {
 		return cliente;
@@ -96,5 +88,18 @@ public class Reserva {
                 " hora de la reserva: "+ getHorareserva() + "\n" +
                 "  cantidad personsas: "+ getCantidadpersonas()+" ]";
     }
+
+	public static void verReserva() {
+	for (Reserva reserva : reservas ) {
+		System.out.println(reserva);
+	}
+	
+	}
+	public static void crearReserva(int cliente, int numreserva,String fechareserva,String horareserva, int cantidadpersonas) {
+	      Reserva newR=new Reserva(cliente, numreserva,fechareserva,horareserva,cantidadpersonas);
+	      reservas.add(newR);
+	      
+	    }
+
 }
 

@@ -1,9 +1,8 @@
 package gestorAplicacion;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.Random;
+import uiMain.Interfaz;
+
+import java.util.*;
 
 public class Mesa {
 
@@ -88,14 +87,17 @@ public class Mesa {
        Scanner in=new Scanner(System.in);
        int op;
        Random idPedido = new Random();
-       HashMap<Catalogo, Integer> pedidoM = new HashMap<>();
+        TreeMap<Catalogo, Integer> pedidoM = new TreeMap<>();
        Catalogo.verCatalogo();
        if(this.pedido == null){ pedido = new Pedido(cliente, this, idPedido.nextInt(1000), pedidoM);
        this.disponibilidad = false;} else {
            System.out.println("-----------------------------------");
-               for (Catalogo plato : this.pedido.getPlatos()) {
-                   System.out.println(plato);
-               }
+           System.out.println("Plato/Cantidad");
+           for (Map.Entry<Catalogo, Integer> plato: this.pedido.getPlatos().entrySet()) {
+               Catalogo key=plato.getKey();
+               Integer value=plato.getValue();
+               System.out.println(key+ " " +value);
+           }
            System.out.println("-----------------------------------");
            }
 
@@ -103,12 +105,12 @@ public class Mesa {
        op = in.nextInt();
        System.out.println("Elija la cantidad que desea del plato seleccionado: ");
        int cant = in.nextInt();
-       pedidoM.put(Catalogo.platos.get(op), cant);
+       pedidoM.put(Catalogo.platos.get(op), (Integer) cant);
        while(op != 0) {
            op = in.nextInt();
            System.out.println("Elija la cantidad que desea del plato seleccionado: ");
            cant = in.nextInt();
-           pedidoM.put(Catalogo.platos.get(op), cant);
+           pedidoM.put(Catalogo.platos.get(op), (Integer) cant);
        }
 
    }
