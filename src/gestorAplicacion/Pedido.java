@@ -3,10 +3,11 @@ package gestorAplicacion;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.TreeMap;
 
 public class Pedido {
 
-    private HashMap<Catalogo, Integer> platos; //Hash que guarda el contenido de cada pedido con la cantidad de cada plato
+    private TreeMap<Catalogo, Integer> platos; //Hash que guarda el contenido de cada pedido con la cantidad de cada plato
     private Cliente cliente;
     private Mesa mesa;
     private int idpedido;
@@ -20,7 +21,7 @@ public class Pedido {
 
 
 
-    public Pedido(Cliente cliente, Mesa mesa, int idpedido, HashMap<Catalogo, Integer> platos) {
+    public Pedido(Cliente cliente, Mesa mesa, int idpedido, TreeMap<Catalogo, Integer> platos) {
         this.cliente = cliente;
         this.mesa = mesa;
         this.idpedido = idpedido;
