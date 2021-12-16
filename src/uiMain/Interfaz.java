@@ -711,11 +711,12 @@ public class Interfaz {
             hora = oli.next();
             System.out.println("Cuantas personas son?");
             cantidadpersonas = oli.nextInt();
+            System.out.println("Su reserva ha sido creada con exito ");
             Reserva reserva= new Reserva(cc,numreserva,fecha,hora,cantidadpersonas);
             for (Map.Entry<Integer,Cliente> cliente: clientes.entrySet()) {
                 if (cliente.getKey()==cc){
                     cliente.getValue().setReserva(reserva);
-                    System.out.println("Su reserva ha sido creada con exito ");
+                    
                 }
             }
         }
