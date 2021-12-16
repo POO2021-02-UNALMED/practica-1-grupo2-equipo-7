@@ -705,11 +705,24 @@ public class Interfaz {
                  //si no hay,muestra una advertencia
                  System.out.println("no hay reservas para ver");
              } else {
+                 System.out.println(" Digite el numero de la reserva que desea ver");
+                 int numero = menu.nextInt();//se pide el numero de la reserva que se escogio para editar
+                 for (Reserva reserva1 : reservas) {
+                     if (reserva1.getNumreserva() == numero) {//se encuentra la reserva
+                         System.out.println("-----------------------------");
+                         System.out.println(" Reserva a editar");
+                         System.out.println(reserva1);//se muestra la reserva que se va a editar solo para comprobar
+                         System.out.println("-----------------------------");
+                     }
+
+                 }
+
+                /* System.out.println(" Digite el numero de lq reserbq");
                  //de lo contrario
                  //recorre el arreglo mostrando todas las reserva registradas hasta el momento
                  System.out.println("-----------------------------");
                  Reserva.verReserva();
-                 System.out.println("-----------------------------");
+                 System.out.println("-----------------------------");*/
              }
         }else if (opcion.equals("2")) {
             Scanner oli = new Scanner(System.in);
