@@ -3,7 +3,10 @@ package gestorAplicacion;
 import java.util.LinkedList;
 
 public class Cliente extends Persona {
+
     protected int puntos = 0;
+    int estatus; //2 cliente VIP, 1 cliente frecuente, 0 cliente normal.
+
     Reserva reserva;
     public static LinkedList<Cliente> clientes= new LinkedList<>();
 
@@ -35,10 +38,19 @@ public class Cliente extends Persona {
 
     @Override
     public String toString() {
-        return "Cedula: "+getCedula() + "\n" +
-                "[ Nombre: "+ getNombre() + "\n" +
-                "  Telefono: "+ getTelefono() + "\n" +
-                "  Direccion: "+ getDireccion() + "\n" +
-                "  Punros acumulados: "+ getPuntos()+" ]";
+        return "Cedula: " + getCedula() + "\n" +
+                "[ Nombre: " + getNombre() + "\n" +
+                "  Telefono: " + getTelefono() + "\n" +
+                "  Direccion: " + getDireccion() + "\n" +
+                "  Punros acumulados: " + getPuntos() + " ]";
+    }
+
+    public int getestatus() {
+        return estatus;
+    }
+
+    public void setestatus(int status) {
+        this.estatus = status;
+
     }
 }
