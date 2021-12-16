@@ -86,6 +86,12 @@ public class BaseDeDatos {
 
         
         Cliente.crearCliente(1009825,"ricardo",31245678,"av colombia #63-10",null);
+        Cliente.crearCliente(1123, "Juan", 3124, "Sarie bay", null);
+        Cliente.crearCliente(15423, "Carlos", 35324, "Tablitas", null);
+        Cliente.crearCliente(16333, "Luz", 345324, "Morrys Landing", null);
+        Cliente.crearCliente(11254, "Doris", 31644, "San Luis", null);
+        Cliente.crearCliente(1143323, "Keder", 312644, "Barrio Obrero", null);
+        Cliente.crearCliente(1123453, "Leo", 315424, "Atlantico", null);
         Cliente.crearCliente(123,"r",321,"av",null);
         materiaPrima.crearInsumo("potato", 20);
     
@@ -99,6 +105,7 @@ public class BaseDeDatos {
         Reserva.crearReserva(1009825, 23,  "24/12/21", "14:00", 2);
         Reserva.crearReserva(1009845, 44,  "26/12/21", "16:00", 7);
         Reserva.crearReserva(1049825, 25,  "12/12/21", "18:00", 4);
+
     }
     
    
