@@ -45,7 +45,7 @@ public class Interfaz {
             System.out.println("1. resevas.");
             System.out.println("2. Consulta de puntaje.");
             System.out.println("3. metodo 3.");
-            System.out.println("4. Pedido y facturación.");
+            System.out.println("4. Pedido y facturaciï¿½n.");
             System.out.println("5. Gestion del restaurante");
             System.out.println("6. ");
             System.out.println("0. Salir.");
@@ -61,19 +61,46 @@ public class Interfaz {
                     if ((boolean) (cliente.getCedula() == reserva.getCliente().getCedula())) {
                         System.out.println("usted ya cuenta con una reserva");
                     } else {
-                        System.out.println("usted acaba de crear una reserva con la cedula" + Persona.getcedula);
+                        System.out.println("Usted no cuenta con resevas porfavor seleccione una opcion");
+                        System.out.println("1 Crear reserva");
+                        System.out.println("0 volver al menu anterior");
+                        
+                       switch (option) {
+                       case "1":
+                    	   System.out.println("Usted esta creando una reserva porfavor proporcione los datos requeridos");
+                    	   Scanner id = new Scanner(System.in);
+                    	   System.out.println("ingrese su documento de identidad");
+                    	   Scanner fechares = new Scanner(System.in);
+                    	   System.out.println("ingrese una fecha para su reserva");
+                    	   Scanner horares = new Scanner(System.in);
+                    	   System.out.println("igrese una hora para su reserva");
+                    	   Scanner sederes = new Scanner(System.in);
+                    	   System.out.println("ingrese un numero de sede para su reserva");
+                    	   System.out.println("su reserva se ha guardado exitosamente con el #cc"+id+"para la fecha"+fechares+"a las"+
+                    		horares+"en la sede"+sederes);
+                    	  
+                       }
+                       break;
+                       
                     }
 
 
                     break;
-                case "clientes frecuentes":
-                    System.out.println("en esta base de datos se almacena la información de todos nuestros clientes frecuentes");
+                case "2":
+                    System.out.println("en esta base de datos se almacena la informaciï¿½n de todos nuestros clientes frecuentes");
 
                     //System.out.println(cliente.getcrearCliente);
                     //falta hacer un array alguna estructura de datos donde almacenar a los clientes
                     break;
                 case "3":
-                    System.out.println("metodo 3");
+                    System.out.println("Bienvenido al sistema para registrar clientes");
+                    System.out.println("Ingrese un numero de documento");
+                    Integer num = in.nextInt();
+                    Scanner nombre = new Scanner (System.in);
+                    String cadena;
+                    System.out.println("ingrese un nombre a fin con el numero de documento");
+                    cadena = nombre.next();
+                    System.out.println("Se ha registrado a"+ nombre +"con el documento#"+num+"de forma exitosa");
                     break;
                 case "4":
 
@@ -180,7 +207,7 @@ public class Interfaz {
                     System.out.println(" Por favor ingrese la direccion");
                     String direccion= in.next();
                     Cliente.crearCliente(cedula,nombre,telefono,direccion);//aca se crea el cliente
-                    System.out.println(" ¡Cliente creado con exito!");
+                    System.out.println(" ï¿½Cliente creado con exito!");
                     break;
                 case "2"://en esta opcion se editara la informacion del cliente
                     System.out.println("-----------------------------");
@@ -219,28 +246,28 @@ public class Interfaz {
                                 }
                                 //como la cedula es valida se procede a editar
                                 cliente1.setCedula(cedul);//aca se edita la cedula
-                                System.out.println(" ¡Cedula editada con exito!");
+                                System.out.println(" ï¿½Cedula editada con exito!");
                             }else if (option.equals("2")) {//opcion para editar el nombre
                                 System.out.println(" Nombre actual");
                                 System.out.println(cliente1.getNombre());//se muestra el nombre actual que se va a editar
                                 System.out.println(" Digite el nuevo nombre");
                                 String name=in.next();//se pide el nuevo nombre
                                 cliente1.setNombre(name);//aca se edita el nombre
-                                System.out.println(" ¡Nombre editado con exito!");
+                                System.out.println(" ï¿½Nombre editado con exito!");
                             }else if (option.equals("3")) {//opcion para editar el telefono
                                 System.out.println(" Telefono actual");
                                 System.out.println(cliente1.getTelefono());//se muestra el telefono actual que se va a editar
                                 System.out.println(" Digite el nuevo telefono");
                                 int tel=in.nextInt();//se pide el nuevo telefono
                                 cliente1.setTelefono(tel);//aca se edita el telefono
-                                System.out.println(" ¡Telefono editado con exito!");
+                                System.out.println(" ï¿½Telefono editado con exito!");
                             }else if (option.equals("4")) {//opcion para editar la direccion
                                 System.out.println(" Direccion actual");
                                 System.out.println(cliente1.getDireccion());//se muestra la direccion actual que se va a editar
                                 System.out.println(" Digite la nueva direccion");
                                 String dir=in.next();//se pide la nueva direccion
                                 cliente1.setDireccion(dir);//aca se edita la direccion
-                                System.out.println(" ¡Direccion editada con exito!");
+                                System.out.println(" ï¿½Direccion editada con exito!");
                             }else if(option.equals("0")){
                                 return;
                             }
@@ -267,7 +294,7 @@ public class Interfaz {
                         for (Cliente cliente1: clientes ){
                             if (cliente1.getCedula()==ced){//encuentra el cliente
                                 clientes.remove(cliente1);//elimina el cliente
-                                System.out.println(" ¡Cliente eliminado con exito! ");
+                                System.out.println(" ï¿½Cliente eliminado con exito! ");
                             }
                         }
                     }
@@ -342,7 +369,7 @@ public class Interfaz {
                     System.out.println(" Por favor ingrese el sueldo");
                     int sueldo=in.nextInt();
                     Empleado.crearEmpleado(cedula,nombre,telefono,direccion,id,cargo,sueldo);//aca se crea el empleado
-                    System.out.println(" ¡Empleado creado con exito!");
+                    System.out.println(" ï¿½Empleado creado con exito!");
                     break;
                 case "2"://opcion para editar un empleado
                     System.out.println("-----------------------------");
@@ -382,49 +409,49 @@ public class Interfaz {
                                 }
                                 //como la cedula es valida se procede a editar
                                 empleado1.setCedula(cedul);//aca se edita la cedula
-                                System.out.println(" ¡Cedula editada con exito!");
+                                System.out.println(" ï¿½Cedula editada con exito!");
                             }else if (option.equals("2")) {//opcion para editar el nombre
                                 System.out.println(" Nombre actual");
                                 System.out.println(empleado1.getNombre());//se muestra el nombre actual que se va a editar
                                 System.out.println(" Digite el nuevo nombre");
                                 String name=in.next();//se pide el nuevo nombre
                                 empleado1.setNombre(name);//aca se edita el nombre
-                                System.out.println(" ¡Nombre editado con exito!");
+                                System.out.println(" ï¿½Nombre editado con exito!");
                             }else if (option.equals("3")) {//opcion para editar el telefono
                                 System.out.println(" Telefono actual");
                                 System.out.println(empleado1.getTelefono());//se muestra el telefono actual que se va a editar
                                 System.out.println(" Digite el nuevo telefono");
                                 int tel=in.nextInt();//se pide el nuevo telefono
                                 empleado1.setTelefono(tel);//aca se edita el telefono
-                                System.out.println(" ¡Telefono editado con exito!");
+                                System.out.println(" ï¿½Telefono editado con exito!");
                             }else if (option.equals("4")) {//opcion para editar la direccion
                                 System.out.println(" Direccion actual");
                                 System.out.println(empleado1.getDireccion());//se muestra la direccion actual que se va a editar
                                 System.out.println(" Digite la nueva direccion");
                                 String dir=in.next();//se pide la nueva direccion
                                 empleado1.setDireccion(dir);//aca se edita la direccion
-                                System.out.println(" ¡Direccion editada con exito!");
+                                System.out.println(" ï¿½Direccion editada con exito!");
                             }else if (option.equals("5")) {//opcion para editar el id
                                 System.out.println(" ID actual");
                                 System.out.println(empleado1.getId());//se muestra el id actual que se va a editar
                                 System.out.println(" Digite el nuevo ID");
                                 int ID=in.nextInt();//se pide el nuevo id
                                 empleado1.setId(ID);//aca se edita el id
-                                System.out.println(" ¡ID editado con exito!");
+                                System.out.println(" ï¿½ID editado con exito!");
                             }else if (option.equals("6")) {//opcion para editar el cargo
                                 System.out.println(" Cargo actual");
                                 System.out.println(empleado1.getCargo());//se muestra el cargo actual que se va a editar
                                 System.out.println(" Digite el nuevo cargo");
                                 String Cargo=in.next();//se pide el nuevo cargo
                                 empleado1.setCargo(Cargo);//aca se edita el cargo
-                                System.out.println(" ¡Cargo editado con exito!");
+                                System.out.println(" ï¿½Cargo editado con exito!");
                             }else if (option.equals("7")) {//opcion para editar el sueldo
                                 System.out.println(" Sueldo actual");
                                 System.out.println(empleado1.getDireccion());//se muestra el sueldo actual que se va a editar
                                 System.out.println(" Digite el nuevo sueldo");
                                 int Sueldo=in.nextInt();//se pide el nuevo sueldo
                                 empleado1.setSueldo(Sueldo);//aca se edita el sueldo
-                                System.out.println(" ¡Direccion editada con exito!");
+                                System.out.println(" ï¿½Direccion editada con exito!");
                             }else if(option.equals("0")){
                                 return;
                             }
@@ -450,7 +477,7 @@ public class Interfaz {
                         for (Empleado empleado1: empleados ){
                             if (empleado1.getCedula()==ced){//encuentra el empleado
                                 empleados.remove(empleado1);//elimina el empleado
-                                System.out.println(" ¡Empleado eliminado con exito! ");
+                                System.out.println(" ï¿½Empleado eliminado con exito! ");
                             }
                         }
                     }
@@ -523,7 +550,7 @@ public class Interfaz {
                     System.out.println(" Por favor ingrese el cliente");
                     //se agrega un cliente
                     System.out.println("-----------------------------");
-                    System.out.println(" Lista de Clientes");//se muestran los clientes para que el usuario escoja el cliente dueño de la reserva
+                    System.out.println(" Lista de Clientes");//se muestran los clientes para que el usuario escoja el cliente dueï¿½o de la reserva
                     Cliente.verCliente();
                     System.out.println("-----------------------------");
                     System.out.println();
@@ -531,11 +558,11 @@ public class Interfaz {
                     int cedul=in.nextInt();//se pide la cedula del cliente que se escogio
                     Cliente cliente=new Cliente();
                     for (Cliente cliente1: clientes ) {
-                        if (cliente1.getCedula()==cedul) {//aca encuentra al cliente que sera el dueño de la reserva
+                        if (cliente1.getCedula()==cedul) {//aca encuentra al cliente que sera el dueï¿½o de la reserva
                             cliente=cliente1;
                         }
                     }
-                    System.out.println(" ¿Es aplicable?");//se pregunta si la reserva es aplicable o no
+                    System.out.println(" ï¿½Es aplicable?");//se pregunta si la reserva es aplicable o no
                     System.out.println("1. Si.");
                     System.out.println("2. No.");
                     System.out.println();
@@ -550,7 +577,7 @@ public class Interfaz {
                         return;
                     }
                     Reserva.crearReserva(num,fecha,cliente,aplicable);//aca se crea la reserva
-                    System.out.println(" ¡Reserva creada con exito!");
+                    System.out.println(" ï¿½Reserva creada con exito!");
                     break;
                 case "2"://opcion para editar una reserva
                     System.out.println("-----------------------------");
@@ -573,18 +600,18 @@ public class Interfaz {
                             System.out.println("0. Salir.");
                             System.out.println("-----------------------------");
                             option = in.next();
-                            if (option.equals("1")) {//opcion para editar el cliente dueño de la reserva
+                            if (option.equals("1")) {//opcion para editar el cliente dueï¿½o de la reserva
                                 System.out.println("-----------------------------");
                                 System.out.println(" Lista de Clientes");//se muestran los clientes para que el usuario escoja el que quiere editar
                                 Cliente.verCliente();
                                 System.out.println("-----------------------------");
                                 System.out.println();
-                                System.out.println(" Digite la cedula del nuevo dueño de la reserva");
+                                System.out.println(" Digite la cedula del nuevo dueï¿½o de la reserva");
                                 int cedu=in.nextInt();//se pide la cedula del cliente que se escogio
                                 for (Cliente cliente1:clientes){
                                     if (cliente1.getCedula()==cedu){
-                                        reserva1.setCliente(cliente1);//aca se edita el dueño de la reserva
-                                        System.out.println(" ¡Cliente editado con exito!");
+                                        reserva1.setCliente(cliente1);//aca se edita el dueï¿½o de la reserva
+                                        System.out.println(" ï¿½Cliente editado con exito!");
                                     }
                                 }
                             }else if (option.equals("2")) {//opcion para editar el numero de la reserva
@@ -593,28 +620,28 @@ public class Interfaz {
                                 System.out.println(" Digite el nuevo numero de reserva");
                                 int nume=in.nextInt();//se pide el nuevo numero
                                 reserva1.setNumreserva(nume);//aca se edita el numero de reserva
-                                System.out.println(" ¡Numero de reserva editado con exito!");
+                                System.out.println(" ï¿½Numero de reserva editado con exito!");
                             }else if (option.equals("3")) {//opcion para la editar la fecha de reserva
                                 System.out.println(" Fecha actual");
                                 System.out.println(reserva1.getFechareserva());//se muestra la fecha actual de la reserva que se va a editar
                                 System.out.println(" Digite la nueva fecha");
                                 String Fecha=in.next();//se pide la nueva fecha
                                 reserva1.setFechareserva(Fecha);//aca se edita la fecha de la reserva
-                                System.out.println(" ¡Fecha de reserva editada con exito!");
+                                System.out.println(" ï¿½Fecha de reserva editada con exito!");
                             }else if (option.equals("4")) {//opcion para editar el aplicable
                                 System.out.println(" Estado del aplicable actual");
                                 System.out.println(reserva1.isAplicable());//se muestra el estado actual del aplicable
-                                System.out.println(" ¿Es aplicable?");//se pregunta si la reserva es aplicable o no
+                                System.out.println(" ï¿½Es aplicable?");//se pregunta si la reserva es aplicable o no
                                 System.out.println("1. Si.");
                                 System.out.println("2. No.");
                                 System.out.println();
                                 option = in.next();
                                 if (option.equals("1")){
                                     reserva1.setAplicable(true);//aca se edita el aplicable
-                                    System.out.println(" ¡Aplicable editado con exito!");
+                                    System.out.println(" ï¿½Aplicable editado con exito!");
                                 }else if (option.equals("2")){
                                     reserva1.setAplicable(false);//aca se edita el aplicable
-                                    System.out.println(" ¡Aplicable editado con exito!");
+                                    System.out.println(" ï¿½Aplicable editado con exito!");
                                 }else {
                                     System.out.println(" Ingrese una opcion valida");
                                     return;
@@ -644,7 +671,7 @@ public class Interfaz {
                         for (Reserva reserva1: reservas ){
                             if (reserva1.getNumreserva()==nume){//encuentra la reserva
                                 reservas.remove(reserva1);//elimina la reserva
-                                System.out.println(" ¡Reserva eliminada con exito! ");
+                                System.out.println(" ï¿½Reserva eliminada con exito! ");
                             }
                         }
                     }
@@ -701,9 +728,9 @@ public class Interfaz {
                 case "1"://en esta opcion se podra crear un pedido
                     System.out.println(" Digite el id del pedido ");
                     int id=in.nextInt();//se pide el id del pedido
-                    System.out.println(" Por favor escoga el cliente dueño del pedido");//el pedido debe tener un cliente dueño
+                    System.out.println(" Por favor escoga el cliente dueï¿½o del pedido");//el pedido debe tener un cliente dueï¿½o
                     System.out.println("-----------------------------");
-                    System.out.println(" Lista de Clientes");//se muestran los clientes para que el usuario escoja el dueño
+                    System.out.println(" Lista de Clientes");//se muestran los clientes para que el usuario escoja el dueï¿½o
                     Cliente.verCliente();
                     System.out.println("-----------------------------");
                     System.out.println();
@@ -711,7 +738,7 @@ public class Interfaz {
                     int cedul=in.nextInt();//se pide la cedula del cliente que se escogio
                     Cliente cliente=new Cliente();
                     for (Cliente cliente1: clientes ) {
-                        if (cliente1.getCedula()==cedul) {//aca encuentra al cliente que sera el dueño del pedido
+                        if (cliente1.getCedula()==cedul) {//aca encuentra al cliente que sera el dueï¿½o del pedido
                             cliente=cliente1;
                         }
                     }
@@ -734,7 +761,7 @@ public class Interfaz {
                     Catalogo.verCatalogo();//Muestra el catalogo
                     System.out.println("-----------------------------");
                     System.out.println();
-                    System.out.println(" ¿Cuantos platos desea comprar el cliente?");//se pregunta cuantos platos comprara el cliente
+                    System.out.println(" ï¿½Cuantos platos desea comprar el cliente?");//se pregunta cuantos platos comprara el cliente
                     //ya que el cliente puede comprar mas de un plato en cada pedido,por ende se le pedira un plato la cantidad de veces que va a comprar
                     int cantidad= in.nextInt();
                     ArrayList<Catalogo> pedidosPlato = new ArrayList<>();
@@ -764,7 +791,7 @@ public class Interfaz {
                         }
                     }
                     Pedido.crearPedido(cliente,mesa,id,pedidosPlato);//aca se crea el pedido
-                    System.out.println(" ¡Pedido creado con exito!");
+                    System.out.println(" ï¿½Pedido creado con exito!");
                     break;
                 case "2"://opcion para editar un pedido
                     System.out.println("-----------------------------");
@@ -786,18 +813,18 @@ public class Interfaz {
                             System.out.println("0. Salir.");
                             System.out.println("-----------------------------");
                             option = in.next();
-                            if (option.equals("1")) {//opcion para editar el cliente dueño del pedido
+                            if (option.equals("1")) {//opcion para editar el cliente dueï¿½o del pedido
                                 System.out.println("-----------------------------");
                                 System.out.println(" Lista de Clientes");//se muestran los clientes para que el usuario escoja el que quiere editar
                                 Cliente.verCliente();
                                 System.out.println("-----------------------------");
                                 System.out.println();
-                                System.out.println(" Digite la cedula del nuevo dueño del pedido");
+                                System.out.println(" Digite la cedula del nuevo dueï¿½o del pedido");
                                 int cedu=in.nextInt();//se pide la cedula del cliente que se escogio
                                 for (Cliente cliente1:clientes){
                                     if (cliente1.getCedula()==cedu){
-                                        pedido1.setCliente(cliente1);//aca se edita el dueño del pedido
-                                        System.out.println(" ¡Cliente editado con exito!");
+                                        pedido1.setCliente(cliente1);//aca se edita el dueï¿½o del pedido
+                                        System.out.println(" ï¿½Cliente editado con exito!");
                                     }
                                 }
                             }else if (option.equals("2")) {//opcion para editar la mesa del pedido
@@ -814,7 +841,7 @@ public class Interfaz {
                                 for (Mesa mesa1:mesas.values()){
                                     if (mesa1.getIdunico()==idMesa){//encuentra la mesa
                                         pedido1.setMesa(mesa1);
-                                        System.out.println(" ¡Mesa editada con exito!");
+                                        System.out.println(" ï¿½Mesa editada con exito!");
                                     }
                                 }
                             }else if (option.equals("3")) {//opcion para la editar el id del pedido
@@ -823,7 +850,7 @@ public class Interfaz {
                                 System.out.println(" Digite el nuevo ID");
                                 int newID=in.nextInt();//se pide el nuevo id
                                 pedido1.setIdpedido(newID);//aca se edita el id del pedido
-                                System.out.println(" ¡ID editado con exito!");
+                                System.out.println(" ï¿½ID editado con exito!");
                             }else if(option.equals("0")){
                                 return;
                             }
@@ -849,7 +876,7 @@ public class Interfaz {
                         for (Pedido pedido: pedidos ){
                             if (pedido.getIdpedido()==nume){//encuentra el pedido
                                 pedidos.remove(pedido);//elimina el pedido
-                                System.out.println(" ¡Pedido eliminado con exito! ");
+                                System.out.println(" ï¿½Pedido eliminado con exito! ");
                             }
                         }
                     }
@@ -919,7 +946,7 @@ public class Interfaz {
                     System.out.println(" Digite el numero de la mesa");
                     int numMesa= in.nextInt();
                     new Mesa(id,zona,numMesa);//aca se crea la mesa
-                    System.out.println(" ¡Mesa creada con exito!");
+                    System.out.println(" ï¿½Mesa creada con exito!");
                     break;
                 case "2"://opcion para editar una mesa
                     System.out.println("-----------------------------");
@@ -951,7 +978,7 @@ public class Interfaz {
                                     }
                                 }
                                 mesa1.setIdunico(newID);
-                                System.out.println(" ¡ID editado con exito!");
+                                System.out.println(" ï¿½ID editado con exito!");
                             }else if (option.equals("2")) {//opcion para editar la zona
                                 System.out.println(" Zona de la mesa actual");
                                 System.out.println(mesa1.getZona());//se muestra la zona actual
@@ -962,14 +989,14 @@ public class Interfaz {
                                 short zone= in.nextShort();
                                 if(zone > 0 && zone <4)
                                 mesa1.setZona(zone);//aca se edita la zona
-                                System.out.println(" ¡Zona editada con exito!");
+                                System.out.println(" ï¿½Zona editada con exito!");
                             }else if (option.equals("3")) {//opcion para la editar el numero de la mesa
                                 System.out.println(" Numero de la mesa actual");
                                 System.out.println(mesa1.getNumero());//muestra el numero actual de la mesa
                                 System.out.println(" Digite el nuevo numero");
                                 int newNum= in.nextInt();
                                 mesa1.setNumero(newNum);//aca se edita el numero de la mesa
-                                System.out.println(" ¡Numero de mesa editado con exito!");
+                                System.out.println(" ï¿½Numero de mesa editado con exito!");
                             }else if(option.equals("0")){
                                 return;
                             }
@@ -995,7 +1022,7 @@ public class Interfaz {
                         for (Mesa mesa: mesas.values()){
                             if (mesa.getIdunico()==nume){//encuentra la mesa
                                 mesas.remove(mesa);//elimina la mesa
-                                System.out.println(" ¡Mesa eliminada con exito! ");
+                                System.out.println(" ï¿½Mesa eliminada con exito! ");
                             }
                         }
                     }
@@ -1095,21 +1122,21 @@ public class Interfaz {
                                     }
                                 }
                                 proveedor1.setNit(newNIT);
-                                System.out.println(" ¡NIT editado con exito!");
+                                System.out.println(" ï¿½NIT editado con exito!");
                             }else if (option.equals("2")) {//opcion para editar el nombre
                                 System.out.println(" Nombre del proveedor actual");
                                 System.out.println(proveedor1.getNombre());//se muestra el nombre actual
                                 System.out.println(" Digite el nuevo nombre");
                                 String name= in.next();
                                 proveedor1.setNombre(name);//aca se edita el nombre
-                                System.out.println(" ¡Nombre editado con exito!");
+                                System.out.println(" ï¿½Nombre editado con exito!");
                             }else if (option.equals("3")) {//opcion para la editar el telefono del proveedor
                                 System.out.println(" Numero de telefono actual");
                                 System.out.println(proveedor1.getTelefono());//muestra el telefono actual del proveedor
                                 System.out.println(" Digite el nuevo telefono");
                                 String newTel= in.next();
                                 proveedor1.setTelefono(newTel);//aca se edita el telefono del proveedor
-                                System.out.println(" ¡Telefono editado con exito!");
+                                System.out.println(" ï¿½Telefono editado con exito!");
                             }else if(option.equals("0")){
                                 return;
                             }
@@ -1135,7 +1162,7 @@ public class Interfaz {
                         for (Proveedor proveedor: proveedores ){
                             if (proveedor.getNit()==NIT){//encuentra el proveedor
                                 proveedores.remove(proveedor);//elimina el proveedores
-                                System.out.println(" ¡Proveedor eliminado con exito! ");
+                                System.out.println(" ï¿½Proveedor eliminado con exito! ");
                             }
                         }
                     }
@@ -1212,7 +1239,7 @@ public class Interfaz {
                     System.out.println("none");
                     break;
                 case "3":
-                    System.out.println("none aún");
+                    System.out.println("none aï¿½n");
                     break;
                 case "0":
                     return;
@@ -1232,7 +1259,7 @@ public class Interfaz {
             if(mesas.get(option).equals(true)){
                 if (mesas.get(option).isDisponibilidad()){
                     if(mesas.get(option).entornoMesa() == null){
-                        System.out.println("Aún no tiene pedido para ésta mesa.");
+                        System.out.println("Aï¿½n no tiene pedido para ï¿½sta mesa.");
                     }else{
                     mesas.get(option).entornoMesa();}
                 }

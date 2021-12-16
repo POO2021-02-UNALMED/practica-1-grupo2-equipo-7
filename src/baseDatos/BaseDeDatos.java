@@ -1,6 +1,7 @@
 package baseDatos;
 
 import gestorAplicacion.*;
+import java.util.HashMap;
 
 
 public class BaseDeDatos {
@@ -21,9 +22,8 @@ public class BaseDeDatos {
         materiaPrima.crearInsumo("fish", 40);
         materiaPrima.crearInsumo("chicken", 40);
         materiaPrima.crearInsumo("potato", 20);
-        
-        Cliente.crearCliente(1009825,"ricardo",31245678,"av colombia #63-10");
-        Cliente.crearCliente(123,"r",321,"av");
+    
+    HashMap<Integer, String > mapaClientes =new HashMap<Integer,String>();
 
         new Mesa(1, (short) 1,18);
         new Mesa(2, (short) 2,6);
