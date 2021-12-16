@@ -11,8 +11,6 @@ public class Cliente extends Persona {
     Reserva reserva;
     public static HashMap<Integer,Cliente> clientes= new HashMap<>();
 
- 
-    
     public Cliente(int cedula, String nombre, int telefono, String direccion){
         super(cedula, nombre, telefono, direccion);
     }

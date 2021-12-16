@@ -63,17 +63,35 @@ public class Interfaz {
             option = in.next();
             switch (option) {
                 case "1":
-                    System.out.println("Bienvenido al sistema de reservas");
-                    Scanner numcc = new Scanner(System.in);
-                    System.out.println("Ingrese un numero de cedula");
-                    if ((boolean) (cliente.getCedula() == reserva.getCliente().getCedula())) {
-                        System.out.println("usted ya cuenta con una reserva");
-                    } else {
-                        //System.out.println("usted acaba de crear una reserva con la cedula" + cliente.getCedula);
-                    }
-
-
-                    break;
+                    System.out.println("Bienvenido al sistema de reservas porfavor seleccione una opcion acontinuaci�n");
+                    Scanner menu = new Scanner(System.in);
+                    String opcion;
+                    System.out.println("Presione 1 para consultar el estado de una reserva ");
+                    System.out.println("Presione 2 para crear una nueva reserva ");
+                	opcion = in.next();
+                      if (opcion.equals("2")) {
+                    	  Scanner oli = new Scanner(System.in);
+                    	  int cc;
+                    	  String fecha;
+                    	  String hora;
+                    	  int cantidadpersonas,numreserva;
+                          System.out.println("Ingrese su numero de cedula");
+                          cc = oli.nextInt();
+                          verification(cc);
+                          System.out.println("Ingrese un numero para su reserva nueva");
+                          numreserva = oli.nextInt();
+                          System.out.println("ingrese una fecha para su reserva");
+                          fecha = oli.next();
+                          System.out.println("ingrese una hora para su reserva");
+                          hora = oli.next();
+                          System.out.println("Cuantas personas son?");
+                          cantidadpersonas = oli.nextInt();
+                          Reserva reserva = new Reserva (cc,numreserva,fecha,hora,cantidadpersonas);
+                          System.out.println("Su reserva ha sido creada con exito ");
+                    	  }
+            break;
+                    
+                   
                 case "2":
                     menuPuntos();
                     //System.out.println("en esta base de datos se almacena la informaci�n de todos nuestros clientes frecuentes");
@@ -1403,8 +1421,33 @@ public class Interfaz {
             }
         }
     }
+                
+                public static void verification(int cedula){
+                    Scanner in = new Scanner(System.in);
+                    String nombre;
+                    String direccion;
+                    int cc, tel;
 
-}
+                    if (!clientes.containsKey(cedula)) {
+                        System.out.println("No existe el cliente en el sistema, vamos a crearlo: ");
+                        System.out.println("Ingrese nombre: ");
+                        nombre = in.next();
+                        System.out.println("Ingrese n�mero de cc: ");
+                        cc = in.nextInt();
+                        System.out.println("Ingrese n�mero de tel�fono: ");
+                        tel = in.nextInt();
+                        System.out.println("Ingrese direcci�n: ");
+                        direccion = in.next();
+                        Cliente cliente = new Cliente(cc, nombre, tel, direccion);
+                        System.out.println("Cliente creado de manera exitosa." +
+                                "Ahora s�, realizemos su reserva.");
 
+                    } else{
+                        System.out.println("Bienvenido(a) Sr(a). " + clientes.get(cedula).getNombre()+".");
+                    }
+                }
+            }
+        
+   
 
 
