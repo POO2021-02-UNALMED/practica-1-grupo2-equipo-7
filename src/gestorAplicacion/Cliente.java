@@ -54,6 +54,7 @@ public class Cliente extends Persona {
                 "[ Nombre: " + getNombre() + "\n" +
                 "  Telefono: " + getTelefono() + "\n" +
                 "  Direccion: " + getDireccion() + "\n" +
+                "  Reserva: " + getReserva() + "\n" +
                 "  Punros acumulados: " + getPuntos() + " ]";
     }
 
