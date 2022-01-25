@@ -1,4 +1,4 @@
-from gestorAplicación.Persona import Persona
+from gestorAplicacion.persona import Persona
 
 class cliente(Persona):
 
