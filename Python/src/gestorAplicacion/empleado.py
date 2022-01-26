@@ -1,6 +1,6 @@
 from gestorAplicacion.persona import Persona
 
-class empleado(Persona):
+class Empleado(Persona):
 
     def __init__(self,cedula,nombre,telefono, direccion, id, cargo, sueldo):
         super().__init__( cedula,nombre,telefono, direccion)
