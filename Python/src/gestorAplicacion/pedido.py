@@ -1,11 +1,12 @@
-class Pedido:
+import catalogo
+class Pedido():
 
-    pedidos=[]
-    def __init__(self, cliente,mesa,idpedido,platos):
+    pedidos={catalogo : int}
+    def __init__(self, cliente,mesa,idpedido,pedidos):
         self.cliente = cliente
         self.mesa=mesa
         self.idpedido=idpedido
-        self.platos=platos
+        self.platos=pedidos
     
 
     #getters y setters   
