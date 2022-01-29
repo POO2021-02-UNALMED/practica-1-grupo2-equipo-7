@@ -86,7 +86,7 @@ class Mesa():
             self._pedido = None
             self._disponibilidad = True
         else:
-            
+            pass
 
 
 
