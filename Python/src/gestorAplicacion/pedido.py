@@ -1,4 +1,5 @@
-import catalogo
+from inspect import ismethoddescriptor
+from catalogo import Catalogo
 class Pedido():
 
     pedidos={catalogo : int}
@@ -33,6 +34,16 @@ class Pedido():
     
     def getPlatos(self):
         return self.platos
+
+    def recibo(self, val):
+        print("Sub-total: " + val)
+        print("Propina: "+ val*0.10)
+        print("Total: "+ (val + (val*0.10)))
+        self.getCliente().actualizar_puntos((float) (val*0.10))
+        print("Has ganado: "+ (val*0.10) + " Puntos.")
+        print("Llevas acumulados: "+ self.getCliente().getPuntos() + " Puntos.")
+        input()
+    
 
 
 

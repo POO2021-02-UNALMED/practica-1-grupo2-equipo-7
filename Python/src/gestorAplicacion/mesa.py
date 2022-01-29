@@ -1,11 +1,13 @@
+import imp
 from typing_extensions import Self
 from xmlrpc.client import Boolean
 from numpy import short
 from Python.src.Basedatos.Serializadora import save_mesas
 from gestorAplicacion import pedido
 from Basedatos import Serializadora
-from gestorAplicacion import cliente
-from gestorAplicacion import catalogo
+from gestorAplicacion.cliente import Cliente
+from gestorAplicacion.catalogo import Catalogo
+from gestorAplicacion.pedido import Pedido
 import random
 
 class Mesa():
@@ -15,7 +17,7 @@ class Mesa():
         self._numero         = int
         self._zona           = short
         self._disponibilidad = bool
-        self._pedido         = pedido
+        self._pedido         = Pedido
         save_mesas(numero, self)
     
     def getIdunico(self):
@@ -59,8 +61,8 @@ class Mesa():
     def entornoMesa(self, cliente):
         val = 0
         idPedido = random.randint(0, 10000)
-        pedidoM           = {catalogo : int}
-        catalogo.verCatalogo() #Crear método para ver el catálogo
+        pedidoM           = {Catalogo : int}
+        Catalogo.verCatalogo() #Crear método para ver el catálogo
         if (self._pedido == None):
             pedido(cliente, self, idPedido, pedidoM)
             self._disponibilidad = False
@@ -73,9 +75,18 @@ class Mesa():
             """)
             for plato, cantidad in self._pedido.items():
                 print(f'{plato}  / {cantidad}/{plato.getPrecio()*cantidad}')
-                
-        
-
+                val += cantidad * plato.getPrecio()
+        print("""Elija uno por uno los items que desea agregar a su pedido, con 0 finaliza el pedido.
+               Escriba 0000 Para realizar la factura de la mesa actual.""")
+        op = int(input())
+        if (op == 0000):
+            self._pedido.recibo(val)
+            for plato, cantidad in self._pedido.items():
+                Catalogo.descontarInsumos(plato, cantidad)
+            self._pedido = None
+            self._disponibilidad = True
+        else:
+            
 
 
 

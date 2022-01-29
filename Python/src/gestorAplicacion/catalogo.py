@@ -1,4 +1,4 @@
-class Catalogo:
+class Catalogo():
     
     idPlato=1
     cantPlatos=0
