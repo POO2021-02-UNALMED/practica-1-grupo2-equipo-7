@@ -6,16 +6,52 @@ from tkinter import *
 import tkinter as tk
 from turtle import bgcolor, right
 
+#se crea la ventana de inicio
 ventana = tk.Tk()
-ventana.title("Inicio")
-ventana.geometry("700x460")
+ventana.title("Inicio") #el titulo de la ventana
+ventana.geometry("700x460") #las dimensiones
 
-btnSalir=Button(ventana,height=1,width=10,text="Salir",bg="gray")
+#botones salir y descripcion---------
+btnSalir=Button(ventana,height=1,width=10,text="Salir",bg="gray",command=ventana.destroy)
 btnSalir.place(x=600,y=431)
 
-btnDesc=Button(ventana,height=1,width=10,text="Descripcion",bg="gray")
+#ventana descripcion--------------------------------------
+def Descripcion():
+    ventanaDescp=Toplevel()
+    ventanaDescp.geometry("300x400")
+    ventanaDescp.title("Descripcion")
+    bienvenida1="¡Bienvenido al sistema Poopina!"
+    bienvenida2="Nos encanta tenerte aqui,con nuestra ayuda puedes administrar tu restaurante con facilidad."
+
+    contenedorDescp=Frame(ventanaDescp, height=250 , width=350,bd=2,bg="Light Blue" , relief=SUNKEN)
+    contenedorDescp.pack(fill="both",expand="True",padx=4,pady=4,side=TOP)
+
+#----------------------------------------------------------
+#boton descripcion
+btnDesc=Button(ventana,height=1,width=10,text="Descripcion",bg="gray",command=Descripcion)
 btnDesc.place(x=500,y=431)
 
+#---------------------------------------------------
+
+
+#ventana menu ---------------------------------------------
+def menu():
+    ventanaMenu=Toplevel()
+    ventanaMenu.geometry("900x500")
+    ventanaMenu.title("POOPINA")
+    
+
+    
+
+
+
+
+#----------------------------------------------------------
+
+
+
+
+#contenedor inicio ----------------------------------
 contenedor1=Frame(ventana, height=430 ,bg="sky Blue" , width=270,bd=2,relief=SUNKEN)
 contenedor1.pack(fill="both",expand="True", padx=15,pady=30, side=LEFT )
 
@@ -53,9 +89,9 @@ imgB=tk.PhotoImage(file="burguer.png")
 img5=Label(contenedorInicio,image=imgB, bg="Light Blue")
 img5.place(x=173,y=93,height=80,width=80)
 
-btnIniciar=Button(contenedorInicio, height=1,width=7,text="Iniciar",bg="sky Blue")
+btnIniciar=Button(contenedorInicio, height=1,width=7,text="Iniciar",bg="sky Blue",command=menu)
 btnIniciar.place(x=130,y=200)
-
+#----------------------------------------------------------
 
 #label2=Label(contenedorFotos,bd=2,relief=SUNKEN,text="img 2",bg="gray")
 #label2.place(relx=0.03,rely=0.5,relheight=0.45,relwidth=0.45)
@@ -64,20 +100,69 @@ btnIniciar.place(x=130,y=200)
 #label4=Label(contenedorFotos,bd=2,relief=SUNKEN,text="img 4",bg="gray")
 #label4.place(relx=0.5,rely=0.5,relheight=0.45,relwidth=0.45)
 
+#contenedor hoja de vida ----------------------------------
 
-#label1=Label(contenedor1,text="Bienvenido al sistema del restaurante Poopina")
-#label1.pack()
+
+def HV2():
+    btnHV=Button(contenedor2,text="Hoja de vida 2",command=HV3)
+    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+
+    label1=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 2.1",bg="gray")
+    label1.grid(row=0,column=0)
+    label2=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 2.2",bg="gray")
+    label2.grid(row=0,column=1)
+    label3=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 2.3",bg="gray")
+    label3.grid(row=1,column=0)
+    label4=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 2.4",bg="gray")
+    label4.grid(row=1,column=1)
+
+def HV3():
+    btnHV=Button(contenedor2,text="Hoja de vida 3",command=HV4)
+    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+
+    label1=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 3.1",bg="gray")
+    label1.grid(row=0,column=0)
+    label2=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 3.2",bg="gray")
+    label2.grid(row=0,column=1)
+    label3=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 3.3",bg="gray")
+    label3.grid(row=1,column=0)
+    label4=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 3.4",bg="gray")
+    label4.grid(row=1,column=1)
+
+def HV4():
+    btnHV=Button(contenedor2,text="Hoja de vida 4",command=HV1)
+    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+
+    label1=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 4.1",bg="gray")
+    label1.grid(row=0,column=0)
+    label2=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 4.2",bg="gray")
+    label2.grid(row=0,column=1)
+    label3=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 4.3",bg="gray")
+    label3.grid(row=1,column=0)
+    label4=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 4.4",bg="gray")
+    label4.grid(row=1,column=1)
+
+def HV1():
+    btnHV=Button(contenedor2,text="Hoja de vida 1",command=HV2)
+    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+
+    label1=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 1.1",bg="gray")
+    label1.grid(row=0,column=0)
+    label2=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 1.2",bg="gray")
+    label2.grid(row=0,column=1)
+    label3=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 1.3",bg="gray")
+    label3.grid(row=1,column=0)
+    label4=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 1.4",bg="gray")
+    label4.grid(row=1,column=1)
 
 contenedor2=Frame(ventana, height=430 , width=270,bd=2,relief=SUNKEN)
-contenedor2.pack(fill="both",expand="True",padx=15,pady=30, side=LEFT,)
+contenedor2.pack(fill="both",expand="True",padx=15,pady=30, side=LEFT)
 
 contenedorHV=Frame(contenedor2, height=80 , width=250,bd=2,relief=SUNKEN)
 contenedorHV.pack(fill="both",expand="True",padx=2,pady=2,side=TOP)
 
 contenedorFotos=Frame(contenedor2, height=330 , width=250,bd=1,relief=SUNKEN)
 contenedorFotos.pack(fill="both",expand="True",padx=4,pady=4)
-#labelHV=Label(contenedor2,text="hoja de vida")
-#labelHV.pack()
 
 label1=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 1",bg="gray")
 label1.grid(row=0,column=0)
@@ -87,6 +172,17 @@ label3=Label(contenedorFotos,height=10 , width=17,bd=2,relief=SUNKEN,text="img 3
 label3.grid(row=1,column=0)
 label4=Label(contenedorFotos,height=10, width=17,bd=2,relief=SUNKEN,text="img 4",bg="gray")
 label4.grid(row=1,column=1)
+
+#btnHV=Button(contenedor2,height=5 ,width=40,text="HVVVV",bg="gray")
+
+btnHV=Button(contenedor2,text="Hoja de vida 1",command=HV2)
+btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+
+
+
+
+#----------------------------------------------------------------------
+
 
 
 
