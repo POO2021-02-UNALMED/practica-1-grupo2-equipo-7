@@ -44,6 +44,11 @@ def menu():
     contenedor=Frame(ventanaMenu,height=400,width=800 ,bd=2,relief=SUNKEN)
     contenedor.pack(fill="both",expand="True", padx=5,pady=2, side=LEFT )
 
+    def salir():
+        ventanaMenu.destroy()
+        ventana.mainloop()
+        
+
     #Mensaje sobre los desarrolladores
     def Ayuda():
         msgDes="Desarrolladores"
@@ -62,15 +67,27 @@ def menu():
         mensaje4=Message(contenedor,text=msgDes4,width=300 ,fg="black",font="Arial")
         mensaje4.pack(fill="both",expand="True")
 
+
+    def Cliente():
+        msgD="Clientes"
+        mensaje=Message(contenedor,text=msgD,width=300 ,fg="black",bg="gray" ,font="Elephant")
+        mensaje.pack(fill="both",expand="True")
+      
+
     #Barra del menu-----------------------------------------
     barraMenu=Menu(ventanaMenu)
     mnuArchivo=Menu(barraMenu)
     mnuArchivo.add_command(label='Aplicacion')
-    mnuArchivo.add_command(label='Salir')
+    mnuArchivo.add_command(label='Salir',command=salir)
     barraMenu.add_cascade(label='Archivo',menu=mnuArchivo)
     mnuProc=Menu(barraMenu)
-    mnuProc.add_command(label='none 1')
-    mnuProc.add_command(label='none 2')
+    mnuProc.add_command(label='Cliente',command=Cliente)
+    mnuProc.add_command(label='Reserva')
+    mnuProc.add_command(label='Mesa')
+    mnuProc.add_command(label='Pedido')
+    mnuProc.add_command(label='Empleado')
+    mnuProc.add_command(label='Materia Prima')
+    mnuProc.add_command(label='Catalogo')
     mnuAyu=Menu(barraMenu)
     mnuAyu.add_cascade(label='Acerca de',command=Ayuda)
     barraMenu.add_cascade(label='Procesos y Consultas',menu=mnuProc)
