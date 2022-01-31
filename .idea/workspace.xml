@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fbe7132d-630f-4dea-a2e8-d362db84fa21" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/interfaz_entornoMesa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/interfaz_entornoMesa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/gestorAplicacion/mesa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/gestorAplicacion/mesa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python/src/uiMain/Interfaz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python/src/uiMain/Interfaz.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
