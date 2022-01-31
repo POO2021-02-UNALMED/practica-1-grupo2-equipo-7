@@ -1,10 +1,12 @@
 from cProfile import label
+from cgitb import text
 from doctest import master
 from email import message
 from lib2to3.pgen2.token import LEFTSHIFT
 from textwrap import fill
 from tkinter import *
 import tkinter as tk
+from tkinter.messagebox import showinfo
 from turtle import bgcolor, right
 
 #se crea la ventana de inicio
@@ -41,8 +43,8 @@ def menu():
     ventanaMenu.geometry("900x500")
     ventanaMenu.title("POOPINA")
     ventanaMenu.configure(background="light gray")
-    contenedor=Frame(ventanaMenu,height=400,width=800 ,bd=2,relief=SUNKEN)
-    contenedor.pack(fill="both",expand="True", padx=5,pady=2, side=LEFT )
+    contenedor=Frame(ventanaMenu,height=495,width=895,bg="gray" ,bd=2,relief=SUNKEN)
+    contenedor.place(x=2,y=2)
 
     def salir():
         ventanaMenu.destroy()
@@ -50,46 +52,76 @@ def menu():
         
 
     #Mensaje sobre los desarrolladores
-    def Ayuda():
-        msgDes="Desarrolladores"
-        msgDes1="¬ Edgar Alexis Garcia Camuan"
-        msgDes2="¬ Omar"
-        msgDes3="¬ Keder Madera Polo"
-        msgDes4="¬ Juan"
-        mensaje=Message(contenedor,text=msgDes,width=300 ,fg="black",font="Elephant")
-        mensaje.pack(fill="both",expand="True")
-        mensaje1=Message(contenedor,text=msgDes1,width=300,fg="black",font="Arial")
-        mensaje1.pack(fill="both",expand="True")
-        mensaje2=Message(contenedor,text=msgDes2,width=300 ,fg="black",font="Arial")
-        mensaje2.pack(fill="both",expand="True")
-        mensaje3=Message(contenedor,text=msgDes3,width=300 ,fg="black",font="Arial")
-        mensaje3.pack(fill="both",expand="True")
-        mensaje4=Message(contenedor,text=msgDes4,width=300 ,fg="black",font="Arial")
-        mensaje4.pack(fill="both",expand="True")
+    def ayuda():
+        showinfo(title="Desarrolladores" ,message=" Edgar Alexis Garcia Camuan \n Omar \n Keder \n Juan") 
 
+    def cliente():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="blue" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
 
-    def Cliente():
-        msgD="Clientes"
-        mensaje=Message(contenedor,text=msgD,width=300 ,fg="black",bg="gray" ,font="Elephant")
-        mensaje.pack(fill="both",expand="True")
+    def reserva():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="red" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
+
+    def mesa():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="green" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
+
+    def pedido():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="white" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
+
+    def empleado():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="black" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
+
+    def maPrima():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="yellow" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
+
+    def catalogo():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="sky blue" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
+
+    def aplicacion():
+        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="gray" ,bd=2,relief=SUNKEN)
+        contenedor1.place(x=2,y=2)
+        contenedor2=Frame(contenedor1,bg="gray")
+        contenedor2.place(x=250,y=100)
+        msgDes="Aplicacion"
+        msgDes1="¬ "
+        msgDes2="¬ "
+        msgDes3="¬ "
+        msgDes4="¬ "
+        mensaje=Message(contenedor2,text=msgDes,width=500 ,bg="gray" ,fg="black",font="Elephant 20")
+        mensaje.pack()
+        mensaje1=Message(contenedor2,text=msgDes1,width=500,bg="gray" ,fg="black",font="Arial 20")
+        mensaje1.pack()
+        mensaje2=Message(contenedor2,text=msgDes2,width=500 ,bg="gray" ,fg="black",font="Arial 20")
+        mensaje2.pack()
+        mensaje3=Message(contenedor2,text=msgDes3,width=500 ,bg="gray" ,fg="black",font="Arial 20")
+        mensaje3.pack()
+        mensaje4=Message(contenedor2,text=msgDes4,width=500 ,bg="gray" ,fg="black",font="Arial 20")
+        mensaje4.pack()
+        
       
 
     #Barra del menu-----------------------------------------
     barraMenu=Menu(ventanaMenu)
     mnuArchivo=Menu(barraMenu)
-    mnuArchivo.add_command(label='Aplicacion')
+    mnuArchivo.add_command(label='Aplicacion',command=aplicacion)
     mnuArchivo.add_command(label='Salir',command=salir)
     barraMenu.add_cascade(label='Archivo',menu=mnuArchivo)
     mnuProc=Menu(barraMenu)
-    mnuProc.add_command(label='Cliente',command=Cliente)
-    mnuProc.add_command(label='Reserva')
-    mnuProc.add_command(label='Mesa')
-    mnuProc.add_command(label='Pedido')
-    mnuProc.add_command(label='Empleado')
-    mnuProc.add_command(label='Materia Prima')
-    mnuProc.add_command(label='Catalogo')
+    mnuProc.add_command(label='Cliente',command=cliente)
+    mnuProc.add_command(label='Reserva',command=reserva)
+    mnuProc.add_command(label='Mesa',command=mesa)
+    mnuProc.add_command(label='Pedido',command=pedido)
+    mnuProc.add_command(label='Empleado',command=empleado)
+    mnuProc.add_command(label='Materia Prima',command=maPrima)
+    mnuProc.add_command(label='Catalogo',command=catalogo)
     mnuAyu=Menu(barraMenu)
-    mnuAyu.add_cascade(label='Acerca de',command=Ayuda)
+    mnuAyu.add_cascade(label='Acerca de',command=ayuda)
     barraMenu.add_cascade(label='Procesos y Consultas',menu=mnuProc)
     barraMenu.add_cascade(label='Ayuda',menu=mnuAyu)
 
@@ -131,7 +163,8 @@ img1.place(x=113,y=10,height=100,width=100)
 
 imgS=tk.PhotoImage(file="sushi.png")
 img2=Label(contenedorInicio,image=imgS, bg="Light Blue")
-img2.place(x=13,y=10,height=100,width=100)
+img2.place(relx=0.013,y=0.010,relheight=1,relwidth=1)
+#img2.place(x=13,y=10,height=100,width=100)
 
 imgA=tk.PhotoImage(file="arepa.png")
 img3=Label(contenedorInicio,image=imgA, bg="Light Blue")
@@ -160,8 +193,13 @@ btnIniciar.place(x=130,y=200)
 
 
 def HV2():
-    btnHV=Button(contenedor2,text="Hoja de vida 2",command=HV3, bg="Light Blue")
-    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+    msgHV2="Omar,Estudiante de pregrado del programa en Ing.Sistemas e informatica \n es \n cue."
+    btnHV=Button(contenedor2, bg="Light blue",command=HV2,height=5,width=90)
+    btnHV.place(relheight=0.25,relwidth=1)
+    mensaje=Button(btnHV,text=msgHV2,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV3)
+    mensaje.pack()
+    #btnHV=Button(contenedor2,text="Hoja de vida 2",command=HV3, bg="Light Blue")
+    #btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
 
     label1=Label(contenedorFotos,height=10, width=22,bd=2,relief=SUNKEN,text="img 2.1",bg="gray")
     label1.grid(row=0,column=0)
@@ -173,8 +211,11 @@ def HV2():
     label4.grid(row=1,column=1)
 
 def HV3():
-    btnHV=Button(contenedor2,text="Hoja de vida 3",command=HV4, bg="Light Blue")
-    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+    msgHV3="Keder,Estudiante de pregrado del programa en Ing.Sistemas e informatica \n es \n cue."
+    btnHV=Button(contenedor2, bg="Light blue",command=HV2,height=5,width=90)
+    btnHV.place(relheight=0.25,relwidth=1)
+    mensaje=Button(btnHV,text=msgHV3,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV4)
+    mensaje.pack()
 
     label1=Label(contenedorFotos,height=10, width=22,bd=2,relief=SUNKEN,text="img 3.1",bg="gray")
     label1.grid(row=0,column=0)
@@ -186,8 +227,11 @@ def HV3():
     label4.grid(row=1,column=1)
 
 def HV4():
-    btnHV=Button(contenedor2,text="Hoja de vida 4",command=HV1, bg="Light Blue")
-    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+    msgHV4="Juan,Estudiante de pregrado del programa en Ing.Sistemas e informatica \n es \n cue."
+    btnHV=Button(contenedor2, bg="Light blue",command=HV2,height=5,width=90)
+    btnHV.place(relheight=0.25,relwidth=1)
+    mensaje=Button(btnHV,text=msgHV4,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV1)
+    mensaje.pack()
 
     label1=Label(contenedorFotos,height=10, width=22,bd=2,relief=SUNKEN,text="img 4.1",bg="gray")
     label1.grid(row=0,column=0)
@@ -199,9 +243,15 @@ def HV4():
     label4.grid(row=1,column=1)
 
 def HV1():
-    btnHV=Button(contenedor2,text="Hoja de vida 1", bg="Light Blue",command=HV2)
-    btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
-    #msgHV1="Edgar Alexis Garcia Camuan,20 años,Estudiante de pregrado del programa en Ing.Sistemas e informatica en la UNAL.Cuento con un certificado hexho en asociacion de MINTIC y la UNAB en aplicaciones moviles,cuento con experiencia en Java,Javascript,css y php."
+    msgHV1="Edgar Alexis Garcia Camuan,20 años,Estudiante de pregrado del programa en Ing.Sistemas e informatica \n en la UNAL. Cuento con un certificado hecho en asociacion de MINTIC y la UNAB en aplicaciones moviles \n cuento con experiencia en Java,Javascript,css y php."
+    btnHV=Button(contenedor2, bg="Light blue",text=msgHV1,command=HV2,height=5,width=90)
+    btnHV.place(relheight=0.25,relwidth=1)
+    mensaje=Button(btnHV,text=msgHV1,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV2)
+    mensaje.pack()
+    #btnHV.place(relx=0.01,rely=0.01,relheight=0.2,relwidth=0.98)
+    #labelHV=Button(contenedor,height=3, width=100,text=msgHV1,bg="Light blue",command=HV2)
+    #labelHV.place(relx=0.01,rely=0.01,relheight=0.98,relwidth=0.98)
+    #mensaje1=Message(btnHV,text=msgHV1,width=40 ,fg="black",font="Arial")
 
     label1=Label(contenedorFotos,height=10, width=22,bd=2,relief=SUNKEN,text="img 1.1",bg="gray")
     label1.grid(row=0,column=0)
@@ -215,10 +265,10 @@ def HV1():
 contenedor2=Frame(ventana, height=430 , width=270,bg="sky Blue" ,bd=2,relief=SUNKEN)
 contenedor2.pack(fill="both",expand="True",padx=15,pady=30, side=LEFT)
 
-contenedorHV=Frame(contenedor2, height=80 , width=250,bd=2,relief=SUNKEN)
+contenedorHV=Frame(contenedor2, height=80 ,bg="sky Blue", width=250,bd=2,relief=SUNKEN)
 contenedorHV.pack(fill="both",expand="True",padx=2,pady=2,side=TOP)
 
-contenedorFotos=Frame(contenedor2, height=330 , width=250,bd=1,relief=SUNKEN)
+contenedorFotos=Frame(contenedor2, height=330 ,bg="sky Blue",width=250,bd=1,relief=SUNKEN)
 contenedorFotos.pack(fill="both",expand="True",padx=4,pady=4)
 
 
