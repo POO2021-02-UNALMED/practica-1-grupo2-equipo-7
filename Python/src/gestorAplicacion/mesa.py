@@ -1,8 +1,10 @@
 #from Basedatos.baseDeDatos import baseDedatos
+from numpy import double
 from cliente import Cliente
 from catalogo import Catalogo
 from cliente import Cliente
 from pedido import Pedido
+from materiaprima import materiaPrima
 import random 
 
 class Mesa():
@@ -51,10 +53,14 @@ class Mesa():
         return self._pedido
 
     def isDisponibilidad(self):
-        return self._disponibilidad
+        if (self._disponibilidad):
+            return "Disponible"
+        else:
+            return "Ocupada"
 
     def setDisponibilidad(self, disponibilidad):
         self._disponibilidad = disponibilidad
+
     
     def entornoMesa(self, cliente):
         val = 0
@@ -86,60 +92,117 @@ class Mesa():
         else:
             pass
 
-cb = {str : }
+
+
+
+    @classmethod
+    def verMesas(cls):
+        for numero, mesa in Mesa.mesas.items():
+            print(f'Mesa {numero} ({mesa.isDisponibilidad()})')
+# Diccionarios con los ingredientes y sus cantidades
+
+cb = {str : double}
 cb["tomate"] = 0.3
 cb["cebolla"] = 0.3
 cb["chicken"] = 0.5
 cb["lechuga"] = 0.3
 cb["bread"] = 0.4
-HashMap<String, Double> vb = new HashMap<>();
-vb.put("tomate",0.3);
-vb.put("cebolla",0.3);
-vb.put("champiñon",0.5);
-vb.put("lechuga",0.3);
-vb.put("bread",0.4);
-HashMap<String, Double> fb = new HashMap<>();
-fb.put("tomate",0.3);
-fb.put("cebolla",0.3);
-fb.put("fish",0.5);
-fb.put("lechuga",0.3);
-fb.put("bread",0.4);
-HashMap<String, Double> gb = new HashMap<>();
-gb.put("tomate",0.3);
-gb.put("cebolla",0.3);
-gb.put("pimiento",0.5);
-gb.put("lechuga",0.3);
-gb.put("bread",0.4);
-HashMap<String, Double> vs = new HashMap<>();
-vs.put("tomate",0.3);
-vs.put("cebolla",0.3);
-vs.put("lenteja",0.5);
-vs.put("lechuga",0.3);
-vs.put("bread",0.4);
-HashMap<String, Double> cs = new HashMap<>();
-cs.put("tomate",0.3);
-cs.put("cebolla",0.3);
-cs.put("chicken",0.5);
-cs.put("bread",0.4);
-HashMap<String, Double> ts = new HashMap<>();
-ts.put("tomate",0.3);
-ts.put("cebolla",0.3);
-ts.put("tuna",0.5);
-ts.put("bread",0.4);
-HashMap<String, Double> fs = new HashMap<>();
-fs.put("tomate",0.3);
-fs.put("cebolla",0.3);
-fs.put("fish",0.5);
-fs.put("bread",0.4);
-HashMap<String, Double> tks = new HashMap<>();
-tks.put("tomate",0.3);
-tks.put("cebolla",0.3);
-tks.put("turkey",0.5);
-tks.put("bread",0.4);
+vb = {str : double}
+vb["tomate"] = 0.3
+vb["cebolla"] = 0.3
+vb["champiñon"] = 0.5
+vb["lechuga"] = 0.3
+vb["bread"] = 0.4
+fb = {str : double}
+fb["tomate"] = 0.3
+fb["cebolla"] = 0.3
+fb["fish"] = 0.5
+fb["lechuga"] = 0.3
+fb["bread"] = 0.4
+gb = {str : double}
+gb["tomate"] = 0.3
+gb["cebolla"] = 0.3
+gb["pimiento"] = 0.5
+gb["lechuga"] = 0.3
+gb["bread"] = 0.4
+vs = {str : double}
+vs["tomate" ] = 0.3
+vs["cebolla"] = 0.3
+vs["lenteja"] = 0.5
+vs["lechuga"] = 0.3
+vs["bread"] = 0.4
+cs = {str : double}
+cs["tomate"] = 0.3
+cs["cebolla"] = 0.3
+cs["chicken"] = 0.5
+cs["bread"] = 0.4
+ts = {str : double}
+ts["tomate"] = 0.3
+ts["cebolla"] = 0.3
+ts["tuna"] = 0.5
+ts["bread"] = 0.4
+fs = {str : double}
+fs["tomate"] = 0.3
+fs["cebolla"] = 0.3
+fs["fish"] = 0.5
+fs["bread"] = 0.4
+tks = {str : double}
+tks["tomate"] = 0.3
+tks["cebolla"] = 0.3
+tks["turkey"] = 0.5
+tks["bread"] = 0.4
 
+
+#catalogos
+Catalogo("chicken burguer",12,cb)
+Catalogo("vegan burguer",12,vb)
+Catalogo("fish burguer",12,fb)
+Catalogo("green burguer",12,gb)
+Catalogo("vegan sandwich",15,vb)
+Catalogo("chicken sandwich",15,cb)
+Catalogo("tuna sandwich",15,ts)
+Catalogo("fish sandwich",15,fs)
+Catalogo("turkey sandwich",15,tks)
+# materia prima
+materiaPrima("tomate", 20)
+materiaPrima("lechuga", 20)
+materiaPrima("champiñon", 20)
+materiaPrima("pimiento", 20)
+materiaPrima("lenteja", 20)
+materiaPrima("cebolla", 20)
+materiaPrima("tuna", 40)
+materiaPrima("fish", 40)
+materiaPrima("chicken", 40)
+materiaPrima("turkey", 40)
+materiaPrima("patata", 20)
+materiaPrima("bread", 20)
+materiaPrima("meat", 20)
+materiaPrima("potato", 20)
+
+# Clientes
+Cliente(1009825,"ricardo",31245678,"av colombia #63-10")
+Cliente(1123, "Juan", 3124, "Sarie bay")
+Cliente(15423, "Carlos", 35324, "Tablitas")
+Cliente(16333, "Luz", 345324, "Morrys Landing")
+Cliente(11254, "Doris", 31644, "San Luis")
+Cliente(1143323, "Keder", 312644, "Barrio Obrero")
+Cliente(1123453, "Leo", 315424, "Atlantico")
+Cliente(123,"r",321,"av")
 Cliente(1124, "Alberto Nuñez", 312313, "Barrio Nueva Guinea")
-Mesa(112, 1, 1)
 
-Mesa.entornoMesa(Mesa.mesas[1], Cliente.clientes[1124])
+#Mesas
+Mesa(1, 1,18)
+Mesa(2, 2,6)
+Mesa(3, 3,7)
+Mesa(4, 4,8)
+Mesa(5, 5,9)
 
-   
+
+
+#Mesa.entornoMesa(Mesa.mesas[1], Cliente.clientes[1124])
+#Mesa.verMesas()
+cc = int(input("Ingrese la cc del cliente: "))
+#Cliente.verification(cc)
+print(Cliente.clientes[cc].nombre)
+print(Cliente.clientes.keys())
+#.get(cc,'no se encuentra')
