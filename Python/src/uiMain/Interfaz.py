@@ -1,5 +1,6 @@
 from cProfile import label
 from cgitb import text
+from distutils import command
 from doctest import master
 from email import message
 from lib2to3.pgen2.token import LEFTSHIFT
@@ -8,6 +9,8 @@ from tkinter import *
 import tkinter as tk
 from tkinter.messagebox import showinfo
 from turtle import bgcolor, right
+
+#from gestorAplicacion.empleado import Empleado
 
 #se crea la ventana de inicio
 ventana = tk.Tk()
@@ -43,8 +46,8 @@ def menu():
     ventanaMenu.geometry("900x500")
     ventanaMenu.title("POOPINA")
     ventanaMenu.configure(background="light gray")
-    contenedor=Frame(ventanaMenu,height=495,width=895,bg="gray" ,bd=2,relief=SUNKEN)
-    contenedor.place(x=2,y=2)
+    contenedor=Frame(ventanaMenu,bg="gray" ,bd=2,relief=SUNKEN)
+    contenedor.place(relheight=1,relwidth=1)
 
     def salir():
         ventanaMenu.destroy()
@@ -55,56 +58,320 @@ def menu():
     def ayuda():
         showinfo(title="Desarrolladores" ,message=" Edgar Alexis Garcia Camuan \n Omar Enrique Chavez Fonseca \n Keder Julian Madera Polo") 
 
+   
+    #En esta seccion va todo lo relacionado con el menu cliente y sus funciones
     def cliente():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="blue" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
+        contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
+        Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
+        Barra.place(relheight=0.07,relwidth=1)
+
+        def registrar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def ver():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def eliminar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def editar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Cliente",bg="light gray",command=registrar)
+        btn1.grid(row=0,column=0)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Cliente",bg="light gray",command=ver)
+        btn2.grid(row=0,column=1)
+        btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Cliente",bg="light gray",command=eliminar)
+        btn3.grid(row=0,column=2)
+        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Cliente",bg="light gray",command=editar)
+        btn4.grid(row=0,column=3)
+
+
+
+    #En esta seccion va todo lo relacionado con el menu reserva y sus funciones
     def reserva():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="red" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
+        contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
+        Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
+        Barra.place(relheight=0.07,relwidth=1)
+
+        def registrar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def ver():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def eliminar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def editar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Reserva",bg="light gray",command=registrar)
+        btn1.grid(row=0,column=0)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Reserva",bg="light gray",command=ver)
+        btn2.grid(row=0,column=1)
+        btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Reserva",bg="light gray",command=eliminar)
+        btn3.grid(row=0,column=2)
+        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Reserva",bg="light gray",command=editar)
+        btn4.grid(row=0,column=3)
+
+
+    #En esta seccion va todo lo relacionado con el menu mesa y sus funciones
     def mesa():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="green" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
+        contenedor1=Frame(ventanaMenu ,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
+        Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
+        Barra.place(relheight=0.07,relwidth=1)
+
+        def registrar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def ver():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def eliminar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def editar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Mesa",bg="light gray",command=registrar)
+        btn1.grid(row=0,column=0)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Mesas",bg="light gray",command=ver)
+        btn2.grid(row=0,column=1)
+        btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Mesa",bg="light gray",command=eliminar)
+        btn3.grid(row=0,column=2)
+        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Mesa",bg="light gray",command=editar)
+        btn4.grid(row=0,column=3)
+
+    
+    #En esta seccion va todo lo relacionado con el menu pedido y sus funciones
     def pedido():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="white" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
+        contenedor1=Frame(ventanaMenu ,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
+        Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
+        Barra.place(relheight=0.07,relwidth=1)
+
+        def registrar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def ver():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def eliminar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def editar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Pedido",bg="light gray",command=registrar)
+        btn1.grid(row=0,column=0)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Pedido",bg="light gray",command=ver)
+        btn2.grid(row=0,column=1)
+        btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Pedido",bg="light gray",command=eliminar)
+        btn3.grid(row=0,column=2)
+        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Pedido",bg="light gray",command=editar)
+        btn4.grid(row=0,column=3)
+
+    
+    
+    #En esta seccion va todo lo relacionado con el menu empleado y sus funciones
     def empleado():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="black" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
+        contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
+        #contenedorBase=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+        #contenedorBase.place(relheight=0.95,relwidth=0.95)
+
+        Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
+        Barra.place(relheight=0.07,relwidth=1)
+
+        #Barra=Frame(contenedor1,height=40,width=880,bg="gray" ,bd=2,relief=SUNKEN)
+        #Barra.place(x=120,y=0)
+
+        def registro():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            nombre=StringVar()
+            cedula=StringVar()
+            telefono=StringVar()
+            direccion=StringVar()
+            cargo=StringVar()
+            sueldo=StringVar()
+
+            nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+            nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+            nombre_entry=Entry(contenedor2,textvariable=nombre)
+            nombre_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=cedula)
+            cedula_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+            telefono_label=Label(contenedor2 ,text="Telefono",bd=2,relief=SUNKEN,bg="light gray")
+            telefono_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+            telefono_entry=Entry(contenedor2,textvariable=telefono)
+            telefono_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+            direccion_label=Label(contenedor2 ,text="Direccion",bd=2,relief=SUNKEN,bg="light gray")
+            direccion_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+            direccion_entry=Entry(contenedor2,textvariable=direccion)
+            direccion_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+            cargo_label=Label(contenedor2 ,text="Cargo",bd=2,relief=SUNKEN,bg="light gray")
+            cargo_label.place(relx=0.05,rely=0.4,relheight=0.05,relwidth=0.15)
+            cargo_entry=Entry(contenedor2,textvariable=cargo)
+            cargo_entry.place(relx=0.22,rely=0.4,relheight=0.05,relwidth=0.35)
+
+            sueldo_label=Label(contenedor2 ,text="Sueldo",bd=2,relief=SUNKEN,bg="light gray")
+            sueldo_label.place(relx=0.05,rely=0.48,relheight=0.05,relwidth=0.15)
+            sueldo_entry=Entry(contenedor2,textvariable=sueldo)
+            sueldo_entry.place(relx=0.22,rely=0.48,relheight=0.05,relwidth=0.35)
+
+            def crear():
+                empleadoNuevo=Empleado()
+                empleadoNuevo.setNombre(nombre_entry.get())
+                empleadoNuevo.setCedula(cedula_entry.get())
+                empleadoNuevo.setDireccion(direccion_entry.get())
+                empleadoNuevo.setTelefono(telefono_entry.get())
+
+                print(empleadoNuevo.getNombre)
+                nombre_entry.delete(0,END)
+                cedula_entry.delete(0,END)
+                telefono_entry.delete(0,END)
+                direccion_entry.delete(0,END)
+                cargo_entry.delete(0,END)
+                sueldo_entry.delete(0,END)
+
+            btncrear=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray",command=crear)
+            btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
+
+
+        def verEmpleados():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def elimEmpleado():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def editEmpleado():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Empleado",bg="light gray",command=registro)
+        btn1.grid(row=0,column=0)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Empleados",bg="light gray",command=verEmpleados)
+        btn2.grid(row=0,column=1)
+        btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Empleado",bg="light gray",command=elimEmpleado)
+        btn3.grid(row=0,column=2)
+        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Empleado",bg="light gray",command=editEmpleado)
+        btn4.grid(row=0,column=3)
+
+
+
+    #En esta seccion va todo lo relacionado con el menu de la materia prima y sus funciones
     def maPrima():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="yellow" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
+        contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
+        Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
+        Barra.place(relheight=0.07,relwidth=1)
+
+        def registro():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def verMaPrima():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def eliMaPrima():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def editMaPrima():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Materia Prima",bg="light gray",command=registro)
+        btn1.grid(row=0,column=0)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Materia Prima",bg="light gray",command=verMaPrima)
+        btn2.grid(row=0,column=1)
+        btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Materia Prima",bg="light gray",command=eliMaPrima)
+        btn3.grid(row=0,column=2)
+        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Materia Prima",bg="light gray",command=editMaPrima)
+        btn4.grid(row=0,column=3)
+
+
+    
+    #En esta seccion va todo lo relacionado con el menu catalogo y sus funciones
     def catalogo():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="sky blue" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
+        contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
+        Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
+        Barra.place(relheight=0.07,relwidth=1)
+
+        def registrar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def ver():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def eliminar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        def editar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+        btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Catalogo",bg="light gray",command=registrar)
+        btn1.grid(row=0,column=0)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Catalogo",bg="light gray",command=ver)
+        btn2.grid(row=0,column=1)
+        btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Catalogo",bg="light gray",command=eliminar)
+        btn3.grid(row=0,column=2)
+        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Catalogo",bg="light gray",command=editar)
+        btn4.grid(row=0,column=3)
+
+
+
+    #En esta seccion va la informacion acerca de que hace el programa 
     def aplicacion():
-        contenedor1=Frame(ventanaMenu,height=495,width=895,bg="gray" ,bd=2,relief=SUNKEN)
-        contenedor1.place(x=2,y=2)
-        contenedor2=Frame(contenedor1,bg="gray")
-        contenedor2.place(x=250,y=100)
-        msgDes="Aplicacion"
-        msgDes1="¬ "
-        msgDes2="¬ "
-        msgDes3="¬ "
-        msgDes4="¬ "
-        mensaje=Message(contenedor2,text=msgDes,width=500 ,bg="gray" ,fg="black",font="Elephant 20")
-        mensaje.pack()
-        mensaje1=Message(contenedor2,text=msgDes1,width=500,bg="gray" ,fg="black",font="Arial 20")
-        mensaje1.pack()
-        mensaje2=Message(contenedor2,text=msgDes2,width=500 ,bg="gray" ,fg="black",font="Arial 20")
-        mensaje2.pack()
-        mensaje3=Message(contenedor2,text=msgDes3,width=500 ,bg="gray" ,fg="black",font="Arial 20")
-        mensaje3.pack()
-        mensaje4=Message(contenedor2,text=msgDes4,width=500 ,bg="gray" ,fg="black",font="Arial 20")
-        mensaje4.pack()
+        contenedor1=Frame(ventanaMenu,bg="gray" ,bd=2,relief=SUNKEN)
+        contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
+
         
-      
+
+
 
     #Barra del menu-----------------------------------------
     barraMenu=Menu(ventanaMenu)
