@@ -26,10 +26,13 @@ def Descripcion():
     ventanaDescp=Toplevel()
     ventanaDescp.geometry("300x400")
     ventanaDescp.title("Descripcion")
-    
+    textDesc="Poopina es un software  de gestión y organización para restaurantes, el cual se basa en ayudar a ordenar nuestro restaurante. Podremos registrar clientes frecuentes, gestionar reservas, tener control del inventario , llevar control estricto sobre cada orden y la mesa donde esta se efectuó entre otras cosas."
 
     contenedorDescp=Frame(ventanaDescp, height=250 , width=350,bd=2, bg="Light Blue" , relief=SUNKEN)
     contenedorDescp.pack(fill="both",expand="True",padx=4,pady=4,side=TOP)
+
+    mensaje=Message(contenedorDescp,text=textDesc,bg="Light Blue" ,fg="black",font="Arial")
+    mensaje.place(relx=0.01,relheight=0.9,relwidth=0.9)
 
 #----------------------------------------------------------
 #boton descripcion
@@ -202,14 +205,8 @@ def menu():
         contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
         contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
-        #contenedorBase=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
-        #contenedorBase.place(relheight=0.95,relwidth=0.95)
-
         Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
         Barra.place(relheight=0.07,relwidth=1)
-
-        #Barra=Frame(contenedor1,height=40,width=880,bg="gray" ,bd=2,relief=SUNKEN)
-        #Barra.place(x=120,y=0)
 
         def registro():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
@@ -253,13 +250,14 @@ def menu():
             sueldo_entry.place(relx=0.22,rely=0.48,relheight=0.05,relwidth=0.35)
 
             def crear():
-                empleadoNuevo=Empleado()
-                empleadoNuevo.setNombre(nombre_entry.get())
-                empleadoNuevo.setCedula(cedula_entry.get())
-                empleadoNuevo.setDireccion(direccion_entry.get())
-                empleadoNuevo.setTelefono(telefono_entry.get())
+                print(nombre_entry.get())
+                #empleadoNuevo=Empleado()
+                #empleadoNuevo.setNombre(nombre_entry.get())
+                #empleadoNuevo.setCedula(cedula_entry.get())
+                #empleadoNuevo.setDireccion(direccion_entry.get())
+                #empleadoNuevo.setTelefono(telefono_entry.get())
 
-                print(empleadoNuevo.getNombre)
+                
                 nombre_entry.delete(0,END)
                 cedula_entry.delete(0,END)
                 telefono_entry.delete(0,END)
@@ -424,14 +422,12 @@ mensaje2.pack(fill="both",expand="True")
 contenedorInicio=Frame(contenedor1, height=330 , bg="Light Blue",width=250,bd=2,relief=SUNKEN)
 contenedorInicio.pack(fill="both",padx=4,pady=4,expand="True")
 
-<<<<<<< Updated upstream
+
 imgH=tk.PhotoImage(file="huevos.png")
 img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
 img1.place(relx=0.01,rely=0.01,relheight=0.28,relwidth=0.3)
 
-#imgH=tk.PhotoImage(file="huevos.png")
-#img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
-#img1.place(x=113,y=10,height=100,width=100)
+
 
 imgS=tk.PhotoImage(file="sushi.png")
 img2=Label(contenedorInicio,image=imgS, bg="Light Blue")
@@ -449,28 +445,7 @@ img4.place(relx=0.20,rely=0.35,relheight=0.29,relwidth=0.31)
 imgB=tk.PhotoImage(file="burguer.png")
 img5=Label(contenedorInicio,image=imgB, bg="Light Blue")
 img5.place(relx=0.57,rely=0.35,relheight=0.29,relwidth=0.27)
-=======
-#imgH=tk.PhotoImage(file="huevos.png")
-#img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
-#img1.place(x=113,y=10,height=100,width=100)
-#
-#imgS=tk.PhotoImage(file="sushi.png")
-#img2=Label(contenedorInicio,image=imgS, bg="Light Blue")
-#img2.place(relx=0.013,y=0.010,relheight=1,relwidth=1)
-##img2.place(x=13,y=10,height=100,width=100)
-#
-#imgA=tk.PhotoImage(file="arepa.png")
-#img3=Label(contenedorInicio,image=imgA, bg="Light Blue")
-#img3.place(x=213,y=10,height=100,width=100)
-#
-#imgP=tk.PhotoImage(file="pollo.png")
-#img4=Label(contenedorInicio,image=imgP, bg="Light Blue")
-#img4.place(x=53,y=90,height=90,width=100)
 
-#imgB=tk.PhotoImage(file="burguer.png")
-#img5=Label(contenedorInicio,image=imgB, bg="Light Blue")
-#img5.place(x=173,y=93,height=80,width=80)
->>>>>>> Stashed changes
 
 btnIniciar=Button(contenedorInicio,text="Iniciar",bg="sky Blue",command=menu)
 btnIniciar.place(relx=0.41,rely=0.75,relheight=0.1,relwidth=0.2)
@@ -487,7 +462,7 @@ btnIniciar.place(relx=0.41,rely=0.75,relheight=0.1,relwidth=0.2)
 
 
 def HV2():
-    msgHV2="Edgar Alexis Garcia Camuan,20 años,Estudiante de pregrado del programa \n en Ing.Sistemas e informatica en la UNAL. Cuento con un certificado \n hecho en asociacion de MINTIC y la UNAB en aplicaciones moviles \n donde tomé experiencia en Java,Javascript,css y php."
+    msgHV2="Omar"
     btnHV=Button(contenedor2, bg="Light blue",text=msgHV2,command=HV2,height=5,width=90)
     btnHV.place(relheight=0.25,relwidth=1)
     mensaje=Button(btnHV,text=msgHV2,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV3)
@@ -504,8 +479,12 @@ def HV2():
     label4=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 2.4",bg="gray")
     label4.grid(row=1,column=1)
 
+imghv30cpy=tk.PhotoImage(file="HV30.gif")
+imghv31cpy=tk.PhotoImage(file="HV31.gif")
+imghv32cpy=tk.PhotoImage(file="HV32.gif")
+imghv33cpy=tk.PhotoImage(file="HV33.gif")
 def HV3():
-    msgHV3="Edgar Alexis Garcia Camuan,20 años,Estudiante de pregrado del programa \n en Ing.Sistemas e informatica en la UNAL. Cuento con un certificado \n hecho en asociacion de MINTIC y la UNAB en aplicaciones moviles \n donde tomé experiencia en Java,Javascript,css y php."
+    msgHV3="Keder Julian Madera Polo Estudiante de pregrado del programa ingeniería \n de sistemas e informática de la UNAL cuenta con el conocimiento de \n lenguajes de programación como visual Basic, java, Python y c++, además de \n certificados en seguridad informática básica impartidos en platzi."
     btnHV=Button(contenedor2, bg="Light blue",text=msgHV3,command=HV2,height=5,width=90)
     btnHV.place(relheight=0.25,relwidth=1)
     mensaje=Button(btnHV,text=msgHV3,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV1)
@@ -513,12 +492,25 @@ def HV3():
 
     label1=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 3.1",bg="gray")
     label1.grid(row=0,column=0)
+    imgHV30=Label(label1,image=imghv30cpy,bg="gray")
+    imgHV30.place(relheight=1,relwidth=1)
+
     label2=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 3.2",bg="gray")
     label2.grid(row=0,column=1)
+    imgHV31=Label(label2,image=imghv31cpy,bg="gray")
+    imgHV31.place(relheight=1,relwidth=1)
+
     label3=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 3.3",bg="gray")
     label3.grid(row=1,column=0)
+    imgHV32=Label(label3,image=imghv32cpy,bg="gray")
+    imgHV32.place(relheight=1,relwidth=1)
+
     label4=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 3.4",bg="gray")
     label4.grid(row=1,column=1)
+    imgHV33=Label(label4,image=imghv33cpy,bg="gray")
+    imgHV33.place(relheight=1,relwidth=1)
+
+
 
 imghv10cpy=tk.PhotoImage(file="HV10.gif")
 imghv11cpy=tk.PhotoImage(file="HV11.gif")
