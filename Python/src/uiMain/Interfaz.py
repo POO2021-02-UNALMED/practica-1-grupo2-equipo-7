@@ -482,7 +482,7 @@ btnIniciar.place(relx=0.41,rely=0.75,relheight=0.1,relwidth=0.2)
 
 #contenedor hoja de vida ----------------------------------
 
-imghv30cpy=tk.PhotoImage(file="HV20.gif")
+imghv20cpy=tk.PhotoImage(file="HV20.gif")
 imghv31cpy=tk.PhotoImage(file="HV31.gif")
 imghv32cpy=tk.PhotoImage(file="HV32.gif")
 imghv33cpy=tk.PhotoImage(file="HV33.gif")
@@ -497,7 +497,7 @@ def HV2():
 
     label1=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 2.1",bg="gray")
     label1.grid(row=0,column=0)
-    imgHV20=Label(label1,image=imghv30cpy,bg="gray")
+    imgHV20=Label(label1,image=imghv20cpy,bg="gray")
     imgHV20.place(relheight=1,relwidth=1)
 
     label2=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 2.2",bg="gray")
