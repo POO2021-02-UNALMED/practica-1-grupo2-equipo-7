@@ -422,11 +422,7 @@ mensaje2.pack(fill="both",expand="True")
 contenedorInicio=Frame(contenedor1, height=330 , bg="Light Blue",width=250,bd=2,relief=SUNKEN)
 contenedorInicio.pack(fill="both",padx=4,pady=4,expand="True")
 
-<<<<<<< Updated upstream
 
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
 imgH=tk.PhotoImage(file="huevos.png")
 img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
 img1.place(relx=0.01,rely=0.01,relheight=0.28,relwidth=0.3)
@@ -449,7 +445,7 @@ img4.place(relx=0.20,rely=0.35,relheight=0.29,relwidth=0.31)
 imgB=tk.PhotoImage(file="burguer.png")
 img5=Label(contenedorInicio,image=imgB, bg="Light Blue")
 img5.place(relx=0.57,rely=0.35,relheight=0.29,relwidth=0.27)
-=======
+
 #imgH=tk.PhotoImage(file="huevos.png")
 #img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
 #img1.place(x=113,y=10,height=100,width=100)
@@ -470,7 +466,7 @@ img5.place(relx=0.57,rely=0.35,relheight=0.29,relwidth=0.27)
 #imgB=tk.PhotoImage(file="burguer.png")
 #img5=Label(contenedorInicio,image=imgB, bg="Light Blue")
 #img5.place(x=173,y=93,height=80,width=80)
->>>>>>> Stashed changes
+
 
 
 btnIniciar=Button(contenedorInicio,text="Iniciar",bg="sky Blue",command=menu)
@@ -486,9 +482,12 @@ btnIniciar.place(relx=0.41,rely=0.75,relheight=0.1,relwidth=0.2)
 
 #contenedor hoja de vida ----------------------------------
 
-
+imghv30cpy=tk.PhotoImage(file="HV20.gif")
+imghv31cpy=tk.PhotoImage(file="HV31.gif")
+imghv32cpy=tk.PhotoImage(file="HV32.gif")
+imghv33cpy=tk.PhotoImage(file="HV33.gif")
 def HV2():
-    msgHV2="Omar"
+    msgHV2="Omar Enrique Chávez Fonseca, de 23 años, es estudiante de la universidad nacional de Colombia\n  y la plataforma Platzi.  En las cuales estudia Ingeniería de sistemas e informática\n  además de Desarrollo Backend con Python y Django respectivamente. \n Cuenta con conocimientos en lenguajes como Python, Java, C++."
     btnHV=Button(contenedor2, bg="Light blue",text=msgHV2,command=HV2,height=5,width=90)
     btnHV.place(relheight=0.25,relwidth=1)
     mensaje=Button(btnHV,text=msgHV2,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV3)
@@ -498,6 +497,9 @@ def HV2():
 
     label1=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 2.1",bg="gray")
     label1.grid(row=0,column=0)
+    imgHV20=Label(label1,image=imghv30cpy,bg="gray")
+    imgHV20.place(relheight=1,relwidth=1)
+
     label2=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 2.2",bg="gray")
     label2.grid(row=0,column=1)
     label3=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 2.3",bg="gray")
