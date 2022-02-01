@@ -484,9 +484,12 @@ btnIniciar.place(relx=0.41,rely=0.75,relheight=0.1,relwidth=0.2)
 
 #contenedor hoja de vida ----------------------------------
 
-
+imghv20cpy=tk.PhotoImage(file="HV20.gif")
+imghv31cpy=tk.PhotoImage(file="HV31.gif")
+imghv32cpy=tk.PhotoImage(file="HV32.gif")
+imghv33cpy=tk.PhotoImage(file="HV33.gif")
 def HV2():
-    msgHV2="Omar"
+    msgHV2="Omar Enrique Chávez Fonseca, de 23 años, es estudiante de la universidad nacional de Colombia\n  y la plataforma Platzi.  En las cuales estudia Ingeniería de sistemas e informática\n  además de Desarrollo Backend con Python y Django respectivamente. \n Cuenta con conocimientos en lenguajes como Python, Java, C++."
     btnHV=Button(contenedor2, bg="Light blue",text=msgHV2,command=HV2,height=5,width=90)
     btnHV.place(relheight=0.25,relwidth=1)
     mensaje=Button(btnHV,text=msgHV2,width=500 ,height=100,bg="Light blue" ,fg="black",command=HV3)
@@ -496,6 +499,9 @@ def HV2():
 
     label1=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 2.1",bg="gray")
     label1.grid(row=0,column=0)
+    imgHV20=Label(label1,image=imghv20cpy,bg="gray")
+    imgHV20.place(relheight=1,relwidth=1)
+
     label2=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 2.2",bg="gray")
     label2.grid(row=0,column=1)
     label3=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 2.3",bg="gray")
