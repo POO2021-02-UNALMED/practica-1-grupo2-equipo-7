@@ -11,6 +11,9 @@ from tkinter.messagebox import showinfo
 from turtle import bgcolor, right
 
 from gestorAplicacion.persona import Persona
+from gestorAplicacion.empleado import Empleado
+
+
 
 #se crea la ventana de inicio
 ventana = tk.Tk()
@@ -252,12 +255,16 @@ def menu():
             sueldo_entry.place(relx=0.22,rely=0.48,relheight=0.05,relwidth=0.35)
 
             def crear():
-                print(nombre_entry.get())
-                #empleadoNuevo=Empleado()
-                #empleadoNuevo.setNombre(nombre_entry.get())
-                #empleadoNuevo.setCedula(cedula_entry.get())
-                #empleadoNuevo.setDireccion(direccion_entry.get())
-                #empleadoNuevo.setTelefono(telefono_entry.get())
+                #print(nombre_entry.get())
+                name=nombre_entry.get()
+                cc=cedula_entry.get()
+                tel=telefono_entry.get()
+                dir=direccion_entry.get()
+                carg=cargo_entry.get()
+                suel=sueldo_entry.get()
+
+                empleadoNew=Empleado(cc,name,tel,dir,carg,suel)
+                print(empleadoNew._sueldo)
 
                 
                 nombre_entry.delete(0,END)
