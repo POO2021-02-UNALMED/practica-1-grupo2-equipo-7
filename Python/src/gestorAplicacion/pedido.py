@@ -2,7 +2,7 @@ from inspect import ismethoddescriptor
 from catalogo import Catalogo
 class Pedido():
 
-    pedidos={catalogo : int}
+    pedidos={Catalogo : int}
     def __init__(self, cliente,mesa,idpedido,pedidos):
         self.cliente = cliente
         self.mesa=mesa
