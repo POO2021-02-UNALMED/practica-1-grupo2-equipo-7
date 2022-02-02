@@ -1,5 +1,4 @@
 #from Basedatos.baseDeDatos import baseDedatos
-from numpy import double
 from gestorAplicacion.cliente import Cliente
 from gestorAplicacion.catalogo import Catalogo
 from gestorAplicacion.cliente import Cliente
@@ -110,52 +109,52 @@ class Mesa():
             print(f'Mesa {numero} ({mesa.isDisponibilidad()})')
 # Diccionarios con los ingredientes y sus cantidades
     def ingreso_datos():
-        cb = {str : double}
+        cb = {str : float}
         cb["tomate"] = 0.3
         cb["cebolla"] = 0.3
         cb["chicken"] = 0.5
         cb["lechuga"] = 0.3
         cb["bread"] = 0.4
-        vb = {str : double}
+        vb = {str : float}
         vb["tomate"] = 0.3
         vb["cebolla"] = 0.3
         vb["champiñon"] = 0.5
         vb["lechuga"] = 0.3
         vb["bread"] = 0.4
-        fb = {str : double}
+        fb = {str : float}
         fb["tomate"] = 0.3
         fb["cebolla"] = 0.3
         fb["fish"] = 0.5
         fb["lechuga"] = 0.3
         fb["bread"] = 0.4
-        gb = {str : double}
+        gb = {str : float}
         gb["tomate"] = 0.3
         gb["cebolla"] = 0.3
         gb["pimiento"] = 0.5
         gb["lechuga"] = 0.3
         gb["bread"] = 0.4
-        vs = {str : double}
+        vs = {str : float}
         vs["tomate" ] = 0.3
         vs["cebolla"] = 0.3
         vs["lenteja"] = 0.5
         vs["lechuga"] = 0.3
         vs["bread"] = 0.4
-        cs = {str : double}
+        cs = {str : float}
         cs["tomate"] = 0.3
         cs["cebolla"] = 0.3
         cs["chicken"] = 0.5
         cs["bread"] = 0.4
-        ts = {str : double}
+        ts = {str : float}
         ts["tomate"] = 0.3
         ts["cebolla"] = 0.3
         ts["tuna"] = 0.5
         ts["bread"] = 0.4
-        fs = {str : double}
+        fs = {str : float}
         fs["tomate"] = 0.3
         fs["cebolla"] = 0.3
         fs["fish"] = 0.5
         fs["bread"] = 0.4
-        tks = {str : double}
+        tks = {str : float}
         tks["tomate"] = 0.3
         tks["cebolla"] = 0.3
         tks["turkey"] = 0.5
