@@ -204,6 +204,7 @@ class Mesa():
         Mesa(3, 3,7)
         Mesa(4, 4,8)
         Mesa(5, 5,9)
+        Mesa(6, 6,9)
 
 
 
