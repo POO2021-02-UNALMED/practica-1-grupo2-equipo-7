@@ -2,6 +2,7 @@
 from gestorAplicacion.cliente import Cliente
 from gestorAplicacion.catalogo import Catalogo
 from gestorAplicacion.cliente import Cliente
+from gestorAplicacion.empleado import Empleado
 from gestorAplicacion.pedido import Pedido
 from gestorAplicacion.materiaprima import materiaPrima
 import random 
@@ -109,6 +110,11 @@ class Mesa():
             print(f'Mesa {numero} ({mesa.isDisponibilidad()})')
 # Diccionarios con los ingredientes y sus cantidades
     def ingreso_datos():
+        Empleado("123","alexis garcia","3138947321","calle 12","Mesero","1000000")
+        Empleado("1006754899","Juan Fernandez","3145431231","carrera 15","Mesero","1000000")
+        Empleado("1100987012","Miguel Zapata","3165368923","calle 80","Mesero","1000000")
+        Empleado("1009513089","Juana Gonzales","3224542351","calle 64","Mesero","1000000")
+
         cb = {str : float}
         cb["tomate"] = 0.3
         cb["cebolla"] = 0.3

@@ -40,23 +40,5 @@ class Reserva:
     def getCantidadpersonas(self):
         return self.cantidadpersonas
 
-	#public String toString() {
-    #    return "numero de reserva: "+getNumreserva() + "\n" +
-    #            "[ fecha de la reserva: "+ getFechareserva() + "\n" +
-    #            "  cliente: "+ getCliente() + "\n" +
-    #            " hora de la reserva: "+ getHorareserva() + "\n" +
-    #            "  cantidad personsas: "+ getCantidadpersonas()+" ]";
-    #}
 
-	#public static void verReserva() {
-	#for (Reserva reserva : reservas ) {
-	#	System.out.println(reserva);
-	#}
-	
-	#}
-	#public static void crearReserva(int cliente, int numreserva,String fechareserva,String horareserva, int cantidadpersonas) {
-	#      Reserva newR=new Reserva(cliente, numreserva,fechareserva,horareserva,cantidadpersonas);
-	#      reservas.add(newR);
-	#      
-	#    }    
     

@@ -2,10 +2,12 @@ from gestorAplicacion.persona import Persona
 
 class Empleado(Persona):
 
+    empleados={}
     def __init__(self, cedula, nombre, telefono, direccion, cargo, sueldo):
         super().__init__(cedula, nombre, telefono, direccion)
         self._cargo=cargo
         self._sueldo=sueldo
+        Empleado.empleados[cedula]=self
 
  #getters y setters
     #def setId(self, id):
