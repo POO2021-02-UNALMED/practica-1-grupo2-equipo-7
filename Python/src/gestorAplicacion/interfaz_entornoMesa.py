@@ -69,7 +69,7 @@ def run():
     boton.pack()
     boton.grid(padx=0, pady=2, row=0, column=0)
     Mesa.ingreso_datos()
-    botones_mesas.botones_mesas(Mesa.mesas)
+    #botones_mesas.botones_mesas(Mesa.mesas)
 
 
     win_principal.mainloop()
@@ -80,15 +80,15 @@ def run():
                     cls.pos_y = botones_mesas.pos_y
                     btn7 = Button(contenedor2, width=10, text=f'Mesa {numero}', background = "green")
                     btn7.grid(padx=0, pady=2, row=botones_mesas.pos_y, column=botones_mesas.pos_x)
-                    actualizar_posicion(posicion)
+                    #actualizar_posicion(posicion)
             
-            def actualizar_posicion(cls):
-                cls.num += 1
-                if (cls.pos_x == 8):
-                    cls.pos_y += 1
-                    cls.pos_x = 0
-
-                botones_mesas.pos_x += 1
-            
-            Mesa.ingreso_datos()
-            botones_mesas(botones_mesas,Mesa.mesas)
+            #def actualizar_posicion(cls):
+            #    cls.num += 1
+            #    if (cls.pos_x == 8):
+            #        cls.pos_y += 1
+            #        cls.pos_x = 0
+#
+            #    botones_mesas.pos_x += 1
+            #
+            #Mesa.ingreso_datos()
+            #botones_mesas(botones_mesas,Mesa.mesas)
