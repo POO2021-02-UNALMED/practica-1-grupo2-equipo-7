@@ -1,15 +1,10 @@
 #from Basedatos.baseDeDatos import baseDedatos
 from numpy import double
-from cliente import Cliente
-from catalogo import Catalogo
-from cliente import Cliente
-from pedido import Pedido
-from materiaprima import materiaPrima
-from cliente import Cliente
-from catalogo import Catalogo
-from cliente import Cliente
-from pedido import Pedido
-from materiaprima import materiaPrima
+from gestorAplicacion.cliente import Cliente
+from gestorAplicacion.catalogo import Catalogo
+from gestorAplicacion.cliente import Cliente
+from gestorAplicacion.pedido import Pedido
+from gestorAplicacion.materiaprima import materiaPrima
 import random 
 
 class Mesa():
@@ -224,4 +219,3 @@ def run():
 #print(Cliente.clientes[cc].nombre)
 #print(Cliente.clientes.keys())
 #.get(cc,'no se encuentra')
-run()

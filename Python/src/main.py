@@ -12,7 +12,7 @@ from turtle import bgcolor, right
 
 from gestorAplicacion.persona import Persona
 from gestorAplicacion.empleado import Empleado
-from gestorAplicacion.interfaz_entornoMesa import botones_mesas
+#from gestorAplicacion.interfaz_entornoMesa import botones_mesas
 from gestorAplicacion.mesa import Mesa
 
 class posicion():
