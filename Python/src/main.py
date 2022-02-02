@@ -192,6 +192,10 @@ def menu():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+        def facturar():
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="blue")
+            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
         btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Pedido",bg="light gray",command=registrar)
         btn1.grid(row=0,column=0)
         btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Pedido",bg="light gray",command=ver)
@@ -200,7 +204,10 @@ def menu():
         btn3.grid(row=0,column=2)
         btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Pedido",bg="light gray",command=editar)
         btn4.grid(row=0,column=3)
+        btn5=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Facturar Pedido",bg="light gray",command=facturar)
+        btn5.grid(row=0,column=4)
 
+    
     
     
     #En esta seccion va todo lo relacionado con el menu empleado y sus funciones
