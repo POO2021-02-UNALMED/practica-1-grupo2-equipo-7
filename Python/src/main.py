@@ -511,11 +511,14 @@ def HV2():
 
     label2=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 2.2",bg="gray")
     label2.grid(row=0,column=1)
-    imgHV21=Label(label1,image=imghv21cpy,bg="gray")
+    imgHV21=Label(label2,image=imghv21cpy,bg="gray")
     imgHV21.place(relheight=1,relwidth=1)
 
     label3=Label(contenedorFotos,height=11 , width=36,bd=2,relief=SUNKEN,text="img 2.3",bg="gray")
     label3.grid(row=1,column=0)
+    imgHV22=Label(label3,image=imghv22cpy,bg="gray")
+    imgHV22.place(relheight=1,relwidth=1)
+
     label4=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 2.4",bg="gray")
     label4.grid(row=1,column=1)
     
