@@ -556,7 +556,7 @@ def HV2():
 
     label4=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 2.4",bg="gray")
     label4.grid(row=1,column=1)
-    imgHV23=Label(label3,image=imghv23cpy,bg="gray")
+    imgHV23=Label(label4,image=imghv23cpy,bg="gray")
     imgHV23.place(relheight=1,relwidth=1)
     
 imghv30cpy=tk.PhotoImage(file="HV30.gif")
