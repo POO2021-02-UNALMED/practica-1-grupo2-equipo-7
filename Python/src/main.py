@@ -1,3 +1,4 @@
+from ast import Lambda
 from cProfile import label
 from cgitb import text
 from distutils import command
@@ -7,7 +8,7 @@ from lib2to3.pgen2.token import LEFTSHIFT
 from textwrap import fill
 from tkinter import *
 import tkinter as tk
-from tkinter.messagebox import showinfo
+from tkinter.messagebox import showinfo, showwarning
 from turtle import bgcolor, right
 
 from gestorAplicacion.persona import Persona
@@ -250,6 +251,9 @@ def menu():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
             nombre=StringVar()
             cedula=StringVar()
             telefono=StringVar()
@@ -290,6 +294,7 @@ def menu():
             sueldo_entry.place(relx=0.22,rely=0.48,relheight=0.05,relwidth=0.35)
 
             def crear():
+                lista.delete(0,END)
                 #print(nombre_entry.get())
                 name=nombre_entry.get()
                 cc=cedula_entry.get()
@@ -298,8 +303,17 @@ def menu():
                 carg=cargo_entry.get()
                 suel=sueldo_entry.get()
 
-                empleadoNew=Empleado(cc,name,tel,dir,carg,suel)
-                print(empleadoNew._sueldo)
+                lista.insert(END,('¡Empleado creado con exito!'))
+                lista.insert(END,('Nombre: ',name))
+                lista.insert(END,('Cedula: ',cc))
+                lista.insert(END,('Telefono: ',tel))
+                lista.insert(END,('Direccion: ',dir))
+                lista.insert(END,('Cargo: ',carg))
+                lista.insert(END,('Sueldo: ',suel))
+               
+
+                #empleadoNew=Empleado(cc,name,tel,dir,carg,suel)
+                #print(empleadoNew._sueldo)
 
                 
                 nombre_entry.delete(0,END)
@@ -314,16 +328,155 @@ def menu():
 
 
         def verEmpleados():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            #contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+            #contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.06,rely=0.06,relheight=0.85,relwidth=0.85)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+ 
+            
 
         def elimEmpleado():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            cedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite la cedula del empleado a eliminar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=cedula)
+            cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def ver():
+                print("nada")
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=ver)
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
         def editEmpleado():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            lista.insert(END,('Lista de empleados: '))
+            #un for que recorra la lista
+
+            cedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite la cedula del empleado a editar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=cedula)
+            cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def editarEmpleado():
+                contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+                contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+                lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+                nombre=StringVar()
+                cedula=StringVar()
+                telefono=StringVar()
+                direccion=StringVar()
+                cargo=StringVar()
+                sueldo=StringVar()
+
+            
+
+                nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+                nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+                nombre_entry=Entry(contenedor2,textvariable=nombre)
+                nombre_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+ 
+                cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+                cedula_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+                cedula_entry=Entry(contenedor2,textvariable=cedula)
+                cedula_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+                telefono_label=Label(contenedor2 ,text="Telefono",bd=2,relief=SUNKEN,bg="light gray")
+                telefono_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+                telefono_entry=Entry(contenedor2,textvariable=telefono)
+                telefono_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+                direccion_label=Label(contenedor2 ,text="Direccion",bd=2,relief=SUNKEN,bg="light gray")
+                direccion_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+                direccion_entry=Entry(contenedor2,textvariable=direccion)
+                direccion_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+                cargo_label=Label(contenedor2 ,text="Cargo",bd=2,relief=SUNKEN,bg="light gray")
+                cargo_label.place(relx=0.05,rely=0.4,relheight=0.05,relwidth=0.15)
+                cargo_entry=Entry(contenedor2,textvariable=cargo)
+                cargo_entry.place(relx=0.22,rely=0.4,relheight=0.05,relwidth=0.35)
+
+                sueldo_label=Label(contenedor2 ,text="Sueldo",bd=2,relief=SUNKEN,bg="light gray")
+                sueldo_label.place(relx=0.05,rely=0.48,relheight=0.05,relwidth=0.15)
+                sueldo_entry=Entry(contenedor2,textvariable=sueldo)
+                sueldo_entry.place(relx=0.22,rely=0.48,relheight=0.05,relwidth=0.35)
+
+                def edit():
+                   lista.delete(0,END)
+                   #print(nombre_entry.get())
+                   name=nombre_entry.get()
+                   cc=cedula_entry.get()
+                   tel=telefono_entry.get()
+                   dir=direccion_entry.get()
+                   carg=cargo_entry.get()
+                   suel=sueldo_entry.get()
+
+                   lista.insert(END,('¡Empleado editado con exito!'))
+                   lista.insert(END,('Nombre: ',name))
+                   lista.insert(END,('Cedula: ',cc))
+                   lista.insert(END,('Telefono: ',tel))
+                   lista.insert(END,('Direccion: ',dir))
+                   lista.insert(END,('Cargo: ',carg))
+                   lista.insert(END,('Sueldo: ',suel))
+               
+
+                   #empleadoNew=Empleado(cc,name,tel,dir,carg,suel)
+                   #print(empleadoNew._sueldo)
+
+                
+                   nombre_entry.delete(0,END)
+                   cedula_entry.delete(0,END)
+                   telefono_entry.delete(0,END)
+                   direccion_entry.delete(0,END)
+                   cargo_entry.delete(0,END)
+                   sueldo_entry.delete(0,END)
+
+
+                btncrear=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=edit)
+                btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
+ 
+
+
+            def comprobarCedula(Ced):
+                #Esta funcion lo que hace es verrificar si en la lista se encuentra la cedula que se ingresa(con el cedula_entry.get)
+                #si es asi permite editar de lo contrario emitira un mensaje de advertencia
+                if Ced=="123":
+                    editarEmpleado()
+                else:
+                    showwarning('Advertencia','La cedula digitada no existe')    
+
+
+            btneditar=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
+            btneditar.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
 
         btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Empleado",bg="light gray",command=registro)
         btn1.grid(row=0,column=0)
