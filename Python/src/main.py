@@ -12,8 +12,13 @@ from turtle import bgcolor, right
 
 from gestorAplicacion.persona import Persona
 from gestorAplicacion.empleado import Empleado
+from gestorAplicacion.interfaz_entornoMesa import botones_mesas
+from gestorAplicacion.mesa import Mesa
 
-
+class posicion():
+    num = 1
+    pos_y = 0
+    pos_x = 1
 
 #se crea la ventana de inicio
 ventana = tk.Tk()
@@ -170,6 +175,7 @@ def menu():
     
     #En esta seccion va todo lo relacionado con el menu pedido y sus funciones
     def pedido():
+        
         contenedor1=Frame(ventanaMenu ,bd=2,relief=SUNKEN)
         contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
@@ -181,8 +187,29 @@ def menu():
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
         def ver():
+            
+            pos_y = 0
+            pos_x = 1
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+            
+            def actualizar_posicion(pos_x, pos_y):
+                
+                if (pos_x == 8):
+                    pos_y += 1
+                    pos_x = 0
+                else:
+                    pos_x += 1   
+                return pos_x, pos_y
+
+            Mesa.ingreso_datos()
+            Mesa.verMesas()
+            for num in Mesa.mesas.keys():
+                btn7 = Button(contenedor2, width=10, text=f'Mesa {num}', background = "green", command=pedido)
+                btn7.grid(padx=0, pady=2, row=pos_y, column=pos_x)
+                pos_x, pos_y = actualizar_posicion(pos_x, pos_y)
+                
+
 
         def eliminar():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")

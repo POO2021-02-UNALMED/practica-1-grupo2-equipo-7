@@ -1,5 +1,5 @@
 from inspect import ismethoddescriptor
-from catalogo import Catalogo
+from gestorAplicacion.catalogo import Catalogo
 class Pedido():
 
     pedidos={Catalogo : int}
