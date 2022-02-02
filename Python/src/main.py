@@ -152,8 +152,27 @@ def menu():
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
         def ver():
+            pos_y = 0
+            pos_x = 1
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+            
+            def actualizar_posicion(pos_x, pos_y):
+                
+                if (pos_x == 8):
+                    pos_y += 1
+                    pos_x = 0
+                else:
+                    pos_x += 1   
+                return pos_x, pos_y
+
+            Mesa.ingreso_datos()
+            Mesa.verMesas()
+            for num in Mesa.mesas.keys():
+                btn7 = Button(contenedor2, width=10, text=f'Mesa {num}', background = "green", command=pedido)
+                btn7.grid(padx=0, pady=2, row=pos_y, column=pos_x)
+                pos_x, pos_y = actualizar_posicion(pos_x, pos_y)
+                
 
         def eliminar():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
@@ -187,28 +206,10 @@ def menu():
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
         def ver():
-            
-            pos_y = 0
-            pos_x = 1
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
             
-            def actualizar_posicion(pos_x, pos_y):
-                
-                if (pos_x == 8):
-                    pos_y += 1
-                    pos_x = 0
-                else:
-                    pos_x += 1   
-                return pos_x, pos_y
-
-            Mesa.ingreso_datos()
-            Mesa.verMesas()
-            for num in Mesa.mesas.keys():
-                btn7 = Button(contenedor2, width=10, text=f'Mesa {num}', background = "green", command=pedido)
-                btn7.grid(padx=0, pady=2, row=pos_y, column=pos_x)
-                pos_x, pos_y = actualizar_posicion(pos_x, pos_y)
-                
+        
 
 
         def eliminar():
@@ -528,7 +529,7 @@ btnIniciar.place(relx=0.41,rely=0.75,relheight=0.1,relwidth=0.2)
 imghv20cpy=tk.PhotoImage(file="HV20.gif")
 imghv21cpy=tk.PhotoImage(file="HV21.gif")
 imghv22cpy=tk.PhotoImage(file="HV22.gif")
-imghv33cpy=tk.PhotoImage(file="HV33.gif")
+imghv23cpy=tk.PhotoImage(file="HV23.gif")
 def HV2():
     msgHV2="Omar Enrique Chávez Fonseca, de 23 años, es estudiante de la universidad nacional de Colombia\n  y la plataforma Platzi.  En las cuales estudia Ingeniería de sistemas e informática\n  además de Desarrollo Backend con Python y Django respectivamente. \n Cuenta con conocimientos en lenguajes como Python, Java, C++."
     btnHV=Button(contenedor2, bg="Light blue",text=msgHV2,command=HV2,height=5,width=90)
@@ -555,6 +556,8 @@ def HV2():
 
     label4=Label(contenedorFotos,height=11, width=36,bd=2,relief=SUNKEN,text="img 2.4",bg="gray")
     label4.grid(row=1,column=1)
+    imgHV23=Label(label3,image=imghv23cpy,bg="gray")
+    imgHV23.place(relheight=1,relwidth=1)
     
 imghv30cpy=tk.PhotoImage(file="HV30.gif")
 imghv31cpy=tk.PhotoImage(file="HV31.gif")
