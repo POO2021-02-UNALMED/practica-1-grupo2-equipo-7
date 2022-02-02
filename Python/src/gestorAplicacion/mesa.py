@@ -90,7 +90,16 @@ class Mesa():
             self._pedido = None
             self._disponibilidad = True
         else:
-            pass
+            
+            while(op != 0):
+                if (Catalogo.listaPlatos.get(op)):
+                    cant = int(input("¿Qué cantidad desea?"))
+                    op = int(input("""Elija uno por uno los items que desea agregar a su pedido, con 0 finaliza el pedido.
+               Escriba 0000 Para realizar la factura de la mesa actual."""))
+
+
+
+
 
 
 
@@ -203,7 +212,9 @@ Mesa(5, 5,9)
 #Mesa.verMesas()
 cc = int(input("Ingrese la cc del cliente: "))
 Cliente.verification(cc)
-
+Mesa.verMesas()
+mes = int(input("A qué mesa desea entrar?"))
+Mesa.entornoMesa(Mesa.mesas.get(mes), Cliente.clientes.get(cc))
 #print(Cliente.clientes[cc].nombre)
 #print(Cliente.clientes.keys())
 #.get(cc,'no se encuentra')

@@ -1,13 +1,15 @@
+
 class Catalogo():
     
     idPlato=1
     cantPlatos=0
-    listaPlatos=[]
+    listaPlatos={}
     
     def __init__(self, nombre, precio, insumos={}):
         self.nombre = nombre
         self.precio = precio
-        Catalogo.listaPlatos.append(self)
+        Catalogo.listaPlatos[Catalogo.idPlato] = self
+        Catalogo.idPlato += 1
         self.insumos = insumos
 
     #getters y setters
@@ -34,9 +36,9 @@ class Catalogo():
             print("No hay platos creados en el sistema.")
         else:
             print("""_____________________________________________
-                     Nombre:                   Precio:""")
-            for plato in Catalogo.listaPlatos:
-                print(f'{plato.getNombrePlato()} // {plato.getPrecio()} ')
+                Código:    Nombre:    Precio:""")
+            for codigo, plato in Catalogo.listaPlatos.items():
+                print(f'{codigo} - {plato.getNombrePlato()} // {plato.getPrecio()} ')
            
 
     # public static void descontarInsumos(Catalogo plato1, Integer cant) {

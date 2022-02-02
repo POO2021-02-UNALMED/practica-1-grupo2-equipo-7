@@ -10,7 +10,7 @@ import tkinter as tk
 from tkinter.messagebox import showinfo
 from turtle import bgcolor, right
 
-from gestorAplicacion.persona import Persona
+#from gestorAplicacion.persona import Persona
 
 #se crea la ventana de inicio
 ventana = tk.Tk()
@@ -425,28 +425,28 @@ contenedorInicio=Frame(contenedor1, height=330 , bg="Light Blue",width=250,bd=2,
 contenedorInicio.pack(fill="both",padx=4,pady=4,expand="True")
 
 
-imgH=tk.PhotoImage(file="huevos.png")
-img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
-img1.place(relx=0.01,rely=0.01,relheight=0.28,relwidth=0.3)
+#imgH=tk.PhotoImage(file="huevos.png")
+#img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
+#img1.place(relx=0.01,rely=0.01,relheight=0.28,relwidth=0.3)
 
 
 
-imgS=tk.PhotoImage(file="sushi.png")
-img2=Label(contenedorInicio,image=imgS, bg="Light Blue")
-img2.place(relx=0.33,y=0.25,relheight=0.25,relwidth=0.35)
+#imgS=tk.PhotoImage(file="sushi.png")
+#img2=Label(contenedorInicio,image=imgS, bg="Light Blue")
+#img2.place(relx=0.33,y=0.25,relheight=0.25,relwidth=0.35)
 #img2.place(x=13,y=10,height=100,width=100)
 
-imgA=tk.PhotoImage(file="arepa.png")
-img3=Label(contenedorInicio,image=imgA, bg="Light Blue")
-img3.place(relx=0.7,rely=0.01,relheight=0.31,relwidth=0.31)
+#imgA=tk.PhotoImage(file="arepa.png")
+#img3=Label(contenedorInicio,image=imgA, bg="Light Blue")
+#img3.place(relx=0.7,rely=0.01,relheight=0.31,relwidth=0.31)
 
-imgP=tk.PhotoImage(file="pollo.png")
-img4=Label(contenedorInicio,image=imgP, bg="Light Blue")
-img4.place(relx=0.20,rely=0.35,relheight=0.29,relwidth=0.31)
+#imgP=tk.PhotoImage(file="pollo.png")
+#img4=Label(contenedorInicio,image=imgP, bg="Light Blue")
+#img4.place(relx=0.20,rely=0.35,relheight=0.29,relwidth=0.31)
 
-imgB=tk.PhotoImage(file="burguer.png")
-img5=Label(contenedorInicio,image=imgB, bg="Light Blue")
-img5.place(relx=0.57,rely=0.35,relheight=0.29,relwidth=0.27)
+#imgB=tk.PhotoImage(file="burguer.png")
+#img5=Label(contenedorInicio,image=imgB, bg="Light Blue")
+#img5.place(relx=0.57,rely=0.35,relheight=0.29,relwidth=0.27)
 
 #imgH=tk.PhotoImage(file="huevos.png")
 #img1=Label(contenedorInicio,image=imgH, bg="Light Blue")
