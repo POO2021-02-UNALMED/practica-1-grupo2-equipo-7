@@ -1,5 +1,5 @@
 #from Basedatos.baseDeDatos import baseDedatos
-from gestorAplicacion import pedido
+from gestorAplicacion.pedido import Pedido
 from gestorAplicacion.cliente import Cliente
 from gestorAplicacion.catalogo import Catalogo
 from gestorAplicacion.cliente import Cliente
@@ -15,12 +15,12 @@ class Mesa():
     mesas = {}
     #baseDedatos.base_de_datos()
     
-    def __init__(self, id, numero, zona, disponibilidad = True, pedidoM = None):
+    def __init__(self, id, numero, zona, disponibilidad = True):
         #self._idUnico        = id
         self._numero         = numero
         self._zona           = zona
         self._disponibilidad = disponibilidad
-        self.pedido         = pedidoM
+        self.pedido         = dict
         Mesa.mesas[numero] = self
 
     fichero_binario=open("lasmesas","wb")
@@ -63,11 +63,15 @@ class Mesa():
     def getPedido(self):
         if(self.pedido):
             return self.pedido
+
         if (not self.pedido):
             return ""
 
-    def setPedido(self, plato, cantidad):
-        self.pedido[plato] = cantidad
+    def setPedido(self, pedido, cantidad):
+        try:
+            self.pedido | {pedido:cantidad}
+        except TypeError:
+            print("Error de tipo")
 
     def isDisponibilidad(self):
         if (self._disponibilidad):
