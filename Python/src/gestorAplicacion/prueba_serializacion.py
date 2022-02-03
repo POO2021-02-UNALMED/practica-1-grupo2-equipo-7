@@ -25,28 +25,28 @@ class Empleado(Persona):
 
     @classmethod
 
-    def escrituraSempleado(cls):
+    def escrituraSempleado(cls, empleados):
 
-     fichero_binario=open("losEmpleados","wb")
+        fichero_binario=open("losEmpleados","wb")
 
-     pickle.dump(empleados, fichero_binario
+        pickle.dump(empleados, fichero_binario)
 
-     fichero_binario.close()
+        fichero_binario.close()
 
-     del(fichero_binario)
+        del(fichero_binario)
 
 
 
-     def lecturaSempleado(cls):
+    def lecturaSempleado(cls):
     
-     fichero=open("losEmpleados", "rb")
+        fichero=open("losEmpleados", "rb")
 
-     misEmpleados=pickle.load(fichero)
+        Empleado.empleados=pickle.load(fichero)
 
-     fichero.close()
+        fichero.close()
 
-     for c in misEmpleados:
+     #for c in misEmpleados:
 
-      print(c.estado())
+      #print(c.estado())
 
 

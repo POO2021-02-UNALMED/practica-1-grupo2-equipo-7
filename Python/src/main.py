@@ -14,6 +14,7 @@ from turtle import bgcolor, right
 from gestorAplicacion.catalogo import Catalogo
 from gestorAplicacion.cliente import Cliente
 from gestorAplicacion.pedido import Pedido
+#from gestorAplicacion.prueba_serializacion import Empleado
 
 from gestorAplicacion.persona import Persona
 from gestorAplicacion.empleado import Empleado
@@ -70,6 +71,7 @@ def menu():
         #aca va el metodo de serializacion
         ventanaMenu.destroy()
         ventana.mainloop()
+        Empleado.escrituraSempleado()
         
 
     #Mensaje sobre los desarrolladores
@@ -1029,6 +1031,7 @@ def menu():
                 suel=sueldo_entry.get()
 
                 empleadoNew=Empleado(cc,name,tel,dir,carg,suel)
+                Empleado.escrituraSempleado()
 
                 lista.insert(END,('¡Empleado creado con exito!'))
                 lista.insert(END,('Nombre: ',empleadoNew.nombre))
@@ -1757,7 +1760,6 @@ mensaje.pack()
 
 
 
-
-Mesa.ingreso_datos()
-
+Empleado.lecturaSempleado()
+#Mesa.ingreso_datos()
 ventana.mainloop() 
