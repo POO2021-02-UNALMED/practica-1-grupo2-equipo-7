@@ -4,6 +4,7 @@ class materiaPrima:
     def __init__(self, nombreInsumo,cantInsumo):
         self.nombreInsumo= nombreInsumo
         self.cantInsumo=cantInsumo
+        materiaPrima.bodega[materiaPrima.nombreInsumo] = self
     
     #getters y setters   
     def setNombreInsumo(self, nombreInsumo):
