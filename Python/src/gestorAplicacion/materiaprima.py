@@ -1,5 +1,5 @@
-
 import pickle
+
 class materiaPrima:
 
     insumos={}
@@ -18,7 +18,7 @@ class materiaPrima:
 
     #getters y setters   
     def setNombreInsumo(self, nombreInsumo):
-        self.cliente = nombreInsumo
+        self.nombreInsumo = nombreInsumo
     
     def getNombreInsumo(self):
         return self.nombreInsumo

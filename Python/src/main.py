@@ -1525,12 +1525,137 @@ def menu():
                 lista.insert(END,'\n')
 
         def eliMaPrima():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Materia prima'))
+            for nombre, insumo in materiaPrima.insumos.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ' ,nombre))
+                lista.insert(END,('Cantidad: ',insumo.cantInsumo))
+                lista.insert(END,'\n')
+
+            nombreMP=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite el nombre de la M.Prima a eliminar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            nombreMP_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+            nombreMP_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            nombreMP_entry=Entry(contenedor2,textvariable=nombreMP)
+            nombreMP_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobar(name):
+                #no funciona este metodo
+                try:
+                    if(materiaPrima.insumos[name]):
+                      lista.delete(0,END)
+                      materiaPrima.insumos.pop(name)
+                      showinfo('Mensaje','Materia prima eliminada con exito')
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','Dicho nombre no existe')
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobar(nombreMP_entry.get()))
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
         def editMaPrima():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Materia prima'))
+            for nombre, insumo in materiaPrima.insumos.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ' ,nombre))
+                lista.insert(END,('Cantidad: ',insumo.cantInsumo))
+                lista.insert(END,'\n')
+
+                nombre=StringVar()
+               
+                msg_label=Label(contenedor2 ,text="Digite el nombre de la M.Prima a editar",font="Elephant")
+                msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+ 
+                nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+                nombre_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+                nombre_entry=Entry(contenedor2,textvariable=nombre)
+                nombre_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+                def comprobar(name):
+                 try:
+                     if(materiaPrima.insumos[name]):
+                       lista.delete(0,END)
+                       editarMateria(materiaPrima.insumos[name])
+                     else:
+                       raise KeyError 
+                
+                 except KeyError:
+                     showwarning('Advertencia','Dicho nombre no existe')
+
+
+                def editarMateria(materia):
+                 contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+                 contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+                 lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                 lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+                 nombre=StringVar()
+                 cantidad=StringVar()
+              
+
+                 nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+                 nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+                 nombre_entry=Entry(contenedor2,textvariable=nombre)
+                 nombre_entry.insert(0,materia.getNombreInsumo())
+                 nombre_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+ 
+                 cantidad_label=Label(contenedor2 ,text="Cantidad",bd=2,relief=SUNKEN,bg="light gray")
+                 cantidad_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+                 cantidad_entry=Entry(contenedor2,textvariable=cantidad)
+                 cantidad_entry.insert(0,materia.getCantInsumo())
+                 cantidad_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+                 btnedit=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:edit(materia))
+                 btnedit.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)   
+
+                 def edit(materia):
+                    
+                   lista.delete(0,END)
+                
+                   name=nombre_entry.get()
+                   cant=cantidad_entry.get()
+
+                   materia.setNombreInsumo(name)
+                   materia.setCantInsumo(cant)
+
+                   lista.insert(END,('¡Materia prima editada con exito!'))
+                   lista.insert(END,('Nombre: ',name))
+                   lista.insert(END,('Cantidad: ',cant))
+
+                   nombre_entry.delete(0,END)
+                   cantidad_entry.delete(0,END)
+
+                   
+   
+            btneditar=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:comprobar(nombre_entry.get()))
+            btneditar.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
 
         btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Materia Prima",bg="light gray",command=registro)
         btn1.grid(row=0,column=0)
@@ -1724,8 +1849,120 @@ def menu():
 
     #En esta seccion va la informacion acerca de que hace el programa 
     def aplicacion():
-        contenedor1=Frame(ventanaMenu,bg="gray" ,bd=2,relief=SUNKEN)
+        contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
         contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
+
+        textDesc="Poopina es un software de gestión y organización para restaurantes, el cual se basa en ayudar a ordenar nuestro restaurante "
+        textDesc1="podremos registrar clientes frecuentes, gestionar reservas, tener control del inventario, llevar control estricto sobre "
+        textDesc2="cada orden y la mesa donde esta se efectuó entre otras cosas."
+
+        textDesc3="Como se mencionó con anterioridad dentro de poopina encontramos muchas herramientas para gestionar nuestro restaurante la "
+        textDesc4="mayoría de estas las encontraremos dentro de la pestaña procesos y consultas a continuación nombraremos todas. comenzamos "
+        textDesc5="con los clientes y es que gracias a ellos es que nuestro modelo de negocio funciona así que es muy importante tener un "
+        textDesc6="control sobre ellos en especial con los que nos visitan frecuentemente es por eso que en poopina contamos con la opción "
+        textDesc7="de registrar clientes de este modo tenemos fácil acceso a los clientes frecuentes con la opción de ver clientes podemos "
+        textDesc8="monitorear los datos del cliente, además con la opción de editar clientes podemos editar la información de cada cliente "
+        textDesc9="en cualquier momento sin complicarnos sin embargo para borrar un cliente por completo tendremos que acceder a la pestaña "
+        textDesc10="de “eliminar cliente” con tan solo colocar su numero de cedula y darle a confirmar borraremos el cliente de inmediato de "
+        textDesc11="la base de datos por lo que tenemos que tener mucho cuidado ya que una vez borrado un cliente ya no tendremos mas acceso "
+        textDesc12="a su información."
+        textDesc13="Después para nuestros empleados también tenemos una ventana exclusiva, es estrictamente necesario llevar control sobre "
+        textDesc14="cada uno de los miembros de nuestro personal y que mejor manera de hacerlo que atravez de poopina en donde contamos con "
+        textDesc15="las herramientas necesarias podremos registrar empleados  para este proceso necesitamos datos básicos proporcionados por "
+        textDesc16="el empleado mientras que el resto nos corresponde  a nosotros como por ejemplo el cargo que desempeñará el sueldo que "
+        textDesc17="recibirá etc..Al igual que con los clientes podemos editar la información de nuestros empleados en todo momento así "
+        textDesc18="como eliminarlos."
+        textDesc19="Todos sabemos que las reservas son un método para asegurar clientes o ganar prestigio sea cual sea el motivo en poopina "
+        textDesc20="pensamos en todo por lo cual tenemos un excelente sistema de gestión de reservas para registrar una reserva solo debemos "
+        textDesc21="poner el cliente al cual se le adjudica la fecha y hora de la reserva y la mesa en cuestión que estaría reservada, en "
+        textDesc22="la pestaña de edición podemos editar la reserva en cualquier momento y por supuesto tendremos acceso a toda la lista de "
+        textDesc23="reservas activas para tener un control preciso sobre la organización de nuestro restaurante en la pestaña de eliminación  "
+        textDesc24="podremos eliminar una reserva en cualquier momento sea cual sea el motivo."
+        textDesc25="Las mesas el lugar de nuestros comensales donde disfrutaran nuestros deliciosos platillos, las hay de todas formas y tamaños "
+        textDesc26="por lo cual no es lo mismo una mesa de dos personas que una para 8 es por eso que es tan importante tener control sobre "
+        textDesc27="cada una de las mesas en poopina tenemos un apartado diseñado para gestionar esto mismo podremos registrar mesas de este "
+        textDesc28="modo podemos agregar tantas mesas en el sistema con tengamos en el restaurante en el apartado de zona podremos ingresar el "
+        textDesc29="lugar físico donde se encuentra la mesa por lo que nos quedara más fácil identificarla en el sistema, cada vez que se realice "
+        textDesc30="un pedido este quedara registrado en su respectiva mesa podremos editarlo en cualquier momento también podremos eliminar mesas "
+        textDesc31="por lo cual podremos reacomodar nuestras mesas como nos plazca."
+        textDesc32="En la parte de pedido funciona como auxiliar para mesas podemos ver todos los pedidos actuales además de editarlos o eliminarlos "
+        textDesc33="de este modo podremos acceder mas rápido a un pedido especifico si no recordamos la mesa en que fue comandado o alguna situación "
+        textDesc34="similar además tenemos la opción de facturar pedido la cual debemos emplear cuando el cliente se disponga a pagar la cuenta."
+        textDesc35="Antes de que nuestros deliciosos platillos fueran tan exquisitos eran un montón de ingredientes independientes que con la magia "
+        textDesc36="de nuestro grandioso personal de cocina se convirtieron en manjares es por eso que en poopina contamos con un apartado para el "
+        textDesc37="registro de la materia prima es como tener una pequeña bodega virtual en donde se lleva el control de los insumos para realizar "
+        textDesc38="nuestras preparaciones en la pestaña de registrar podremos ingresar cada vez que nos llega algún ingrediente, en la pestaña de "
+        textDesc39="ver podemos ver todos los ingredientes con los contamos actualmente con lo cual incluso podríamos hacer un inventario, podremos "
+        textDesc40="ir editando los datos en todo momento sin mayor complejidad y por ultimo si es que ya no contamos con cierto insumo lo podremos "
+        textDesc41="eliminar para siempre tener nuestro inventario actualizado."
+        textDesc42="Después de que nos hallan llegado nuestros ingredientes debemos transformarlos en apetecibles recetas las cuales inclusos pueden "
+        textDesc43="ser únicas o especialidades de la casa es por eso que tenemos un pequeño apartado de catalogo que básicamente cumple las veces de "
+        textDesc44="un menú digital pero obviamente podremos registrar nuevos platillos cuando queramos, editar los que ya tenemos y eliminar alguno "
+        textDesc45="si es que ya no no convence."
+
+
+
+        lista=Listbox(contenedor1,bd=2,relief=SUNKEN)
+        lista.place(relx=0.06,rely=0.06,relheight=0.85,relwidth=0.85)
+
+        scroll=Scrollbar(contenedor1,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+        scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
+        lista.config(yscrollcommand=scroll)
+
+        lista.insert(END,(textDesc))
+        lista.insert(END,(textDesc1))
+        lista.insert(END,(textDesc2))
+        lista.insert(END,('\n'))
+        lista.insert(END,(textDesc3))
+        lista.insert(END,(textDesc4))
+        lista.insert(END,(textDesc5))
+        lista.insert(END,(textDesc6))
+        lista.insert(END,(textDesc7))
+        lista.insert(END,(textDesc8))
+        lista.insert(END,(textDesc9))
+        lista.insert(END,(textDesc10))
+        lista.insert(END,(textDesc11))
+        lista.insert(END,(textDesc12))
+        lista.insert(END,('\n'))
+        lista.insert(END,(textDesc13))
+        lista.insert(END,(textDesc14))
+        lista.insert(END,(textDesc15))
+        lista.insert(END,(textDesc16))
+        lista.insert(END,(textDesc17))
+        lista.insert(END,(textDesc18))
+        lista.insert(END,('\n'))
+        lista.insert(END,(textDesc19))
+        lista.insert(END,(textDesc20))
+        lista.insert(END,(textDesc21))
+        lista.insert(END,(textDesc22))
+        lista.insert(END,(textDesc23))
+        lista.insert(END,(textDesc24))
+        lista.insert(END,('\n'))
+        lista.insert(END,(textDesc25))
+        lista.insert(END,(textDesc26))
+        lista.insert(END,(textDesc27))
+        lista.insert(END,(textDesc28))
+        lista.insert(END,(textDesc29))
+        lista.insert(END,(textDesc30))
+        lista.insert(END,(textDesc31))
+        lista.insert(END,('\n'))
+        lista.insert(END,(textDesc32))
+        lista.insert(END,(textDesc33))
+        lista.insert(END,(textDesc34))
+        lista.insert(END,('\n'))
+        lista.insert(END,(textDesc35))
+        lista.insert(END,(textDesc36))
+        lista.insert(END,(textDesc37))
+        lista.insert(END,(textDesc38))
+        lista.insert(END,(textDesc39))
+        lista.insert(END,(textDesc40))
+        lista.insert(END,(textDesc41))
+        lista.insert(END,('\n'))
+        lista.insert(END,(textDesc42))
+        lista.insert(END,(textDesc43))
+        lista.insert(END,(textDesc44))
+        lista.insert(END,(textDesc45))
+
 
         
 
