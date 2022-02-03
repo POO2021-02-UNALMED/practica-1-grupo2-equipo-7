@@ -1373,8 +1373,23 @@ def menu():
             btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
 
         def verMaPrima():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.06,rely=0.06,relheight=0.85,relwidth=0.85)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('materiaprima'))
+            for nombreInsumo,materiaprima in materiaPrima.bodega.items():
+                lista.insert(END,'\n')
+                lista.insert(END,(f'Nombre: {materiaprima.nombre}'))
+                lista.insert(END,(f'Cantidad: {materiaprima.cantidad}'))
+                #lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,'\n')
 
         def eliMaPrima():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
