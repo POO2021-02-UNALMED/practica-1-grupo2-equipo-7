@@ -1849,12 +1849,6 @@ mensaje.pack()
 
 
 
-<<<<<<< Updated upstream
 Empleado.lecturaSempleado()
 Mesa.ingreso_datos()
 ventana.mainloop() 
-=======
-#Empleado.lecturaSempleado()
-#Mesa.ingreso_datos()
-#ventana.mainloop() 
->>>>>>> Stashed changes
