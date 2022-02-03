@@ -9,13 +9,10 @@ class Empleado(Persona):
         self._sueldo=sueldo
         Empleado.empleados[cedula]=self
 
-    fichero_binario=open("losEmpleados","wb")
+        
 
-    pickle.dump(empleados, fichero_binario)
+    
 
-    fichero_binario.close()
-
-    del(fichero_binario)
     
     def setCargo(self, cargos):
          self._cargo = cargos
@@ -29,12 +26,15 @@ class Empleado(Persona):
     def getSueldo(self):
         return self._sueldo     
 
-fichero=open("losEmpleados", "rb")
+    @classmethod
+    def lecturaSempleado(cls):
+    
+     fichero=open("losEmpleados", "rb")
 
-misEmpleados=pickle.load(fichero)
+     misEmpleados=pickle.load(fichero)
 
-fichero.close()
+     fichero.close()
 
-for c in misEmpleados:
+     for c in misEmpleados:
 
-    print(c.estado())
+      print(c.estado())
