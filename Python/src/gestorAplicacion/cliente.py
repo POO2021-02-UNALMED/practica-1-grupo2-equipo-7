@@ -1,5 +1,6 @@
-from persona import Persona
+from gestorAplicacion.persona import Persona
 import pickle
+
 class Cliente(Persona):
 
     clientes = {}

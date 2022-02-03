@@ -749,11 +749,6 @@ def menu():
                 lista.config(yscrollcommand=scroll)
 
 
-    
-                #scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
-                #scroll.place(relx=0.,rely=0.067,relheight=0.3,relwidth=0.02)
-                #lista.config(yscrollcommand=scroll)
-
                 lista.insert(END,('Catalogo'))
                 for idPlato,catalogo in Catalogo.listaPlatos.items():
                     lista.insert(END,'\n')
@@ -764,6 +759,7 @@ def menu():
                     lista.insert(END,'\n')
                 
                 idPlato=StringVar()
+                cantPlato=StringVar()
 
                 codePlato_label=Label(contenedor2 ,text="Codigo Plato",bd=2,relief=SUNKEN,bg="light gray")
                 codePlato_label.place(relx=0.01,rely=0.6,relheight=0.05,relwidth=0.2)
@@ -772,7 +768,7 @@ def menu():
 
                 catnPlato_label=Label(contenedor2 ,text="Cantidad",bd=2,relief=SUNKEN,bg="light gray")
                 catnPlato_label.place(relx=0.01,rely=0.7,relheight=0.05,relwidth=0.2)
-                catnPlato_entry=Entry(contenedor2,textvariable=idPlato)
+                catnPlato_entry=Entry(contenedor2,textvariable=cantPlato)
                 catnPlato_entry.place(relx=0.25,rely=0.7,relheight=0.05,relwidth=0.25)
 
                 lista1=Listbox(contenedor2,bd=2,relief=SUNKEN)
@@ -782,10 +778,11 @@ def menu():
                 scroll.place(relx=0.4,rely=0.08,relheight=0.45,relwidth=0.02)
                 lista1.config(yscrollcommand=scroll)
 
+                btn=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray",)
+                btn.place(relx=0.1,rely=0.8,relheight=0.05,relwidth=0.2)
+
                 codigoPlato=codePlato_entry.get()
                 cantidadPlato=catnPlato_entry.get()
-
-                Mesa.mesas[num_mesa].setPedido(Catalogo.listaPlatos[codigoPlato], cantidadPlato)
 
                 lista1.insert(END,(f'Pedido actual mesa {num_mesa}'))
                 for mesa in Mesa.mesas[num_mesa].pedido:
@@ -795,6 +792,8 @@ def menu():
                     lista.insert(END,(f'Precio: {mesa.precio}'))
                     #lista.insert(END,('Insumos: ',catalogo.insumos))
                     lista.insert(END,'\n')
+
+                
 
 
             pos_y = 0
@@ -844,14 +843,14 @@ def menu():
                 lista.insert(END,('Pedido: ',mesa.getPedido()))
                 lista.insert(END,'\n')
 
-            cedula=StringVar()
+            numero=StringVar()
 
             msg_label=Label(contenedor2 ,text="Digite el ID de la mesa a eliminar",font="Elephant")
             msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
 
             id_label=Label(contenedor2 ,text="ID",bd=2,relief=SUNKEN,bg="light gray")
             id_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
-            id_entry=Entry(contenedor2,textvariable=cedula)
+            id_entry=Entry(contenedor2,textvariable=numero)
             id_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
 
             def comprobarCedula(id):
