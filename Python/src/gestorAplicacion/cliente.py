@@ -14,6 +14,12 @@ class Cliente(Persona):
         for cedula, cliente in Cliente.clientes.items():
             print(f'Cedula: {cedula} Nombre: {cliente.nombre}')
 
+    def setReserva(self,reserv):
+        self.reserva = reserv
+
+    def getReserva(self):
+        return self.reserva  
+
 
     def verification(cedula):
         if(Cliente.clientes.get(cedula,'no se encuentra')=='no se encuentra'):

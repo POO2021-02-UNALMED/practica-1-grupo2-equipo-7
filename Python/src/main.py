@@ -5,11 +5,13 @@ from distutils import command
 from doctest import master
 from email import message
 from lib2to3.pgen2.token import LEFTSHIFT
+from multiprocessing.connection import Client
 from textwrap import fill
 from tkinter import *
 import tkinter as tk
 from tkinter.messagebox import showinfo, showwarning
 from turtle import bgcolor, right
+from gestorAplicacion.catalogo import Catalogo
 from gestorAplicacion.cliente import Cliente
 from gestorAplicacion.pedido import Pedido
 
@@ -17,6 +19,7 @@ from gestorAplicacion.persona import Persona
 from gestorAplicacion.empleado import Empleado
 #from gestorAplicacion.interfaz_entornoMesa import botones_mesas
 from gestorAplicacion.mesa import Mesa
+from gestorAplicacion.reserva import Reserva
 
 class posicion():
     num = 1
@@ -64,6 +67,7 @@ def menu():
     contenedor.place(relheight=1,relwidth=1)
 
     def salir():
+        #aca va el metodo de serializacion
         ventanaMenu.destroy()
         ventana.mainloop()
         
@@ -125,7 +129,7 @@ def menu():
             
                 newCliente=Cliente(cc,name,tel,dir)
 
-                lista.insert(END,('¡Empleado creado con exito!'))
+                lista.insert(END,('¡Cliente creado con exito!'))
                 lista.insert(END,('Nombre: ',newCliente.nombre))
                 lista.insert(END,('Cedula: ',newCliente.cedula))
                 lista.insert(END,('Telefono: ',newCliente.telefono))
@@ -147,20 +151,194 @@ def menu():
             btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
 
         def ver():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.06,rely=0.06,relheight=0.85,relwidth=0.85)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Lista de clientes  '))
+            for cedula,cliente in Cliente.clientes.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ',cliente.nombre))
+                lista.insert(END,('Cedula: ',cliente.cedula))
+                lista.insert(END,('Telefono: ',cliente.telefono))
+                lista.insert(END,('Direccion: ',cliente.direccion))
+                lista.insert(END,('Reserva: ',cliente.reserva))
+                lista.insert(END,'\n')
 
         def eliminar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Lista de clientes  '))
+            for cedula,cliente in Cliente.clientes.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ',cliente.nombre))
+                lista.insert(END,('Cedula: ',cliente.cedula))
+                lista.insert(END,('Telefono: ',cliente.telefono))
+                lista.insert(END,('Direccion: ',cliente.direccion))
+                lista.insert(END,('Reserva: ',cliente.reserva))
+                lista.insert(END,'\n')
+
+            cedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite la cedula del cliente a eliminar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=cedula)
+            cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarCedula(Ced):
+                print(Cliente.clientes[Ced])
+                #Esta funcion lo que hace es verrificar si en la lista se encuentra la cedula que se ingresa(con el cedula_entry.get)
+                #si es asi permite editar de lo contrario emitira un mensaje de advertencia
+                try:
+                    if(Cliente.clientes[Ced]):
+                      lista.delete(0,END)
+                      Cliente.clientes.pop(Ced)
+                      showinfo('Mensaje','Empleado eliminado con exito')
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','La cedula digitada no existe')
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
+        
+        #------------------------------------------
         def editar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+
+            lista.insert(END,('Lista de clientes '))
+            lista.insert(END,'\n')
+            #un for que recorra la lista
+            for cedula,cliente in Cliente.clientes.items():
+                lista.insert(END,('Nombre: ',cliente.nombre))
+                lista.insert(END,('Cedula: ',cliente.cedula))
+                lista.insert(END,('Telefono: ',cliente.telefono))
+                lista.insert(END,('Direccion: ',cliente.direccion))
+                lista.insert(END,('Reserva: ',cliente.reserva))
+                lista.insert(END,'\n')
+
+            cedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite la cedula del cliente a editar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=cedula)
+            cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarCedula(Ced):
+                try:
+                    if(Cliente.clientes[Ced]):
+                      editarCliente(Cliente.clientes[Ced])
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','La cedula digitada no existe') 
+
+            def editarCliente(empleado):
+
+                contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+                contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+                lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+                nombre=StringVar()
+                cedula=StringVar()
+                telefono=StringVar()
+                direccion=StringVar()
+
+                nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+                nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+                nombre_entry=Entry(contenedor2,textvariable=nombre)
+                nombre_entry.insert(0,empleado.getNombre())
+                nombre_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+ 
+                cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+                cedula_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+                cedula_entry=Entry(contenedor2,textvariable=cedula)
+                cedula_entry.insert(0,empleado.getCedula())
+                cedula_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+                telefono_label=Label(contenedor2 ,text="Telefono",bd=2,relief=SUNKEN,bg="light gray")
+                telefono_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+                telefono_entry=Entry(contenedor2,textvariable=telefono)
+                telefono_entry.insert(0,empleado.getTelefono())
+                telefono_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+                direccion_label=Label(contenedor2 ,text="Direccion",bd=2,relief=SUNKEN,bg="light gray")
+                direccion_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+                direccion_entry=Entry(contenedor2,textvariable=direccion)
+                direccion_entry.insert(0,empleado.getDireccion())
+                direccion_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+                def edit(cliente):
+                    
+                   lista.delete(0,END)
+                   #print(nombre_entry.get())
+                   name=nombre_entry.get()
+                   cc=cedula_entry.get()
+                   tel=telefono_entry.get()
+                   dir=direccion_entry.get()
+
+                   cliente.setNombre(name)
+                   cliente.setCedula(cc)
+                   cliente.setTelefono(tel)
+                   cliente.setDireccion(dir)
+                   
+
+                   lista.insert(END,('¡Cliente editado con exito!'))
+                   lista.insert(END,('Nombre: ',name))
+                   lista.insert(END,('Cedula: ',cc))
+                   lista.insert(END,('Telefono: ',tel))
+                   lista.insert(END,('Direccion: ',dir))
+                  
+                   nombre_entry.delete(0,END)
+                   cedula_entry.delete(0,END)
+                   telefono_entry.delete(0,END)
+                   direccion_entry.delete(0,END)
+                  
+
+                btnedit=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:edit(cliente))
+                btnedit.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)   
+   
+            btncomprobar=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
+            btncomprobar.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
 
         btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Cliente",bg="light gray",command=registrar)
         btn1.grid(row=0,column=0)
-        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Cliente",bg="light gray",command=ver)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Clientes",bg="light gray",command=ver)
         btn2.grid(row=0,column=1)
         btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Cliente",bg="light gray",command=eliminar)
         btn3.grid(row=0,column=2)
@@ -178,24 +356,302 @@ def menu():
         Barra.place(relheight=0.07,relwidth=1)
 
         def registrar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+
+            lista.insert(END,('Lista de clientes '))
+            lista.insert(END,'\n')
+            #un for que recorra la lista
+            for cedula,cliente in Cliente.clientes.items():
+                lista.insert(END,('Nombre: ',cliente.nombre))
+                lista.insert(END,('Cedula: ',cliente.cedula))
+                lista.insert(END,('Telefono: ',cliente.telefono))
+                lista.insert(END,('Direccion: ',cliente.direccion))
+                lista.insert(END,('Reserva: ',cliente.reserva))
+                lista.insert(END,'\n')
+
+            cedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite la cedula del cliente al cual le tomará una reserva",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=cedula)
+            cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarCedula(Ced):
+                try:
+                    if(Cliente.clientes[Ced]):
+                      registrarReserva(Cliente.clientes[Ced])
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','La cedula digitada no existe') 
+
+            def registrarReserva(clienteReserva):
+
+                contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+                contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+                lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+                numReserva=StringVar()
+                fechaReserva=StringVar()
+                horaReserva=StringVar()
+                cantPersonas=StringVar()
+
+                numReserva_label=Label(contenedor2 ,text="Numero de Reserva",bd=2,relief=SUNKEN,bg="light gray")
+                numReserva_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+                numReserva_entry=Entry(contenedor2,textvariable=numReserva)
+                numReserva_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+ 
+                fechaReserva_label=Label(contenedor2 ,text="Fecha",bd=2,relief=SUNKEN,bg="light gray")
+                fechaReserva_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+                fechaReserva_entry=Entry(contenedor2,textvariable=fechaReserva)
+                fechaReserva_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+                horaReserva_label=Label(contenedor2 ,text="Hora",bd=2,relief=SUNKEN,bg="light gray")
+                horaReserva_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+                horaReserva_entry=Entry(contenedor2,textvariable=horaReserva)
+                horaReserva_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+                cantPersonas_label=Label(contenedor2 ,text="Numero de personas",bd=2,relief=SUNKEN,bg="light gray")
+                cantPersonas_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+                cantPersonas_entry=Entry(contenedor2,textvariable=cantPersonas)
+                cantPersonas_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+                def crearReserva(clienteReserva):
+                    
+                   lista.delete(0,END)
+
+                   numero=numReserva_entry.get()
+                   fecha=fechaReserva_entry.get()
+                   hora=horaReserva_entry.get()
+                   cantidad=cantPersonas_entry.get()
+
+                   Reserva(clienteReserva,numero,fecha,hora,cantidad)
+                   
+
+                   lista.insert(END,('¡Reserva creada con exito!'))
+                   lista.insert(END,('Numero de reserva: ',numero))
+                   lista.insert(END,('Fecha: ',fecha))
+                   lista.insert(END,('Hora: ',hora))
+                   lista.insert(END,('Cantidad de personas: ',cantidad))
+                  
+                   numReserva_entry.delete(0,END)
+                   fechaReserva_entry.delete(0,END)
+                   horaReserva_entry.delete(0,END)
+                   cantPersonas_entry.delete(0,END)
+                  
+
+                btnedit=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Crear",bg="light gray",command=lambda:crearReserva(clienteReserva))
+                btnedit.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)   
+   
+            btncomprobar=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Buscar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
+            btncomprobar.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
+            ################
 
         def ver():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.06,rely=0.06,relheight=0.85,relwidth=0.85)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Lista de reservas  '))
+            for numreserva,reserva in Reserva.reservas.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Cliente: ',reserva.cliente))
+                lista.insert(END,('Numerod de reserva: ',reserva.numreserva))
+                lista.insert(END,('Fecha: ',reserva.fechareserva))
+                lista.insert(END,('Hora: ',reserva.horareserva))
+                lista.insert(END,('Cantidad de personas: ',reserva.cantidadpersonas))
+                lista.insert(END,'\n')
 
         def eliminar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Lista de reservas  '))
+            for numreserva,reserva in Reserva.reservas.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Cliente: ',reserva.cliente))
+                lista.insert(END,('Numero de reserva: ',reserva.numreserva))
+                lista.insert(END,('Fecha: ',reserva.fechareserva))
+                lista.insert(END,('Hora: ',reserva.horareserva))
+                lista.insert(END,('Cantidad de personas: ',reserva.cantidadpersonas))
+                lista.insert(END,'\n')
+
+            cedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite la cedula del cliente al cual desea eliminar la reserva",font="Elephant")
+            msg_label.place(relx=0.02,rely=0.08,relheight=0.05,relwidth=0.56)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=cedula)
+            cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarCedula(Ced):
+                print(Reserva.reservas[Ced])
+                #Esta funcion lo que hace es verrificar si en la lista se encuentra la cedula que se ingresa(con el cedula_entry.get)
+                #si es asi permite editar de lo contrario emitira un mensaje de advertencia
+                try:
+                    if(Reserva.reservas[Ced]):
+                      lista.delete(0,END)
+                      Reserva.reservas.pop(Ced)
+                      showinfo('Mensaje','Reserva eliminada con exito')
+                      #Cliente.clientes[Ced]
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','La cedula digitada no existe')
+
+            #editarCliente(cliente):
+            #    cliente.setReserva(None)
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
         def editar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            #un for que recorra la lista
+            lista.insert(END,('Lista de reservas  '))
+            for numreserva,reserva in Reserva.reservas.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Cliente: ',reserva.cliente))
+                lista.insert(END,('Numero de reserva: ',reserva.numreserva))
+                lista.insert(END,('Fecha: ',reserva.fechareserva))
+                lista.insert(END,('Hora: ',reserva.horareserva))
+                lista.insert(END,('Cantidad de personas: ',reserva.cantidadpersonas))
+                lista.insert(END,'\n')
+
+            rsvCedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite la cedula del cliente al cual desea editar la reserva",font="Elephant")
+            msg_label.place(relx=0.02,rely=0.08,relheight=0.05,relwidth=0.56)
+
+            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            cedula_entry=Entry(contenedor2,textvariable=rsvCedula)
+            cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarCedula(Ced):
+                try:
+                    if(Reserva.reservas[Ced]):
+                      lista.delete(0,END)
+                      editarReserva(Reserva.reservas[Ced])
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','La cedula digitada no existe')
+
+            def editarReserva(reserva):
+
+                contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+                contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+                lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+                numReserva=StringVar()
+                fechaReserva=StringVar()
+                horaReserva=StringVar()
+                cantPersonas=StringVar()
+
+                numReserva_label=Label(contenedor2 ,text="Numero de Reserva",bd=2,relief=SUNKEN,bg="light gray")
+                numReserva_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+                numReserva_entry=Entry(contenedor2,textvariable=numReserva)
+                numReserva_entry.insert(0,reserva.getNumreserva())
+                numReserva_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+ 
+                fechaReserva_label=Label(contenedor2 ,text="Fecha",bd=2,relief=SUNKEN,bg="light gray")
+                fechaReserva_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+                fechaReserva_entry=Entry(contenedor2,textvariable=fechaReserva)
+                fechaReserva_entry.insert(0,reserva.getFechareserva())
+                fechaReserva_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+                horaReserva_label=Label(contenedor2 ,text="Hora",bd=2,relief=SUNKEN,bg="light gray")
+                horaReserva_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+                horaReserva_entry=Entry(contenedor2,textvariable=horaReserva)
+                horaReserva_entry.insert(0,reserva.getHorareserva())
+                horaReserva_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+                cantPersonas_label=Label(contenedor2 ,text="Numero de personas",bd=2,relief=SUNKEN,bg="light gray")
+                cantPersonas_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+                cantPersonas_entry=Entry(contenedor2,textvariable=cantPersonas)
+                cantPersonas_entry.insert(0,reserva.getCantidadpersonas())
+                cantPersonas_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+                def edit(reserva):
+                    
+                   lista.delete(0,END)
+
+                   numero=numReserva_entry.get()
+                   fecha=fechaReserva_entry.get()
+                   hora=horaReserva_entry.get()
+                   cantidad=cantPersonas_entry.get()
+
+                   reserva.setNumreserva(numero)
+                   reserva.setFechareserva(fecha)
+                   reserva.setHorareserva(hora)
+                   reserva.setCantidadpersonas(cantidad)
+                   
+
+                   lista.insert(END,('¡Reserva editada con exito!'))
+                   lista.insert(END,('Numero de reserva: ',numero))
+                   lista.insert(END,('Fecha: ',fecha))
+                   lista.insert(END,('Hora: ',hora))
+                   lista.insert(END,('Cantidad de personas: ',cantidad))
+                  
+                   numReserva_entry.delete(0,END)
+                   fechaReserva_entry.delete(0,END)
+                   horaReserva_entry.delete(0,END)
+                   cantPersonas_entry.delete(0,END)
+                  
+
+                btnedit=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:edit(cliente))
+                btnedit.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)   
+   
+            btncomprobar=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
+            btncomprobar.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
 
         btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Reserva",bg="light gray",command=registrar)
         btn1.grid(row=0,column=0)
-        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Reserva",bg="light gray",command=ver)
+        btn2=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Ver Reservas",bg="light gray",command=ver)
         btn2.grid(row=0,column=1)
         btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Reserva",bg="light gray",command=eliminar)
         btn3.grid(row=0,column=2)
@@ -615,11 +1071,6 @@ def menu():
                 lista.insert(END,('Cargo: ',empleado.getCargo()))
                 lista.insert(END,('sueldo: ',empleado.getSueldo()))
                 lista.insert(END,'\n')
-
-            #for x in Empleado.empleados:
-            #    lista.insert(END,(Empleado.empleados[x]))
-
- 
             
 
         def elimEmpleado():
@@ -628,6 +1079,21 @@ def menu():
 
             lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
             lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Lista de empleados  '))
+            for cedula,empleado in Empleado.empleados.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ',empleado.nombre))
+                lista.insert(END,('Cedula: ',empleado.cedula))
+                lista.insert(END,('Telefono: ',empleado.telefono))
+                lista.insert(END,('Direccion: ',empleado.direccion))
+                lista.insert(END,('Cargo: ',empleado.getCargo()))
+                lista.insert(END,('sueldo: ',empleado.getSueldo()))
+                lista.insert(END,'\n')
 
             cedula=StringVar()
 
@@ -639,11 +1105,22 @@ def menu():
             cedula_entry=Entry(contenedor2,textvariable=cedula)
             cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
 
-            def eliminar():
-                print("empleado eliminado")
+            def comprobarCedula(Ced):
+                #Esta funcion lo que hace es verrificar si en la lista se encuentra la cedula que se ingresa(con el cedula_entry.get)
+                #si es asi permite editar de lo contrario emitira un mensaje de advertencia
+                try:
+                    if(Empleado.empleados[Ced]):
+                      lista.delete(0,END)
+                      Empleado.empleados.pop(Ced)
+                      showinfo('Mensaje','Empleado eliminado con exito')
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','La cedula digitada no existe')
              
 
-            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=eliminar)
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
             btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
 
         def editEmpleado():
@@ -652,6 +1129,10 @@ def menu():
 
             lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
             lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
 
             lista.insert(END,('Lista de empleados: '))
             lista.insert(END,'\n')
@@ -701,10 +1182,6 @@ def menu():
                 direccion=StringVar()
                 cargo=StringVar()
                 sueldo=StringVar()
-
-                #textExample = tk.Entry(root) 
-                #textExample.insert(0, "Default Text") 
-                #textExample.pack()
 
                 nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
                 nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
@@ -836,20 +1313,163 @@ def menu():
         Barra.place(relheight=0.07,relwidth=1)
 
         def registrar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            nombre=StringVar()
+            precio=StringVar()
+            insumos=StringVar()
+
+            nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+            nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+            nombre_entry=Entry(contenedor2,textvariable=nombre)
+            nombre_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+
+            precio_label=Label(contenedor2 ,text="Precio",bd=2,relief=SUNKEN,bg="light gray")
+            precio_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+            precio_entry=Entry(contenedor2,textvariable=precio)
+            precio_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+            insumos_label=Label(contenedor2 ,text="Insumos",bd=2,relief=SUNKEN,bg="light gray")
+            insumos_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+            insumos_entry=Entry(contenedor2,textvariable=insumos)
+            insumos_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+            def crear():
+                lista.delete(0,END)
+                
+                nombreInsumo=nombre_entry.get()
+                precioInsumo=precio_entry.get()
+                listInsumos=insumos_entry.get()
+            
+                newInsumo=Catalogo(nombreInsumo,precioInsumo,listInsumos)
+
+                lista.insert(END,('¡Plato agregado al catalogo con exito!'))
+                lista.insert(END,('Nombre: ',newInsumo.nombre))
+                lista.insert(END,('Precio: ',newInsumo.precio))
+                lista.insert(END,('Insumos: ',newInsumo.insumos))
+               
+
+                nombre_entry.delete(0,END)
+                precio_entry.delete(0,END)
+                insumos_entry.delete(0,END)
+                
+
+            btncrear=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray",command=crear)
+            btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
 
         def ver():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.06,rely=0.06,relheight=0.85,relwidth=0.85)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Catalogo'))
+            for idPlato,catalogo in Catalogo.listaPlatos.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ',catalogo.nombre))
+                lista.insert(END,('Precio: ',catalogo.precio))
+                lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,'\n')
 
         def eliminar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Catalogo'))
+            for idPlato,catalogo in Catalogo.listaPlatos.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ',catalogo.nombre))
+                lista.insert(END,('Precio: ',catalogo.precio))
+                lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,'\n')
+
+            nombreCat=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite el nombre del plato a eliminar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            nombreCat_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+            nombreCat_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            nombreCat_entry=Entry(contenedor2,textvariable=nombreCat)
+            nombreCat_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarPlato(id):
+                #no funciona este metodo
+                try:
+                    if(Catalogo.listaPlatos[id]):
+                      lista.delete(0,END)
+                      Catalogo.listaPlatos.pop(id)
+                      showinfo('Mensaje','Plato eliminado con exito')
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','Dicho plato no existe')
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarPlato(nombreCat_entry.get()))
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
         def editar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Catalogo'))
+            for idPlato,catalogo in Catalogo.listaPlatos.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('Nombre: ',catalogo.nombre))
+                lista.insert(END,('Precio: ',catalogo.precio))
+                lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,'\n')
+
+            nombreCat=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite el nombre del plato a editar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            nombreCat_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+            nombreCat_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            nombreCat_entry=Entry(contenedor2,textvariable=nombreCat)
+            nombreCat_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarPlato(id):
+                #no funciona este metodo
+                try:
+                    if(Catalogo.listaPlatos[id]):
+                      lista.delete(0,END)
+                      
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','Dicho plato no existe')
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:comprobarPlato(nombreCat_entry.get()))
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
 
         btn1=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Registrar Catalogo",bg="light gray",command=registrar)
         btn1.grid(row=0,column=0)
@@ -878,11 +1498,11 @@ def menu():
     mnuArchivo.add_command(label='Salir',command=salir)
     barraMenu.add_cascade(label='Archivo',menu=mnuArchivo)
     mnuProc=Menu(barraMenu)
-    mnuProc.add_command(label='Cliente',command=cliente)
+    mnuProc.add_command(label='Empleado',command=empleado)
     mnuProc.add_command(label='Reserva',command=reserva)
     mnuProc.add_command(label='Mesa',command=mesa)
     mnuProc.add_command(label='Pedido',command=pedido)
-    mnuProc.add_command(label='Empleado',command=empleado)
+    mnuProc.add_command(label='Cliente',command=cliente)
     mnuProc.add_command(label='Materia Prima',command=maPrima)
     mnuProc.add_command(label='Catalogo',command=catalogo)
     mnuAyu=Menu(barraMenu)

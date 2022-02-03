@@ -1,12 +1,13 @@
 class Reserva:
 
-    reservas=[]
+    reservas={}
     def __init__(self, cliente, numreserva,fechareserva, horareserva,cantidadpersonas):
         self.cliente = cliente
         self.numreserva=numreserva
         self.fechareserva=fechareserva
         self.horareserva=horareserva
         self.cantidadpersonas=cantidadpersonas
+        Reserva.reservas[numreserva]=self
     
 
     #getters y setters   
