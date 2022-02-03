@@ -662,15 +662,80 @@ def menu():
 
     #En esta seccion va todo lo relacionado con el menu mesa y sus funciones
     def mesa():
-        contenedor1=Frame(ventanaMenu ,bd=2,relief=SUNKEN)
+        contenedor1=Frame(ventanaMenu,bd=2,relief=SUNKEN)
         contenedor1.place(relx=0.01,rely=0.01,relheight=0.97,relwidth=0.97)
 
         Barra=Frame(contenedor1,bg="gray" ,bd=2,relief=SUNKEN)
         Barra.place(relheight=0.07,relwidth=1)
 
         def registrar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            id=StringVar()
+            numero=StringVar()
+            zona=StringVar()
+            disponibilidad=StringVar()
+            pedido=StringVar()
+            
+
+            id_label=Label(contenedor2 ,text="ID",bd=2,relief=SUNKEN,bg="light gray")
+            id_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+            id_entry=Entry(contenedor2,textvariable=id)
+            id_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+
+            numero_label=Label(contenedor2 ,text="Numero",bd=2,relief=SUNKEN,bg="light gray")
+            numero_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+            numero_entry=Entry(contenedor2,textvariable=numero)
+            numero_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+            zona_label=Label(contenedor2 ,text="Zona",bd=2,relief=SUNKEN,bg="light gray")
+            zona_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+            zona_entry=Entry(contenedor2,textvariable=zona)
+            zona_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+            disponibilidad_label=Label(contenedor2 ,text="Disponibilidad",bd=2,relief=SUNKEN,bg="light gray")
+            disponibilidad_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+            disponibilidad_entry=Entry(contenedor2,textvariable=disponibilidad)
+            disponibilidad_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+            pedido_label=Label(contenedor2 ,text="Pedido",bd=2,relief=SUNKEN,bg="light gray")
+            pedido_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+            pedido_entry=Entry(contenedor2,textvariable=pedido)
+            pedido_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+
+            def crear():
+                lista.delete(0,END)
+                
+                iddd=id_entry.get()
+                num=numero_entry.get()
+                zone=zona_entry.get()
+                disp=disponibilidad_entry.get()
+                ped=pedido_entry.get()
+            
+                newMesa=Mesa(iddd,num,zone,disp,ped)
+
+                lista.insert(END,('¡Mesa creada con exito!'))
+                lista.insert(END,('ID: ',newMesa._idUnico))
+                lista.insert(END,('Numero: ',newMesa._numero))
+                lista.insert(END,('Zona: ',newMesa._zona))
+                lista.insert(END,('Disponibilidad: ',newMesa._disponibilidad))
+                lista.insert(END,('Pedido: ',newMesa._pedido))
+              
+
+                id_entry.delete(0,END)
+                numero_entry.delete(0,END)
+                zona_entry.delete(0,END)
+                disponibilidad_entry.delete(0,END)
+                pedido_entry.delete(0,END)
+                
+
+            btncrear=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray",command=crear)
+            btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
 
         def ver():
             def entornoMesa(num_mesa):
@@ -759,8 +824,51 @@ def menu():
                 
 
         def eliminar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+            scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+            lista.config(yscrollcommand=scroll)
+
+            lista.insert(END,('Mesas  '))
+            for mesa in Mesa.mesas.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('ID: ',mesa.getidUnico()))
+                lista.insert(END,('Numero: ',mesa.getNumero()))
+                lista.insert(END,('Zona: ',mesa.getZona))
+                lista.insert(END,('Disponibilidad: ',mesa.isDisponibilidad()))
+                lista.insert(END,('Pedido: ',mesa.getPedido()))
+                lista.insert(END,'\n')
+
+            cedula=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite el ID de la mesa a eliminar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            id_label=Label(contenedor2 ,text="ID",bd=2,relief=SUNKEN,bg="light gray")
+            id_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            id_entry=Entry(contenedor2,textvariable=cedula)
+            id_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarCedula(id):
+                try:
+                    if(Mesa.mesas[id]):
+                      lista.delete(0,END)
+                      Mesa.mesas.pop(id)
+                      showinfo('Mensaje','Empleado eliminado con exito')
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','La cedula digitada no existe')
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarCedula(id_entry.get()))
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
 
         def editar():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
