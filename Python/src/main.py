@@ -678,10 +678,15 @@ def menu():
     
                 lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
                 lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
-    
                 scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
                 scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
                 lista.config(yscrollcommand=scroll)
+
+
+    
+                #scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+                #scroll.place(relx=0.,rely=0.067,relheight=0.3,relwidth=0.02)
+                #lista.config(yscrollcommand=scroll)
 
                 lista.insert(END,('Catalogo'))
                 for idPlato,catalogo in Catalogo.listaPlatos.items():
@@ -694,21 +699,25 @@ def menu():
                 
                 idPlato=StringVar()
 
-                numReserva_label=Label(contenedor2 ,text="Numero de Reserva",bd=2,relief=SUNKEN,bg="light gray")
-                numReserva_label.place(relx=0.05,rely=0.08,relheight=0.6,relwidth=0.15)
-                numReserva_entry=Entry(contenedor2,textvariable=idPlato)
-                #numReserva_entry.insert(0,reserva.getNumreserva())
-                numReserva_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
-                
-                contenedor3=Frame(contenedor1,bd=2,relief=SUNKEN)
-                contenedor3.place(rely=0.07,relheight=0.97,relwidth=0.5)
+                codePlato_label=Label(contenedor2 ,text="Codigo Plato",bd=2,relief=SUNKEN,bg="light gray")
+                codePlato_label.place(relx=0.01,rely=0.6,relheight=0.05,relwidth=0.2)
+                codePlato_entry=Entry(contenedor2,textvariable=idPlato)
+                codePlato_entry.place(relx=0.25,rely=0.6,relheight=0.05,relwidth=0.25)
 
-                lista1=Listbox(contenedor3,bd=2,relief=SUNKEN)
-                lista1.place(relx=0.06,rely=0.08,relheight=0.45,relwidth=0.65)
+                catnPlato_label=Label(contenedor2 ,text="Cantidad",bd=2,relief=SUNKEN,bg="light gray")
+                catnPlato_label.place(relx=0.01,rely=0.7,relheight=0.05,relwidth=0.2)
+                catnPlato_entry=Entry(contenedor2,textvariable=idPlato)
+                catnPlato_entry.place(relx=0.25,rely=0.7,relheight=0.05,relwidth=0.25)
 
-                scroll=Scrollbar(contenedor3,bd=3,relief=SUNKEN,bg="gray",command=lista1.yview)
-                scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+                lista1=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                lista1.place(relx=0.01,rely=0.08,relheight=0.45,relwidth=0.4)
+
+                scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista1.yview)
+                scroll.place(relx=0.4,rely=0.08,relheight=0.45,relwidth=0.02)
                 lista1.config(yscrollcommand=scroll)
+
+                codigoPlato=codePlato_entry.get()
+                cantidadPlato=catnPlato_entry.get()
 
                 lista1.insert(END,(f'Pedido actual mesa {num_mesa}'))
                 for mesa in Mesa.mesas[num_mesa].pedido:
@@ -1849,12 +1858,7 @@ mensaje.pack()
 
 
 
-<<<<<<< Updated upstream
+
 Empleado.lecturaSempleado()
 Mesa.ingreso_datos()
 ventana.mainloop() 
-=======
-#Empleado.lecturaSempleado()
-#Mesa.ingreso_datos()
-#ventana.mainloop() 
->>>>>>> Stashed changes
