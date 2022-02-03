@@ -1508,10 +1508,10 @@ def menu():
             lista.config(yscrollcommand=scroll)
 
             lista.insert(END,('Materia prima'))
-            for materiaprima in materiaPrima.insumos.items():
+            for nombre, insumo in materiaPrima.insumos.items():
                 lista.insert(END,'\n')
-                lista.insert(END,('Nombre: ' ,materiaprima.nombreInsumo))
-                lista.insert(END,('Cantidad: ',materiaprima.cantInsumo))
+                lista.insert(END,('Nombre: ' ,nombre))
+                lista.insert(END,('Cantidad: ',insumo.cantInsumo))
                 lista.insert(END,'\n')
 
         def eliMaPrima():
