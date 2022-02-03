@@ -671,6 +671,54 @@ def menu():
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
         def ver():
+            def entornoMesa(num_mesa):
+                contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+                contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+    
+                lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+    
+                scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+                scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+                lista.config(yscrollcommand=scroll)
+
+                lista.insert(END,('Catalogo'))
+                for idPlato,catalogo in Catalogo.listaPlatos.items():
+                    lista.insert(END,'\n')
+                    lista.insert(END,(f'Código: {idPlato}'))
+                    lista.insert(END,(f'Nombre: {catalogo.nombre}'))
+                    lista.insert(END,(f'Precio: {catalogo.precio}'))
+                    #lista.insert(END,('Insumos: ',catalogo.insumos))
+                    lista.insert(END,'\n')
+                
+                idPlato=StringVar()
+
+                numReserva_label=Label(contenedor2 ,text="Numero de Reserva",bd=2,relief=SUNKEN,bg="light gray")
+                numReserva_label.place(relx=0.05,rely=0.08,relheight=0.6,relwidth=0.15)
+                numReserva_entry=Entry(contenedor2,textvariable=idPlato)
+                #numReserva_entry.insert(0,reserva.getNumreserva())
+                numReserva_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+                
+                contenedor3=Frame(contenedor1,bd=2,relief=SUNKEN)
+                contenedor3.place(rely=0.07,relheight=0.97,relwidth=0.5)
+
+                lista1=Listbox(contenedor3,bd=2,relief=SUNKEN)
+                lista1.place(relx=0.06,rely=0.08,relheight=0.45,relwidth=0.65)
+
+                scroll=Scrollbar(contenedor3,bd=3,relief=SUNKEN,bg="gray",command=lista1.yview)
+                scroll.place(relx=0.96,rely=0.067,relheight=0.5,relwidth=0.02)
+                lista1.config(yscrollcommand=scroll)
+
+                lista1.insert(END,(f'Pedido actual mesa {num_mesa}'))
+                for mesa in Mesa.mesas[num_mesa].pedido:
+                    lista.insert(END,'\n')
+                    #.insert(END,(f'Código: {idPlato}'))
+                    lista.insert(END,(f'Nombre: {mesa.nombre}'))
+                    lista.insert(END,(f'Precio: {mesa.precio}'))
+                    #lista.insert(END,('Insumos: ',catalogo.insumos))
+                    lista.insert(END,'\n')
+
+
             pos_y = 0
             pos_x = 1
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
@@ -688,9 +736,13 @@ def menu():
             Mesa.ingreso_datos()
             Mesa.verMesas()
             for num in Mesa.mesas.keys():
-                btn7 = Button(contenedor2, width=10, text=f'Mesa {num}', background = "green", command=pedido)
+                btn7 = Button(contenedor2, width=10, text=f'Mesa {num}', background = "green", command=lambda : entornoMesa(num))
                 btn7.grid(padx=0, pady=2, row=pos_y, column=pos_x)
                 pos_x, pos_y = actualizar_posicion(pos_x, pos_y)
+        
+            
+#------------------------------------------------------------------------------------------------------------------
+                
                 
 
         def eliminar():
@@ -1375,9 +1427,10 @@ def menu():
             lista.insert(END,('Catalogo'))
             for idPlato,catalogo in Catalogo.listaPlatos.items():
                 lista.insert(END,'\n')
-                lista.insert(END,('Nombre: ',catalogo.nombre))
-                lista.insert(END,('Precio: ',catalogo.precio))
-                lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,(f'Código: {idPlato}'))
+                lista.insert(END,(f'Nombre: {catalogo.nombre}'))
+                lista.insert(END,(f'Precio: {catalogo.precio}'))
+                #lista.insert(END,('Insumos: ',catalogo.insumos))
                 lista.insert(END,'\n')
 
         def eliminar():
@@ -1758,9 +1811,5 @@ mensaje.pack()
 
 
 Empleado.lecturaSempleado()
-<<<<<<< Updated upstream
 Mesa.ingreso_datos()
-=======
-#Mesa.ingreso_datos()
->>>>>>> Stashed changes
 ventana.mainloop() 
