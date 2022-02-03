@@ -1007,9 +1007,6 @@ def menu():
             idpedido_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
             idpedido_entry=Entry(contenedor2,textvariable=idpedido)
             idpedido_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
-
-            def eliminar():
-                print("pedido eliminado")
              
 
             btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=eliminar)
@@ -1143,10 +1140,10 @@ def menu():
         btn2.grid(row=0,column=1)
         btn3=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Eliminar Pedido",bg="light gray",command=eliminar)
         btn3.grid(row=0,column=2)
-        btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Pedido",bg="light gray",command=editar)
-        btn4.grid(row=0,column=3)
-        btn5=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Facturar Pedido",bg="light gray",command=facturar)
-        btn5.grid(row=0,column=4)
+        #btn4=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Editar Pedido",bg="light gray",command=editar)
+        #btn4.grid(row=0,column=3)
+        #btn5=Button(Barra,width=20 ,bd=2,relief=SUNKEN,text="Facturar Pedido",bg="light gray",command=facturar)
+        #btn5.grid(row=0,column=4)
 
     
     
