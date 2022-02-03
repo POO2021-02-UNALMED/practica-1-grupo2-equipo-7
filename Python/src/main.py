@@ -1477,11 +1477,11 @@ def menu():
                 name=nombre_entry.get()
                 ct=cantidad_entry.get()
                 
-                newMateriaprima=materiaprima(name,ct)
+                newMateriaprima=materiaPrima(name,ct)
                
-                lista.insert(END,('¡Empleado creado con exito!'))
-                lista.insert(END,('Nombre: ',newMateriaprima.nombre))
-                lista.insert(END,('Cantidad: ',newMateriaprima.cantidad))
+                lista.insert(END,('¡Materia prima creada con exito!'))
+                lista.insert(END,('Nombre: ',newMateriaprima.nombreInsumo))
+                lista.insert(END,('Cantidad: ',newMateriaprima.cantInsumo))
                 
 
                 nombre_entry.delete(0,END)
@@ -1502,12 +1502,11 @@ def menu():
             scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
             lista.config(yscrollcommand=scroll)
 
-            lista.insert(END,('materiaprima'))
-            for nombreInsumo,materiaprima in materiaPrima.insumos.items():
+            lista.insert(END,('Materia prima'))
+            for materiaprima in materiaPrima.insumos.items():
                 lista.insert(END,'\n')
-                lista.insert(END,(f'Nombre: {materiaprima.nombre}'))
-                lista.insert(END,(f'Cantidad: {materiaprima.cantidad}'))
-                #lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,('Nombre: ' ,materiaprima.nombreInsumo))
+                lista.insert(END,('Cantidad: ',materiaprima.cantInsumo))
                 lista.insert(END,'\n')
 
         def eliMaPrima():
