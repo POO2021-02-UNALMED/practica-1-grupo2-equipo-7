@@ -1,4 +1,5 @@
 import pickle
+from gestorAplicacion import empleado
 from persona import Persona
 class Empleado(Persona):
 
@@ -8,10 +9,6 @@ class Empleado(Persona):
         self._cargo=cargo
         self._sueldo=sueldo
         Empleado.empleados[cedula]=self
-
-        
-
-    
 
     
     def setCargo(self, cargos):
@@ -27,7 +24,20 @@ class Empleado(Persona):
         return self._sueldo     
 
     @classmethod
-    def lecturaSempleado(cls):
+
+    def escrituraSempleado(cls):
+
+     fichero_binario=open("losEmpleados","wb")
+
+     pickle.dump(empleados, fichero_binario
+
+     fichero_binario.close()
+
+     del(fichero_binario)
+
+
+
+     def lecturaSempleado(cls):
     
      fichero=open("losEmpleados", "rb")
 
@@ -38,3 +48,5 @@ class Empleado(Persona):
      for c in misEmpleados:
 
       print(c.estado())
+
+
