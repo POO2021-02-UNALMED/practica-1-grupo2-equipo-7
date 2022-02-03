@@ -11,6 +11,7 @@ import tkinter as tk
 from tkinter.messagebox import showinfo, showwarning
 from turtle import bgcolor, right
 from gestorAplicacion.cliente import Cliente
+from gestorAplicacion.pedido import Pedido
 
 from gestorAplicacion.persona import Persona
 from gestorAplicacion.empleado import Empleado
@@ -265,23 +266,230 @@ def menu():
         Barra.place(relheight=0.07,relwidth=1)
 
         def registrar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            cliente=StringVar()
+            mesa=StringVar()
+            idpedido=StringVar()
+            plato=StringVar()
+            
+
+            cliente_label=Label(contenedor2 ,text="cliente",bd=2,relief=SUNKEN,bg="light gray")
+            cliente_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+            cliente_entry=Entry(contenedor2,textvariable=cliente)
+            cliente_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+
+            mesa_label=Label(contenedor2 ,text="mesa",bd=2,relief=SUNKEN,bg="light gray")
+            mesa_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+            mesa_entry=Entry(contenedor2,textvariable=mesa)
+            mesa_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+            idpedido_label=Label(contenedor2 ,text="idpedido",bd=2,relief=SUNKEN,bg="light gray")
+            idpedido_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+            idpedido_entry=Entry(contenedor2,textvariable=idpedido)
+            idpedido_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+            plato_label=Label(contenedor2 ,text="plato",bd=2,relief=SUNKEN,bg="light gray")
+            plato_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+            plato_entry=Entry(contenedor2,textvariable=plato)
+            plato_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+            
+            def crear():
+                lista.delete(0,END)
+                
+                cli=cliente_entry.get()
+                me=mesa.get()
+                id=idpedido_entry.get()
+                pl=plato_entry.get()
+                
+
+                pedidoNew=Pedido(cli,me,id,pl)
+
+                lista.insert(END,('¡pedido realizado con exito!'))
+                lista.insert(END,('cliente: ',pedidoNew.cliente))
+                lista.insert(END,('mesa: ',pedidoNew.mesa))
+                lista.insert(END,('idpedido: ',pedidoNew.idpedido))
+                lista.insert(END,('plato: ',pedidoNew.platos))
+               
+
+                cliente_entry.delete(0,END)
+                mesa_entry.delete(0,END)
+                idpedido_entry.delete(0,END)
+                plato_entry.delete(0,END)
+                
+            btncrear=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray",command=crear)
+            btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
+
+
         def ver():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
-            contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+             lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+             lista.place(relx=0.06,rely=0.06,relheight=0.85,relwidth=0.85)
+
+             scroll=Scrollbar(contenedor2,bd=3,relief=SUNKEN,bg="gray",command=lista.yview)
+             scroll.place(relx=0.91,rely=0.064,relheight=0.85,relwidth=0.02)
+             lista.config(yscrollcommand=scroll)
+
+             lista.insert(END,('Lista de pedidos  '))
+             for idpedido,pedido in Pedido.pedidos.items():
+                lista.insert(END,'\n')
+                lista.insert(END,('cliente: ',pedido.cliente))
+                lista.insert(END,('mesa: ',pedido.mesa))
+                lista.insert(END,('idpedido: ',pedido.idpedido))
+                lista.insert(END,('plato: ',pedido.plato))
+                lista.insert(END,'\n')
             
         
 
 
         def eliminar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="white")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
 
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            idpedido=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite el idpedido del pedido que desea eliminar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            idpedido_label=Label(contenedor2 ,text="idpedido",bd=2,relief=SUNKEN,bg="light gray")
+            idpedido_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            idpedido_entry=Entry(contenedor2,textvariable=idpedido)
+            idpedido_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def eliminar():
+                print("pedido eliminado")
+             
+
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=eliminar)
+            btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
         def editar():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="black")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            lista.insert(END,('Lista de pedidos: '))
+            lista.insert(END,'\n')
+            #un for que recorra la lista
+            for idpedido,pedido in Pedido.pedidos.items():
+                lista.insert(END,('cliente: ',pedido.cliente))
+                lista.insert(END,('mesa: ',pedido.mesa))
+                lista.insert(END,('idpedido: ',pedido.idpedido))
+                lista.insert(END,('plato: ',pedido.plato))
+                lista.insert(END,'\n')
+
+            idpedido=StringVar()
+
+            msg_label=Label(contenedor2 ,text="Digite el idpedido del pedido a editar",font="Elephant")
+            msg_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.52)
+
+            idpedido_label=Label(contenedor2 ,text="idpedido",bd=2,relief=SUNKEN,bg="light gray")
+            idpedido_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
+            idpedido_entry=Entry(contenedor2,textvariable=idpedido)
+            idpedido_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
+
+            def comprobarPedido(ped):
+                #Esta funcion lo que hace es verrificar si en la lista se encuentra la cedula que se ingresa(con el cedula_entry.get)
+                #si es asi permite editar de lo contrario emitira un mensaje de advertencia
+                try:
+                    if(Pedido.pedidos[ped]):
+                      editarPedido(Pedido.pedidos[ped])
+                    else:
+                       raise KeyError 
+                
+                except KeyError:
+                    showwarning('Advertencia','el idpedido digitado  no existe') 
+
+            def editarPedido(pedido):
+
+                contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
+                contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+                lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+                lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+                cliente=StringVar()
+                mesa=StringVar()
+                idpedido=StringVar()
+                plato=StringVar()
+                
+                #textExample = tk.Entry(root) 
+                #textExample.insert(0, "Default Text") 
+                #textExample.pack()
+
+                cliente_label=Label(contenedor2 ,text="cliente",bd=2,relief=SUNKEN,bg="light gray")
+                cliente_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+                cliente_entry=Entry(contenedor2,textvariable=cliente)
+                cliente_entry.insert(0,pedido.getCliente())
+                cliente_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+ 
+                mesa_label=Label(contenedor2 ,text="mesa",bd=2,relief=SUNKEN,bg="light gray")
+                mesa_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+                mesa_entry=Entry(contenedor2,textvariable=mesa)
+                mesa_entry.insert(0,pedido.getMesa())
+                mesa_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+                idpedido_label=Label(contenedor2 ,text="idpedido",bd=2,relief=SUNKEN,bg="light gray")
+                idpedido_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
+                idpedido_entry=Entry(contenedor2,textvariable=idpedido)
+                idpedido_entry.insert(0,pedido.getIdpedido())
+                idpedido_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
+
+                plato_label=Label(contenedor2 ,text="plato",bd=2,relief=SUNKEN,bg="light gray")
+                plato_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
+                plato_entry=Entry(contenedor2,textvariable=plato)
+                plato_entry.insert(0,pedido.getPlato())
+                plato_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
+
+                
+
+                def edit(Pedido):
+                    
+                   lista.delete(0,END)
+                   #print(nombre_entry.get())
+                   cli=cliente_entry.get()
+                   me=mesa_entry.get()
+                   id=idpedido_entry.get()
+                   pl=plato_entry.get()
+                   
+
+                   pedido.setCliente(cli)
+                   pedido.setMesa(me)
+                   pedido.setIdpedido(id)
+                   pedido.setPlato(pl)
+                   
+
+                   lista.insert(END,('¡pedido editado con exito!'))
+                   lista.insert(END,('cliente: ',cli))
+                   lista.insert(END,('mesa: ',me))
+                   lista.insert(END,('idpedido: ',id))
+                   lista.insert(END,('plato: ',pl))
+                   
+                   cliente_entry.delete(0,END)
+                   mesa_entry.delete(0,END)
+                   idpedido_entry.delete(0,END)
+                   plato_entry.delete(0,END)
+                   
+
+                btncrear=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:edit(pedido))
+                btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)   
+   
+            btneditar=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda: comprobarPedido(idpedido_entry.get()))
+            btneditar.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
+
+    
 
         def facturar():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="blue")

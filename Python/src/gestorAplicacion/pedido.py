@@ -8,7 +8,8 @@ class Pedido():
         self.mesa=mesa
         self.idpedido=idpedido
         self.platos=pedidos
-    
+        Pedido.pedidos[idpedido]=self
+
 
     #getters y setters   
     def setCliente(self, cliente):

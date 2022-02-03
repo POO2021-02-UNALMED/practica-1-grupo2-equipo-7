@@ -1,3 +1,4 @@
+import pickle
 
 class Catalogo():
     
@@ -11,6 +12,24 @@ class Catalogo():
         Catalogo.listaPlatos[Catalogo.idPlato] = self
         Catalogo.idPlato += 1
         self.insumos = insumos
+
+    fichero_binario=open("Elcatalogo","wb")
+
+    pickle.dump(listaPlatos, fichero_binario)
+
+    fichero_binario.close()
+
+    del(fichero_binario)
+
+fichero=open("Elcatalogo", "rb")
+
+miCatalogo=pickle.load(fichero)
+
+fichero.close()
+
+for c in miCatalogo:
+
+    print(c.estado())
 
     #getters y setters
     def setNombrePlato(self, nombres):

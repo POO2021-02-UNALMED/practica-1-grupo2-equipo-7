@@ -17,13 +17,6 @@ class Empleado(Persona):
     fichero_binario.close()
 
     del(fichero_binario)
-
- #getters y setters
-    #def setId(self, id):
-    #     self.id = id
-
-    #def getId(self):
-    #     return self.id    
     
     def setCargo(self, cargos):
          self._cargo = cargos
