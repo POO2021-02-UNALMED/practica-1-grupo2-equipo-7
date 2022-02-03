@@ -205,11 +205,8 @@ def menu():
             cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
 
             def comprobarCedula(Ced):
-                print(Cliente.clientes[Ced])
-                #Esta funcion lo que hace es verrificar si en la lista se encuentra la cedula que se ingresa(con el cedula_entry.get)
-                #si es asi permite editar de lo contrario emitira un mensaje de advertencia
                 try:
-                    if(Cliente.clientes[Ced]):
+                    if(Cliente.clientes[int(Ced)]):
                       lista.delete(0,END)
                       Cliente.clientes.pop(Ced)
                       showinfo('Mensaje','Empleado eliminado con exito')
@@ -220,7 +217,7 @@ def menu():
                     showwarning('Advertencia','La cedula digitada no existe')
              
 
-            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
+            btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarCedula(int(cedula_entry.get())))
             btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
 
         
@@ -259,15 +256,15 @@ def menu():
 
             def comprobarCedula(Ced):
                 try:
-                    if(Cliente.clientes[Ced]):
-                      editarCliente(Cliente.clientes[Ced])
+                    if(Cliente.clientes[int(Ced)]):
+                      editarCliente(Cliente.clientes[int(Ced)])
                     else:
                        raise KeyError 
                 
                 except KeyError:
-                    showwarning('Advertencia','La cedula digitada no existe') 
+                    showwarning('Advertencia','La cedula digitada no existe')
 
-            def editarCliente(empleado):
+            def editarCliente(cliente):
 
                 contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
                 contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
@@ -283,25 +280,25 @@ def menu():
                 nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
                 nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
                 nombre_entry=Entry(contenedor2,textvariable=nombre)
-                nombre_entry.insert(0,empleado.getNombre())
+                nombre_entry.insert(0,cliente.getNombre())
                 nombre_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
  
                 cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
                 cedula_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
                 cedula_entry=Entry(contenedor2,textvariable=cedula)
-                cedula_entry.insert(0,empleado.getCedula())
+                cedula_entry.insert(0,cliente.getCedula())
                 cedula_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
 
                 telefono_label=Label(contenedor2 ,text="Telefono",bd=2,relief=SUNKEN,bg="light gray")
                 telefono_label.place(relx=0.05,rely=0.24,relheight=0.05,relwidth=0.15)
                 telefono_entry=Entry(contenedor2,textvariable=telefono)
-                telefono_entry.insert(0,empleado.getTelefono())
+                telefono_entry.insert(0,cliente.getTelefono())
                 telefono_entry.place(relx=0.22,rely=0.24,relheight=0.05,relwidth=0.35)
 
                 direccion_label=Label(contenedor2 ,text="Direccion",bd=2,relief=SUNKEN,bg="light gray")
                 direccion_label.place(relx=0.05,rely=0.32,relheight=0.05,relwidth=0.15)
                 direccion_entry=Entry(contenedor2,textvariable=direccion)
-                direccion_entry.insert(0,empleado.getDireccion())
+                direccion_entry.insert(0,cliente.getDireccion())
                 direccion_entry.place(relx=0.22,rely=0.32,relheight=0.05,relwidth=0.35)
 
                 def edit(cliente):
@@ -391,8 +388,8 @@ def menu():
 
             def comprobarCedula(Ced):
                 try:
-                    if(Cliente.clientes[Ced]):
-                      registrarReserva(Cliente.clientes[Ced])
+                    if(Cliente.clientes[int(Ced)]):
+                      registrarReserva(Cliente.clientes[int(Ced)])
                     else:
                        raise KeyError 
                 
@@ -508,33 +505,34 @@ def menu():
 
             cedula=StringVar()
 
-            msg_label=Label(contenedor2 ,text="Digite la cedula del cliente al cual desea eliminar la reserva",font="Elephant")
+            msg_label=Label(contenedor2 ,text="Digite el numero de reserva del cliente al cual desea eliminar la reserva",font="Elephant")
             msg_label.place(relx=0.02,rely=0.08,relheight=0.05,relwidth=0.56)
 
-            cedula_label=Label(contenedor2 ,text="Cedula",bd=2,relief=SUNKEN,bg="light gray")
+            cedula_label=Label(contenedor2 ,text="Numero Reserva",bd=2,relief=SUNKEN,bg="light gray")
             cedula_label.place(relx=0.05,rely=0.18,relheight=0.05,relwidth=0.15)
             cedula_entry=Entry(contenedor2,textvariable=cedula)
             cedula_entry.place(relx=0.22,rely=0.18,relheight=0.05,relwidth=0.35)
 
             def comprobarCedula(Ced):
-                print(Reserva.reservas[Ced])
-                #Esta funcion lo que hace es verrificar si en la lista se encuentra la cedula que se ingresa(con el cedula_entry.get)
-                #si es asi permite editar de lo contrario emitira un mensaje de advertencia
+                #try:
+                #    if(Cliente.clientes[int(Ced)]):
+                #      editarCliente(Cliente.clientes[int(Ced)])
+                #    else:
+                #       raise KeyError 
+                #
+                #except KeyError:
+                #    showwarning('Advertencia','La cedula digitada no existe')
+
                 try:
-                    if(Reserva.reservas[Ced]):
+                    if(Reserva.reservas[int(Ced)]):
                       lista.delete(0,END)
                       Reserva.reservas.pop(Ced)
                       showinfo('Mensaje','Reserva eliminada con exito')
-                      #Cliente.clientes[Ced]
                     else:
                        raise KeyError 
                 
                 except KeyError:
                     showwarning('Advertencia','La cedula digitada no existe')
-
-            #editarCliente(cliente):
-            #    cliente.setReserva(None)
-             
 
             btnelim=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Eliminar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
             btnelim.place(relx=0.1,rely=0.3,relheight=0.05,relwidth=0.25)
@@ -572,9 +570,8 @@ def menu():
 
             def comprobarCedula(Ced):
                 try:
-                    if(Reserva.reservas[Ced]):
-                      lista.delete(0,END)
-                      editarReserva(Reserva.reservas[Ced])
+                    if(Reserva.reservas[int(Ced)]):
+                      editarReserva(Reserva.reservas[int(Ced)])
                     else:
                        raise KeyError 
                 
@@ -645,7 +642,7 @@ def menu():
                    cantPersonas_entry.delete(0,END)
                   
 
-                btnedit=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:edit(cliente))
+                btnedit=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:edit(reserva))
                 btnedit.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)   
    
             btncomprobar=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Editar",bg="light gray",command=lambda:comprobarCedula(cedula_entry.get()))
@@ -1761,5 +1758,5 @@ mensaje.pack()
 
 
 Empleado.lecturaSempleado()
-#Mesa.ingreso_datos()
+Mesa.ingreso_datos()
 ventana.mainloop() 
