@@ -1,5 +1,6 @@
 from inspect import ismethoddescriptor
 from gestorAplicacion.catalogo import Catalogo
+import pickle
 class Pedido():
 
     pedidos={Catalogo : int}
@@ -10,6 +11,14 @@ class Pedido():
         self.platos=pedidos
         Pedido.pedidos[idpedido]=self
 
+    fichero_binario=open("losPedidos","wb")
+
+    pickle.dump(pedidos, fichero_binario)
+
+    fichero_binario.close()
+
+    del(fichero_binario)
+    
 
     #getters y setters   
     def setCliente(self, cliente):
