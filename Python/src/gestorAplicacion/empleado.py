@@ -1,4 +1,5 @@
 from gestorAplicacion.persona import Persona
+import pickle
 
 class Empleado(Persona):
 
@@ -8,6 +9,14 @@ class Empleado(Persona):
         self._cargo=cargo
         self._sueldo=sueldo
         Empleado.empleados[cedula]=self
+
+    fichero_binario=open("losEmpleados","wb")
+
+    pickle.dump(empleados, fichero_binario)
+
+    fichero_binario.close()
+
+    del(fichero_binario)
 
  #getters y setters
     #def setId(self, id):
