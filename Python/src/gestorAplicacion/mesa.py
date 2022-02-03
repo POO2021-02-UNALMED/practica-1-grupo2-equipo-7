@@ -62,6 +62,9 @@ class Mesa():
     def getPedido(self):
         return self._pedido
 
+    def setPedido(self, plato, cantidad):
+        self.pedido[plato] = cantidad
+
     def isDisponibilidad(self):
         if (self._disponibilidad):
             return "Disponible"

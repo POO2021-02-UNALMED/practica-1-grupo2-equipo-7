@@ -720,6 +720,8 @@ def menu():
                 codigoPlato=codePlato_entry.get()
                 cantidadPlato=catnPlato_entry.get()
 
+                Mesa.mesas[num_mesa].setPedido(Catalogo.listaPlatos[codigoPlato], cantidadPlato)
+
                 lista1.insert(END,(f'Pedido actual mesa {num_mesa}'))
                 for mesa in Mesa.mesas[num_mesa].pedido:
                     lista.insert(END,'\n')
