@@ -1,4 +1,4 @@
-from gestorAplicacion.persona import Persona
+from persona import Persona
 import pickle
 class Cliente(Persona):
 
@@ -16,7 +16,15 @@ class Cliente(Persona):
 
     del(fichero_binario)
 
-    
+fichero=open("LosClientes", "rb")
+
+misClientes=pickle.load(fichero)
+
+fichero.close()
+
+for c in misClientes:
+
+    print(c.estado())
     @classmethod
 
     def verClientes(cls):

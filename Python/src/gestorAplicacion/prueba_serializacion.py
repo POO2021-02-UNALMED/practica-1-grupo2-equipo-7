@@ -1,52 +1,23 @@
 import pickle
-from gestorAplicacion import empleado
-from persona import Persona
-class Empleado(Persona):
+import mesa
 
-    empleados={}
-    def __init__(self, cedula, nombre, telefono, direccion, cargo, sueldo):
-        super().__init__(cedula, nombre, telefono, direccion)
-        self._cargo=cargo
-        self._sueldo=sueldo
-        Empleado.empleados[cedula]=self
+class Mesa():
 
+    mesas = {}
+    #baseDedatos.base_de_datos()
     
-    def setCargo(self, cargos):
-         self._cargo = cargos
+    def __init__(self, id, numero, zona, disponibilidad = True, pedidoM = None):
+        self._idUnico        = id
+        self._numero         = numero
+        self._zona           = zona
+        self._disponibilidad = disponibilidad
+        self.pedido         = pedidoM
+        Mesa.mesas[numero] = self
 
-    def getCargo(self):
-        return self._cargo 
+    fichero_binario=open("lasmesas","wb")
 
-    def setSueldo(self,sueldos):
-        self._sueldo = sueldos
+    pickle.dump(mesas, fichero_binario)
 
-    def getSueldo(self):
-        return self._sueldo     
+    fichero_binario.close()
 
-    @classmethod
-
-    def escrituraSempleado(cls, empleados):
-
-        fichero_binario=open("losEmpleados","wb")
-
-        pickle.dump(empleados, fichero_binario)
-
-        fichero_binario.close()
-
-        del(fichero_binario)
-
-
-
-    def lecturaSempleado(cls):
-    
-        fichero=open("losEmpleados", "rb")
-
-        Empleado.empleados=pickle.load(fichero)
-
-        fichero.close()
-
-     #for c in misEmpleados:
-
-      #print(c.estado())
-
-
+    del(fichero_binario)

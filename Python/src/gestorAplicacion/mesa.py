@@ -6,7 +6,7 @@ from gestorAplicacion.empleado import Empleado
 from gestorAplicacion.pedido import Pedido
 from gestorAplicacion.materiaprima import materiaPrima
 import random
-
+import pickle
 from gestorAplicacion.reserva import Reserva 
 
 class Mesa():
@@ -21,7 +21,15 @@ class Mesa():
         self._disponibilidad = disponibilidad
         self.pedido         = pedidoM
         Mesa.mesas[numero] = self
-    
+
+    fichero_binario=open("lasmesas","wb")
+
+    pickle.dump(mesas, fichero_binario)
+
+    fichero_binario.close()
+
+    del(fichero_binario)
+
     def getIdunico(self):
         return self._idUnico
 

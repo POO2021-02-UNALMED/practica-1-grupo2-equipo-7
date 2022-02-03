@@ -1,3 +1,5 @@
+
+import pickle
 class materiaPrima:
 
     insumos={}
@@ -5,7 +7,15 @@ class materiaPrima:
         self.nombreInsumo= nombreInsumo
         self.cantInsumo=cantInsumo
         materiaPrima.insumos[nombreInsumo] = self
-    
+
+    fichero_binario=open("LosInsumos","wb")
+
+    pickle.dump(insumos, fichero_binario)
+
+    fichero_binario.close()
+
+    del(fichero_binario)
+
     #getters y setters   
     def setNombreInsumo(self, nombreInsumo):
         self.cliente = nombreInsumo
