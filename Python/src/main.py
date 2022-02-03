@@ -778,16 +778,19 @@ def menu():
                 scroll.place(relx=0.4,rely=0.08,relheight=0.45,relwidth=0.02)
                 lista1.config(yscrollcommand=scroll)
 
-                btn=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray",)
-                btn.place(relx=0.1,rely=0.8,relheight=0.05,relwidth=0.2)
-
                 codigoPlato=codePlato_entry.get()
                 cantidadPlato=catnPlato_entry.get()
+                def insertPedido():
+                    Mesa.mesas[num_mesa].setPedido(Catalogo.listaPlatos[int(codigoPlato)], int(cantidadPlato))
 
-                Mesa.mesas[num_mesa].setPedido(Catalogo.listaPlatos[codigoPlato], cantidadPlato)
+                btn=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray", command=insertPedido)
+                btn.place(relx=0.1,rely=0.8,relheight=0.05,relwidth=0.2)
+
+                
+                
 
                 lista1.insert(END,(f'Pedido actual mesa {num_mesa}'))
-                for mesa in Mesa.mesas[num_mesa].pedido:
+                for mesa in Mesa.mesas[num_mesa].getPedido():
                     lista.insert(END,'\n')
                     #.insert(END,(f'Código: {idPlato}'))
                     lista.insert(END,(f'Nombre: {mesa.nombre}'))
