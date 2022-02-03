@@ -1587,9 +1587,9 @@ def menu():
                 newInsumo=Catalogo(nombreInsumo,precioInsumo,listInsumos)
 
                 lista.insert(END,('¡Plato agregado al catalogo con exito!'))
-                lista.insert(END,('Nombre: ',newInsumo.nombre))
-                lista.insert(END,('Precio: ',newInsumo.precio))
-                lista.insert(END,('Insumos: ',newInsumo.insumos))
+                lista.insert(END,(f'Nombre: {newInsumo.nombre}'))
+                lista.insert(END,(f'Precio: {newInsumo.precio}'))
+                lista.insert(END,(f'Insumos: {newInsumo.insumos}'))
                
 
                 nombre_entry.delete(0,END)
@@ -1634,9 +1634,9 @@ def menu():
             lista.insert(END,('Catalogo'))
             for idPlato,catalogo in Catalogo.listaPlatos.items():
                 lista.insert(END,'\n')
-                lista.insert(END,('Nombre: ',catalogo.nombre))
-                lista.insert(END,('Precio: ',catalogo.precio))
-                lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,(f'Nombre: {catalogo.nombre}'))
+                lista.insert(END,(f'Precio: {catalogo.precio}'))
+                #lista.insert(END,(f'Insumos: {catalogo.insumos}'))
                 lista.insert(END,'\n')
 
             nombreCat=StringVar()
@@ -1680,9 +1680,9 @@ def menu():
             lista.insert(END,('Catalogo'))
             for idPlato,catalogo in Catalogo.listaPlatos.items():
                 lista.insert(END,'\n')
-                lista.insert(END,('Nombre: ',catalogo.nombre))
-                lista.insert(END,('Precio: ',catalogo.precio))
-                lista.insert(END,('Insumos: ',catalogo.insumos))
+                lista.insert(END,(f'Nombre: {catalogo.nombre}'))
+                lista.insert(END,(f'Precio: {catalogo.precio}'))
+                #lista.insert(END,(f'Insumos: {catalogo.insumos}'))
                 lista.insert(END,'\n')
 
             nombreCat=StringVar()
