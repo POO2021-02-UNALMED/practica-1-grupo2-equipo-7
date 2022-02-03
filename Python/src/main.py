@@ -784,6 +784,8 @@ def menu():
                 codigoPlato=codePlato_entry.get()
                 cantidadPlato=catnPlato_entry.get()
 
+                Mesa.mesas[num_mesa].setPedido(Catalogo.listaPlatos[codigoPlato], cantidadPlato)
+
                 lista1.insert(END,(f'Pedido actual mesa {num_mesa}'))
                 for mesa in Mesa.mesas[num_mesa].pedido:
                     lista.insert(END,'\n')
@@ -834,13 +836,13 @@ def menu():
             lista.config(yscrollcommand=scroll)
 
             lista.insert(END,('Mesas  '))
-            for mesa in Mesa.mesas.items():
+            for numero, mesa in Mesa.mesas.items():
                 lista.insert(END,'\n')
-                lista.insert(END,('ID: ',mesa.getidUnico()))
-                lista.insert(END,('Numero: ',mesa.getNumero()))
-                lista.insert(END,('Zona: ',mesa.getZona))
-                lista.insert(END,('Disponibilidad: ',mesa.isDisponibilidad()))
-                lista.insert(END,('Pedido: ',mesa.getPedido()))
+                #lista.insert(END,('ID: ',mesa.getidUnico()))
+                lista.insert(END,(f'Numero: {numero}'))
+                lista.insert(END,(f'Zona: {mesa.getZona()}'))
+                lista.insert(END,(f'Disponibilidad: {mesa.isDisponibilidad()}'))
+                lista.insert(END,(f'Pedido: {mesa.getPedido()}'))
                 lista.insert(END,'\n')
 
             numero=StringVar()

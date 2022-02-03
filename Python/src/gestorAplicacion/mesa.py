@@ -1,4 +1,5 @@
 #from Basedatos.baseDeDatos import baseDedatos
+from gestorAplicacion import pedido
 from gestorAplicacion.cliente import Cliente
 from gestorAplicacion.catalogo import Catalogo
 from gestorAplicacion.cliente import Cliente
@@ -15,7 +16,7 @@ class Mesa():
     #baseDedatos.base_de_datos()
     
     def __init__(self, id, numero, zona, disponibilidad = True, pedidoM = None):
-        self._idUnico        = id
+        #self._idUnico        = id
         self._numero         = numero
         self._zona           = zona
         self._disponibilidad = disponibilidad
@@ -30,11 +31,11 @@ class Mesa():
 
     del(fichero_binario)
 
-    def getIdunico(self):
-        return self._idUnico
+    #def getIdunico(self):
+     #   return self._idUnico
 
-    def setIdunico(self, id):
-        self._idUnico = id
+    #def setIdunico(self, id):
+    #    self._idUnico = id
     
     def getZona(self):
         if (self._zona == 1):
@@ -60,7 +61,10 @@ class Mesa():
     
 
     def getPedido(self):
-        return self._pedido
+        if(self.pedido):
+            return self.pedido
+        if (not self.pedido):
+            return ""
 
     def setPedido(self, plato, cantidad):
         self.pedido[plato] = cantidad
