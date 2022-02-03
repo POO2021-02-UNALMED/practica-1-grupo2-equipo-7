@@ -1,5 +1,5 @@
 from gestorAplicacion.persona import Persona
-
+import pickle
 class Cliente(Persona):
 
     clientes = {}
@@ -7,7 +7,16 @@ class Cliente(Persona):
         super().__init__( cedula,nombre,telefono, direccion)
         self.reserva = reserva
         Cliente.clientes[cedula] = self
+    
+    fichero_binario=open("Losclientes","wb")
 
+    pickle.dump(clientes, fichero_binario)
+
+    fichero_binario.close()
+
+    del(fichero_binario)
+
+    
     @classmethod
 
     def verClientes(cls):
