@@ -11,6 +11,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter.messagebox import showinfo, showwarning
 from turtle import bgcolor, right
+from gestorAplicacion import materiaprima
 from gestorAplicacion.catalogo import Catalogo
 from gestorAplicacion.cliente import Cliente
 from gestorAplicacion.pedido import Pedido
@@ -1330,8 +1331,46 @@ def menu():
         Barra.place(relheight=0.07,relwidth=1)
 
         def registro():
-            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="red")
+            contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN)
             contenedor2.place(rely=0.07,relheight=0.97,relwidth=1)
+
+            lista=Listbox(contenedor2,bd=2,relief=SUNKEN)
+            lista.place(relx=0.6,rely=0.08,relheight=0.45,relwidth=0.37)
+
+            nombre=StringVar()
+            cantidad=StringVar()
+           
+
+            nombre_label=Label(contenedor2 ,text="Nombre",bd=2,relief=SUNKEN,bg="light gray")
+            nombre_label.place(relx=0.05,rely=0.08,relheight=0.05,relwidth=0.15)
+            nombre_entry=Entry(contenedor2,textvariable=nombre)
+            nombre_entry.place(relx=0.22,rely=0.08,relheight=0.05,relwidth=0.35)
+
+            cantidad_label=Label(contenedor2 ,text="Cantidad",bd=2,relief=SUNKEN,bg="light gray")
+            cantidad_label.place(relx=0.05,rely=0.16,relheight=0.05,relwidth=0.15)
+            cantidad_entry=Entry(contenedor2,textvariable=cantidad)
+            cantidad_entry.place(relx=0.22,rely=0.16,relheight=0.05,relwidth=0.35)
+
+           
+            def crear():
+                lista.delete(0,END)
+                
+                name=nombre_entry.get()
+                ct=cantidad_entry.get()
+                
+                newMateriaprima=materiaprima(name,ct)
+               
+                lista.insert(END,('¡Empleado creado con exito!'))
+                lista.insert(END,('Nombre: ',newMateriaprima.nombre))
+                lista.insert(END,('Cantidad: ',newMateriaprima.cantidad))
+                
+
+                nombre_entry.delete(0,END)
+                cantidad_entry.delete(0,END)
+                
+
+            btncrear=Button(contenedor2,width=20 ,bd=2,relief=SUNKEN,text="Registrar",bg="light gray",command=crear)
+            btncrear.place(relx=0.1,rely=0.7,relheight=0.05,relwidth=0.25)
 
         def verMaPrima():
             contenedor2=Frame(contenedor1,bd=2,relief=SUNKEN,bg="yellow")
@@ -1810,6 +1849,12 @@ mensaje.pack()
 
 
 
+<<<<<<< Updated upstream
 Empleado.lecturaSempleado()
 Mesa.ingreso_datos()
 ventana.mainloop() 
+=======
+#Empleado.lecturaSempleado()
+#Mesa.ingreso_datos()
+#ventana.mainloop() 
+>>>>>>> Stashed changes
