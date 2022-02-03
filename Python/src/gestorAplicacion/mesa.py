@@ -118,6 +118,7 @@ class Mesa():
         Empleado("1009513089","Juana Gonzales","3224542351","calle 64","Mesero","1000000")
 
         Reserva(1123,1,"18 marzo","3pm",4)
+        Pedido(1123,None,1,3)
 
         cb = {str : float}
         cb["tomate"] = 0.3
