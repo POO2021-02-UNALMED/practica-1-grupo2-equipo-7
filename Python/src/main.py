@@ -22,6 +22,7 @@ from gestorAplicacion.empleado import Empleado
 #from gestorAplicacion.interfaz_entornoMesa import botones_mesas
 from gestorAplicacion.mesa import Mesa
 from gestorAplicacion.reserva import Reserva
+from gestorAplicacion.materiaprima import materiaPrima
 
 class posicion():
     num = 1
@@ -1393,7 +1394,7 @@ def menu():
             lista.config(yscrollcommand=scroll)
 
             lista.insert(END,('materiaprima'))
-            for nombreInsumo,materiaprima in materiaPrima.bodega.items():
+            for nombreInsumo,materiaprima in materiaPrima.insumos.items():
                 lista.insert(END,'\n')
                 lista.insert(END,(f'Nombre: {materiaprima.nombre}'))
                 lista.insert(END,(f'Cantidad: {materiaprima.cantidad}'))
@@ -1873,10 +1874,7 @@ mensaje.pack()
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> main
 Empleado.lecturaSempleado()
 Mesa.ingreso_datos()
 ventana.mainloop() 

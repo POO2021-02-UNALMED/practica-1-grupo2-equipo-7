@@ -1,10 +1,10 @@
 class materiaPrima:
 
-    insumos=[]
+    insumos={}
     def __init__(self, nombreInsumo,cantInsumo):
         self.nombreInsumo= nombreInsumo
         self.cantInsumo=cantInsumo
-        materiaPrima.bodega[materiaPrima.nombreInsumo] = self
+        materiaPrima.insumos[nombreInsumo] = self
     
     #getters y setters   
     def setNombreInsumo(self, nombreInsumo):
